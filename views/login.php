@@ -72,81 +72,75 @@
 
         if($resultado->num_rows == 1){
             $usuario = $resultado->fetch_assoc();
-            // Verificamos si la contraseña coincide con la almacenada en la base de datos
-            if(password_verify($contrasena, $usuario['contraseña'])){
-                session_start();
-                
-                //Consulta el ROL
-                $sql = "SELECT
-                            r.`descripcion`
-                        FROM
-                            `usuario` AS u
-                        INNER JOIN `usuario_rol` AS ur
-                        ON u.`id_usuario_rol` = ur.`id`
-                        INNER JOIN `rol` AS r
-                        ON ur.`id_rol` = r.`id`
-             
-                         WHERE
-                        u.`id` = ?;";
-                $id_usuario = $usuario['id'];
-                $stmt = $conexion->prepare($sql);
-                if (!$stmt) {
-                    die("Error de consulta: " . $conexion->error);
-                }
-                $stmt->bind_param("s", $id_usuario);
-                $stmt->execute();
-                $resultado = $stmt->get_result();
-
-                if($resultado->num_rows == 1){ 
-                    $array_rol = $resultado->fetch_assoc();
-                    $rol = $array_rol['descripcion'];
+            //Verificar que el usuario tenga un estado ACTIVO
+            if($usuario['activo']){
+                // Verificamos si la contraseña coincide con la almacenada en la base de datos
+                if(password_verify($contrasena, $usuario['contraseña'])){
+                    session_start();
                     
-                    function consultarListaUsuarios($conexion){
-                        $sql = "SELECT * FROM `usuario`;";
-                        $stmt = $conexion->prepare($sql);
-                        if (!$stmt) {
-                            die("Error de consulta: " . $conexion->error);
-                        }
-                        $stmt->execute();
-                        $resultado = $stmt->get_result();
-
-                        while ($fila = $resultado->fetch_assoc()) {
-                            $array_usuarios[] = $fila;
-                        }
-                        
-                        return $array_usuarios;
+                    //Consulta el ROL
+                    $sql = "SELECT
+                                r.`descripcion`
+                            FROM
+                                `usuario` AS u
+                            INNER JOIN `usuario_rol` AS ur
+                            ON u.`id_usuario_rol` = ur.`id`
+                            INNER JOIN `rol` AS r
+                            ON ur.`id_rol` = r.`id`
+                 
+                             WHERE
+                            u.`id` = ?;";
+                    $id_usuario = $usuario['id'];
+                    $stmt = $conexion->prepare($sql);
+                    if (!$stmt) {
+                        die("Error de consulta: " . $conexion->error);
                     }
-
-                    $_SESSION['usuario'] = $usuario;
-                    $_SESSION['rol'] = $rol;
-                    if($rol == "Administrador"){
-                        $array_usuarios = consultarListaUsuarios($conexion);
-                        $_SESSION['listaUsuarios'] = $array_usuarios;
-                    }           
-                    echo "<script>
-                            Swal.fire({
-                                icon: 'success',
-                                title: '¡Inicio de sesión exitoso!',
-                                text: '¡Bienvenido!',
-                                confirmButtonText: 'OK',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.href = '../home.php';
-                                }
-                            });
-                            </script>";
-
-                }
-                
+                    $stmt->bind_param("s", $id_usuario);
+                    $stmt->execute();
+                    $resultado = $stmt->get_result();
+    
+                    if($resultado->num_rows == 1){ 
+                        $array_rol = $resultado->fetch_assoc();
+                        $rol = $array_rol['descripcion'];
+                        $_SESSION['usuario'] = $usuario;
+                        $_SESSION['rol'] = $rol;
+                          
+                        echo "<script>
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '¡Inicio de sesión exitoso!',
+                                    text: '¡Bienvenido!',
+                                    confirmButtonText: 'OK',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = '../home.php';
+                                    }
+                                });
+                                </script>";
+    
+                    }
+                    
+                } else {
+                        echo '<script>
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "La contraseña es incorrecta",
+                        })
+                        </script>';
+                    }
             } else {
-                    echo '<script>
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "La contraseña es incorrecta",
-                    })
-                    </script>';
-                }
+                // Si no si el usuario esta INACTIVO
+                echo '<script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Su usuario se encuentra deshabilitado",
+                })
+                </script>';
+            }
+            //
+            
         } else {
             // El usuario no existe
             echo '<script>

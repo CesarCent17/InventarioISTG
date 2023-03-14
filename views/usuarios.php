@@ -1,13 +1,28 @@
 <?php
-
+	require('../php/mysqli_conexion.php');
+	require('../php/utils_query.php');
     session_start();
+
 	 // Verificamos que el usuario esté iniciado sesión
     if(!isset($_SESSION['usuario'])) {
         // Si el usuario no está iniciado sesión, lo redirigimos a la página de inicio de sesión
-        header("Location: ../views/login.php");
+        header("Location: login.php");
     } else {
+		//Si el usuario tiene una sesion
 		$usuario = $_SESSION['usuario'];
-    	echo "<script> console.log(" . json_encode($usuario) . "); </script>";
+		$rol = $_SESSION['rol'];
+		if($rol == "Administrador"){
+                        $array_usuarios = consultarListaUsuarios($conexion);
+                        $_SESSION['listaUsuarios'] = $array_usuarios;
+						$listaUsuarios = $_SESSION['listaUsuarios'];
+						echo "<script> console.log(" . json_encode($usuario) . "); </script>";
+						echo "<script> console.log(" . json_encode($listaUsuarios) . "); </script>";
+                    } 
+		 else {
+			$msg = "No tiene acceso a la lista de usuarios!";
+    		echo "<script> console.log(" . json_encode($usuario) . "); </script>";
+			echo "<script> console.log('" . $msg . "'); </script>";
+		}
     }
 ?>
 
@@ -154,7 +169,7 @@
 		<section class="full-width text-center" style="padding: 40px 0;">
 			<h3 class="text-center tittles">Lista de usuarios</h3>
 			<?php
-						require('../php/mysqli_conexion.php');
+						// require('../php/mysqli_conexion.php');
 						
 						function consultarRol($usuario, $conexion){
 									$sql = "SELECT
@@ -237,53 +252,75 @@
 						?>
 			        <!-- Table -->
 					<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col">
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
-            <thead>
-                <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Nombre de usuario</th>
-                    <th>Rol</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="mdl-data-table__cell--non-numeric">usuario1</td>
-                    <td>Administrador</td>
-                    <td>Activo</td>
-                    <td>
-						<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--white mdl-color--red">
-   						 	Deshabilitar
-						</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="mdl-data-table__cell--non-numeric">usuario2</td>
-                    <td>Usuario General</td>
-                    <td>Inactivo</td>
-                    <td>
-					<button class="mdl-button mdl-js-button mdl-button--colored mdl-color--green mdl-color-text--white">
-        					Habilitar
-    					</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="mdl-data-table__cell--non-numeric">usuario3</td>
-                    <td>Usuario General</td>
-                    <td>Activo</td>
-                    <td>
-						<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--white mdl-color--red">
-   						 	Deshabilitar
-						</button>
+    					<div class="mdl-cell mdl-cell--12-col">
+							<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+								<thead>
+									<tr>
+										<th class="mdl-data-table__cell--non-numeric">Nombre de usuario</th>
+										<th>Rol</th>
+										<th>Estado</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										$html = '';
+
+										echo "<script> console.log('Hay ". count($listaUsuarios) ." Usuarios'); </script>";
+										echo "<script> console.log('Hay ". json_encode($listaUsuarios) ." Usuarios'); </script>";
+
+										//necesito la lista usuario rol
+										$arrayUsuarioRol = array();
+
+										for($i = 0; $i < count($listaUsuarios); $i++) {
+											$usuario = $listaUsuarios[$i];
+											$rol = consultarRol($usuario, $conexion);
+											$arrayUsuario = array("usuario" => $usuario, "rol" => $rol);
+											array_push($arrayUsuarioRol, $arrayUsuario);
+										}
+										echo "<script> console.log(" . json_encode($arrayUsuarioRol) . "); </script>";
 
 
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+										
+										for($i = 0; $i < count($arrayUsuarioRol); $i++){
+											$nombresCompletos = $arrayUsuarioRol[$i]['usuario']['nombre'].' '.$arrayUsuarioRol[$i]['usuario']['apellido'];
+											$activo = $arrayUsuarioRol[$i]['usuario']['activo'];
+											$estado = '';
+											$boton = '';
+											if($activo==0){
+												$estado = 'Inactivo';
+												$boton = '<button class="mdl-button mdl-js-button mdl-button--colored mdl-color--green mdl-color-text--white" type="submit" name="submit">Habilitar</button>';
+												$form = '<form method="post" action="../php/actualizarEstadoUsuario.php">
+											 			<input type="hidden" name="id_usuario" value="' . $arrayUsuarioRol[$i]['usuario']['id'] . '">
+											 			<input type="hidden" name="nuevo_estado" value="1">
+											 			' . $boton . '
+														</form>';
+
+											} elseif($activo==1){
+												$estado = 'Activo';
+												$boton = '<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--white mdl-color--red type="submit" name="submit">Deshabilitar</button>';
+												$form = '<form method="post" action="../php/actualizarEstadoUsuario.php">
+											 			<input type="hidden" name="id_usuario" value="' . $arrayUsuarioRol[$i]['usuario']['id'] . '">
+											 			<input type="hidden" name="nuevo_estado" value="0">
+											 			' . $boton . '
+														</form>';
+											}
+
+											$html.='<tr>
+											<td class="mdl-data-table__cell--non-numeric">'.$nombresCompletos.'</td>
+											<td>'.$arrayUsuarioRol[$i]['rol'].'</td>
+											<td>'.$estado.'</td>
+											<td>'
+												.$form.
+												'</td>
+											</tr>';
+										}
+										echo $html;
+									?>
+								</tbody>
+							</table>
+						</div>
+					</div>
 </section>
 	
 </body>

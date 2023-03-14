@@ -1,17 +1,24 @@
 <?php
-
+	require('php/mysqli_conexion.php');
+	require('php/utils_query.php');
     session_start();
+
 	 // Verificamos que el usuario esté iniciado sesión
     if(!isset($_SESSION['usuario'])) {
         // Si el usuario no está iniciado sesión, lo redirigimos a la página de inicio de sesión
         header("Location: views/login.php");
     } else {
+		//Si el usuario tiene una sesion
 		$usuario = $_SESSION['usuario'];
-		if(isset($_SESSION['listaUsuarios'])){
-			$listaUsuarios = $_SESSION['listaUsuarios'];
-    		echo "<script> console.log(" . json_encode($usuario) . "); </script>";
-			echo "<script> console.log(" . json_encode($listaUsuarios) . "); </script>";
-		} else {
+		$rol = $_SESSION['rol'];
+		if($rol == "Administrador"){
+                        $array_usuarios = consultarListaUsuarios($conexion);
+                        $_SESSION['listaUsuarios'] = $array_usuarios;
+						$listaUsuarios = $_SESSION['listaUsuarios'];
+						echo "<script> console.log(" . json_encode($usuario) . "); </script>";
+						echo "<script> console.log(" . json_encode($listaUsuarios) . "); </script>";
+                    } 
+		 else {
 			$msg = "No tiene acceso a la lista de usuarios!";
     		echo "<script> console.log(" . json_encode($usuario) . "); </script>";
 			echo "<script> console.log('" . $msg . "'); </script>";
@@ -147,7 +154,7 @@
 												USUARIOS
 												</div>
 											</a>
-									</li>';
+										</li>';
 							echo $html;
 						}	
 					?>
