@@ -19,6 +19,7 @@
 						echo "<script> console.log(" . json_encode($listaUsuarios) . "); </script>";
                     } 
 		 else {
+			header("Location: ../home.php");
 			$msg = "No tiene acceso a la lista de usuarios!";
     		echo "<script> console.log(" . json_encode($usuario) . "); </script>";
 			echo "<script> console.log('" . $msg . "'); </script>";
@@ -121,12 +122,12 @@
 
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
-						<a href="activos.php" class="full-width">
+						<a href="bien.php" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-plus"></i>
 							</div>
 							<div class="navLateral-body-cr hide-on-tablet">
-								AGREGAR ACTIVO
+								AGREGAR BIEN
 							</div>
 						</a>
 					</li>

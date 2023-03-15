@@ -120,12 +120,12 @@
 
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
-						<a href="views/activos.php" class="full-width">
+						<a href="views/bien.php" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-plus"></i>
 							</div>
 							<div class="navLateral-body-cr hide-on-tablet">
-								AGREGAR ACTIVO
+								AGREGAR BIEN
 							</div>
 						</a>
 					</li>
