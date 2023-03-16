@@ -176,7 +176,7 @@
 						<small>Bienes Registrados</small>
 					</span>
 				</div>
-				<i class="zmdi zmdi-account tile-icon"></i>
+				<i class="zmdi zmdi-storage tile-icon"></i>
 			</article>
 			<article class="full-width tile">
 				<div class="tile-text">
