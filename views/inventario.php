@@ -154,7 +154,7 @@
 	<!-- pageContent -->
 	<div class="mdl-cell mdl-cell--12-col mdl-card">
 		
-		<div class="mdl-card__supporting-text" style="padding-left:450px">
+		<div class="mdl-card__supporting-text" style="padding-left:420px">
 			<div class="mdl-card__title">
 				<h2 class="mdl-card__title-text">Bienes Registrados</h2>
 			</div>

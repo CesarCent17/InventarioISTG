@@ -172,7 +172,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						5<br>
+						4<br>
 						<small>Bienes Registrados</small>
 					</span>
 				</div>
@@ -181,7 +181,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						5<br>
+						2<br>
 						<small>Usuarios Activos</small>
 					</span>
 				</div>
@@ -205,32 +205,32 @@
 				  <tbody>
 					<tr>
 					  <td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
-					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 1</td>
+					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1</td>
 					</tr>
 
 					<tr>
 						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 2</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 2</td>
 					  </tr>
 
 					  <tr>
 						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 3</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 3</td>
 					  </tr>
 
 					  <tr>
 						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 4</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 4</td>
 					  </tr>
 
 					  <tr>
 						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 5</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 5</td>
 					  </tr>
 				  </tbody>
 				</table>
