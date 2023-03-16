@@ -8,4 +8,6 @@
         header('Location: ../views/usuarios.php'); // redirige al usuario a la página original
         exit;
     }
+    header('Location: ../views/usuarios.php'); // redirige al usuario a la página original
+        exit;
 ?>

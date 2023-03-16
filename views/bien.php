@@ -159,19 +159,23 @@
 
 	<!-- Form -->
       <form class="mdl-grid" action="../php/save_test.php" method="post" style="max-width: 800px; margin: 0 auto;">
+
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="nombre" name="nombre">
+              <input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
               <label class="mdl-textfield__label" for="nombre">Nombre General</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="descripcion" name="descripcion">
+              <input class="mdl-textfield__input" type="text" id="descripcion" name="descripcion" required>
               <label class="mdl-textfield__label" for="descripcion">Descripción</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           </div>
+
         
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -189,7 +193,7 @@
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="campus" name="campus">
+              <select class="mdl-textfield__input" id="campus" name="campus" required>
                 <option value=""></option>
                 <?php
                 $array_campus = getCampus($conexion);
@@ -203,12 +207,14 @@
                 ?>
               </select>
               <label class="mdl-textfield__label" for="campus">Campus</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           </div>
 
+
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="area_de_ubicacion" name="area_de_ubicacion">
+              <select class="mdl-textfield__input" id="area_de_ubicacion" name="area_de_ubicacion" required>
                 <option value=""></option>
                 <?php
                 $array_area_de_ubicacion = getAreaDeUbicacion($conexion);
@@ -222,6 +228,7 @@
                 ?>
               </select>
               <label class="mdl-textfield__label" for="area_de_ubicacion">Área de ubicación</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
           </div>
         </div>
 
