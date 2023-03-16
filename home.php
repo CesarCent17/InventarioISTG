@@ -1,6 +1,7 @@
 <?php
 	require('php/mysqli_conexion.php');
 	require('php/utils_query.php');
+	require('php/querys_inicio.php');
     session_start();
 
 	 // Verificamos que el usuario esté iniciado sesión
@@ -171,19 +172,37 @@
 			<!-- Tiles -->
 			<article class="full-width tile">
 				<div class="tile-text">
-					<span class="text-condensedLight">
-						4<br>
-						<small>Bienes Registrados</small>
-					</span>
+				<?php
+						$array_ids_productos = obtener_ids_productos($conexion);
+						$bienes_registrados = 0;
+						for($i = 0; $i < count($array_ids_productos); $i++){
+							$bienes_registrados++;
+						}
+						$html = '<span class="text-condensedLight">
+									'.strval($bienes_registrados).'<br>
+									<small>Bienes Registrados</small>
+								</span>';
+						echo $html;
+					?>
+					
 				</div>
 				<i class="zmdi zmdi-storage tile-icon"></i>
 			</article>
 			<article class="full-width tile">
 				<div class="tile-text">
-					<span class="text-condensedLight">
-						2<br>
-						<small>Usuarios Activos</small>
-					</span>
+					<?php
+						$array_ids_usuarios_activos = obtener_ids_usuarios_activos($conexion);
+						$usuarios_activos = 0;
+						for($i = 0; $i < count($array_ids_usuarios_activos); $i++){
+							$usuarios_activos++;
+						}
+						$html = '<span class="text-condensedLight">
+									'.strval($usuarios_activos).'<br>
+									<small>Usuarios Activos</small>
+								</span>';
+						echo $html;
+					?>
+					
 				</div>
 				<i class="zmdi zmdi-accounts tile-icon"></i>
 			</article>
