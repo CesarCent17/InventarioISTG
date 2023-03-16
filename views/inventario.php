@@ -38,7 +38,7 @@
 <body>
 
 <!-- navBar -->
-<div class="full-width navBar">
+	<div class="full-width navBar">
 		<div class="full-width navBar-options">
 			<div class="mdl-tooltip" for="btn-menu">Menu</div>
 			<nav class="navBar-options-list">
@@ -61,9 +61,6 @@
 			</nav>
 		</div>
 	</div>
-
-	
-
 	<!-- navLateral -->
 	<section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
@@ -72,9 +69,6 @@
 				<i class="zmdi zmdi-close btn-menu"></i> Inventario 
 			</div>
 			<figure class="full-width" style="height: 77px;">
-				<!-- <div class="navLateral-body-cl">
-					<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
-				</div> -->
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span style="margin-left: 60px;">
 						<b>Instituto Superior Tecnológico Guayaquil</b><br>
@@ -153,14 +147,14 @@
 
 	<!-- pageContent -->
 	<div class="mdl-cell mdl-cell--12-col mdl-card">
-		
-		<div class="mdl-card__supporting-text" style="padding-left:420px">
+		<div class="mdl-card__supporting-text" style="padding-left:440px; width: 100%">
 			<div class="mdl-card__title">
 				<h2 class="mdl-card__title-text">Bienes Registrados</h2>
 			</div>
 			<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" >
 			<thead>
 				<tr>
+				<th class="mdl-data-table__cell--non-numeric">#</th>
 				<th class="mdl-data-table__cell--non-numeric">Nombre General</th>
 				<th class="mdl-data-table__cell--non-numeric">Descripción</th>
 				<th class="mdl-data-table__cell--non-numeric">Campus</th>
@@ -180,7 +174,9 @@
 						
 					for($i = 0; $i < count($array_bienes_registrados); $i++){
 						$codigo_adicional =  isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
+						$No = $i+1;
 						$html .= '<tr>
+									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['nombre'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['descripcion'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i].'</td>
@@ -196,8 +192,5 @@
 			</table>
 		</div>
 	</div>
-
-
-	
 </body>
 </html>

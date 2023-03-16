@@ -222,35 +222,19 @@
 					</tr>
 				  </thead>
 				  <tbody>
-					<tr>
-					  <td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 1</td>
-					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1</td>
-					</tr>
-
-					<tr>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 2</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 2</td>
-					  </tr>
-
-					  <tr>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 3</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 3</td>
-					  </tr>
-
-					  <tr>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 4</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 4</td>
-					  </tr>
-
-					  <tr>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto 5</td>
-						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 5</td>
-					  </tr>
+					<?php
+						$array_ult_prod = obtener_ult_prod($conexion);
+						$array_ult_us = obtener_ult_us($conexion, $array_ult_prod);
+						$html = '';
+						for($i = 0; $i < count($array_ult_prod); $i++){
+							$html .= '	<tr>
+											<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">'.$array_ult_prod[$i]['fecha_registro'].'</td>
+											<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">'.$array_ult_prod[$i]['nombre'].'</td>
+											<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">'.$array_ult_us[$i].'</td>
+										</tr>';
+						}
+						echo $html;				
+					?>
 				  </tbody>
 				</table>
 			  </div>

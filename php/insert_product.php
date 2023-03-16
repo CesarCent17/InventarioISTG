@@ -56,7 +56,7 @@ function insert_codeprod($conexion, $id_codigo_institucion, $id_producto){
 }
 
 function insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-                    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico){
+                    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_usuario){
     $last_inserted_id = null;
 
     $sql = "INSERT INTO `inventorioistg`.`producto`
@@ -73,10 +73,12 @@ function insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_
                     `id_custodio`,
                     `id_proceso_de_adquisicion`,
                     `id_estado_de_uso`,
-                    `id_estado_fisico`
+                    `id_estado_fisico`,
+                    `id_usuario`
                 )
             VALUES 
                 (
+                    ?,
                     ?,
                     ?,
                     ?,
@@ -95,8 +97,8 @@ function insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
     }
-    $stmt->bind_param("sssssssssssss",$nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico);
+    $stmt->bind_param("ssssssssssssss",$nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
+    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_usuario);
 
     if ($stmt->execute() && $stmt->affected_rows == 1) {
         // La inserción se realizó correctamente

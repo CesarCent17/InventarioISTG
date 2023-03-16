@@ -2,32 +2,9 @@
 
     require('mysqli_conexion.php');
     require('insert_product.php');
-
+    session_start();
+    $id_usuario = $_SESSION['usuario']['id'];
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // $nombre = $_POST['nombre'];
-        // $descripcion =  $_POST['descripcion'];
-        
-        // $id_campus = $_POST['campus'];
-        // $id_area_ubicacion = $_POST['area_de_ubicacion'];
-
-
-        // $observaciones =  $_POST['observaciones'];
-        // $acta_de_donacion = $_POST['acta_de_donacion'];   
-        // $n_acta = $_POST['numero_de_acta'];
-        // $año = $_POST['anio'];
-        // $id_origen_del_bien = $_POST['origen_del_bien'];
-        // $id_custodio = $_POST['custodio'];
-        // $id_proceso_de_adquisicion = $_POST['proceso_de_adquisicion'];
-        // $id_estado_de_uso = $_POST['estado_de_uso'];
-        // $id_estado_fisico = $_POST['estado_fisico'];
-
-        //Requeridos
-        // $nombre = NULL;
-        // $descripcion =  NULL;
-        // $id_campus = NULL;
-        // $id_area_ubicacion = NULL;
-
-        // $codigoISTG = '';
 
         if(!empty($_POST['nombre']) && !empty($_POST['descripcion']) && !empty($_POST['campus']) && !empty($_POST['area_de_ubicacion'])) {
             // Todos los campos están completos, puedes continuar con el proceso
@@ -49,7 +26,7 @@
             $id_estado_fisico = trim($_POST['estado_fisico']) === '' ? NULL : trim($_POST['estado_fisico']);
 
             $id_producto = insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-                    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico);
+                    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_usuario);
             
             // Capturar codigos en un array
             $array_codigo_ISTG = array();
