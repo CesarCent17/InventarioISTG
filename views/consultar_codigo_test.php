@@ -11,7 +11,7 @@ require('../php/querys_inventario.php');
     <title>Prueba Codigos</title>
 </head>
 <body>
-    <form action="consultar_codigo.php" method="post">
+    <form action="consultar_codigo_test.php" method="post">
         <label for="id">ID:</label>
         <input type="text" id="id" name="id">
         <button type="submit">Consultar</button>

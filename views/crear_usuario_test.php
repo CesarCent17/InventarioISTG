@@ -7,7 +7,9 @@
     <title>Create User Test</title>
 </head>
 <body>
-    <form action="createusertest.php" method="post">
+
+    <!-- actualizar formulario -->
+    <form action="crear_usuario_test.php" method="post">
         <p>Crear Usuarios</p>
         <label for="nombres">Nombre(s)</label>
         <input type="text" id="nombres" name="nombres"><br>
