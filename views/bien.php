@@ -90,7 +90,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; PAGINA PRINCIPAL</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; AGREGAR BIEN</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -235,8 +235,9 @@
 
         <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="codigoISTG" name="codigoISTG">
+              <input class="mdl-textfield__input" type="text" id="codigoISTG" name="codigoISTG" required>
               <label class="mdl-textfield__label" for="codigo">Código ISTG</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           
           <div style="margin-top: 10px;">

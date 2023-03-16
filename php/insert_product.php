@@ -20,10 +20,10 @@ function insert_codeinst_and_get_last_id($conexion, $id_institucion, $codigo){
     if ($stmt->execute() && $stmt->affected_rows == 1) {
         // La inserción se realizó correctamente
         $last_inserted_id = mysqli_insert_id($conexion); // Obtiene el último ID insertado
-        echo "El registro ha sido insertado correctamente. ID: " . $last_inserted_id;
+        // echo "El registro ha sido insertado correctamente. ID: " . $last_inserted_id;
     } else {
         // Hubo un error al realizar la inserción
-        echo "Error al insertar el registro: " . $stmt->error;
+        echo "Error al insertar el registro en la tabla codigo_institucion: " . $stmt->error;
     }
     return $last_inserted_id;
 }
@@ -47,10 +47,10 @@ function insert_codeprod($conexion, $id_codigo_institucion, $id_producto){
 
     if ($stmt->execute() && $stmt->affected_rows == 1) {
         // La inserción se realizó correctamente
-        echo "El registro ha sido insertado correctamente en la tabla codigo_producto.";
+        // echo "El registro ha sido insertado correctamente en la tabla codigo_producto.";
     } else {
         // Hubo un error al realizar la inserción
-        echo "Error al insertar el registro: " . $stmt->error;
+        echo "Error al insertar el registro en la tabla codigo_producto: " . $stmt->error;
     }
    
 }

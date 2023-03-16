@@ -88,7 +88,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; PAGINA PRINCIPAL</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; INVENTARIO</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
