@@ -163,6 +163,81 @@
 			</nav>
 		</div>
 	</section>
+
+	<!-- pageContent -->
+	<section class="full-width pageContent">
+		<section class="full-width text-center" style="padding: 40px 0;">
+			<h3 class="text-center tittles">¡Hola! Bienvenido/a al sistema de inventario</h3>
+			<!-- Tiles -->
+			<article class="full-width tile">
+				<div class="tile-text">
+					<span class="text-condensedLight">
+						5<br>
+						<small>Bienes Registrados</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-account tile-icon"></i>
+			</article>
+			<article class="full-width tile">
+				<div class="tile-text">
+					<span class="text-condensedLight">
+						5<br>
+						<small>Usuarios Activos</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-accounts tile-icon"></i>
+			</article>
+			
+		</section>
+
+		<section class="full-width" style="padding: 0px 265px;">
+			<div class="mdl-grid">
+			  <div class="mdl-cell mdl-cell--12-col">
+				<h4 class="tittles">Actividad Reciente</h4>					  
+				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+				  <thead>
+					<tr>
+					  <th class="mdl-data-table__cell--non-numeric" style="width: 30%;">Fecha</th>
+					  <th class="mdl-data-table__cell--non-numeric" style="width: 45%;">Nombre General</th>
+					  <th class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
+					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
+					  <td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+					</tr>
+
+					<tr>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+					  </tr>
+
+					  <tr>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+					  </tr>
+
+					  <tr>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+					  </tr>
+
+					  <tr>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">2023-03-15</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Producto Agdgsg</td>
+						<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario 1gdsgsgs</td>
+					  </tr>
+				  </tbody>
+				</table>
+			  </div>
+			</div>
+		  </section>
+	</section>
 	
 </body>
 </html>
