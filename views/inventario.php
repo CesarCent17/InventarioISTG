@@ -1,5 +1,6 @@
 <?php
-
+	require('../php/mysqli_conexion.php');
+	require('../php/querys_inventario.php');
     session_start();
 	 // Verificamos que el usuario esté iniciado sesión
     if(!isset($_SESSION['usuario'])) {
@@ -149,6 +150,54 @@
 			</nav>
 		</div>
 	</section>
+
+	<!-- pageContent -->
+	<div class="mdl-cell mdl-cell--12-col mdl-card">
+		
+		<div class="mdl-card__supporting-text" style="padding-left:450px">
+			<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">Bienes Registrados</h2>
+			</div>
+			<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" >
+			<thead>
+				<tr>
+				<th class="mdl-data-table__cell--non-numeric">Nombre General</th>
+				<th class="mdl-data-table__cell--non-numeric">Descripción</th>
+				<th class="mdl-data-table__cell--non-numeric">Campus</th>
+				<th class="mdl-data-table__cell--non-numeric">Área de Ubicación</th>
+				<th class="mdl-data-table__cell--non-numeric">Código ISTG</th>
+				<th class="mdl-data-table__cell--non-numeric">Código Adicional</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$array_bienes_registrados = obtener_bienes_registrados($conexion);
+					$html = '';
+					// echo "<script> console.log(". json_encode($array_bienes_registrados) ."); </script>";
+					$array_campus = obtener_array_campus($conexion, $array_bienes_registrados);
+					$array_ubicacion = obtener_array_ubicacion($conexion, $array_bienes_registrados);
+					$array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
+						
+					for($i = 0; $i < count($array_bienes_registrados); $i++){
+						$codigo_adicional =  isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
+						$html .= '<tr>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['nombre'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['descripcion'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$codigo_adicional.'</td>
+								</tr> ';
+					}
+					echo $html;		
+										
+				?>
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+
 	
 </body>
 </html>
