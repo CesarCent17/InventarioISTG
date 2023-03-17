@@ -174,16 +174,18 @@
 					$array_campus = obtener_array_campus($conexion, $array_bienes_registrados);
 					$array_ubicacion = obtener_array_ubicacion($conexion, $array_bienes_registrados);
 					$array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
-					$form_ver_detalles = '<form action="#" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fas fa-eye" value="6" name="hola"></button>
-											</form>';
-					$form_eliminar = '<form action="#" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fa-solid fa-trash" value="6" name="hola"></button>
-											</form>';
+					
 						
 					for($i = 0; $i < count($array_bienes_registrados); $i++){
 						$codigo_adicional =  isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
 						$No = $i+1;
+						// ver_detalles
+						$form_ver_detalles = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
+												<button type="submit" class="form-button-icon fas fa-eye" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
+											</form>';
+						$form_eliminar = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
+												<button type="submit" class="form-button-icon fa-solid fa-trash" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
+											</form>';
 						$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['nombre'].'</td>

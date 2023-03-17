@@ -1,9 +1,6 @@
 <?php
     require('../php/mysqli_conexion.php');
     require('../php/utils_query.php');
-	require('../php/querys_ver_detalle.php');
-	require('../php/querys_inventario.php');
-
     session_start();
 	 // Verificamos que el usuario esté iniciado sesión
     if(!isset($_SESSION['usuario'])) {
@@ -20,7 +17,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Ver Detalles | ISTG</title>
+	<title>Actualizar Bien | ISTG</title>
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/sweetalert2.css">
 	<link rel="stylesheet" href="../css/material.min.css">
@@ -93,7 +90,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; VER DETALLES</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; AGREGAR BIEN</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -157,38 +154,23 @@
 
 	<section class="full-width pageContent">
 	<div style="text-align: center; margin-top: 20px" >
-		<h5 class="mdl-color-text--primary">Ver Detalles</h5>
+		<h5 class="mdl-color-text--primary">Actualizar Bien</h5>
   </div>
-	
-
-	<?php
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$id_prod = $_POST['id_prod'];
-			$prod = obtener_producto_por_id($conexion, $id_prod);	
-		 }		
-	?>
-	<!-- <script>console.log('holaaa')</script> -->
 
 	<!-- Form -->
-      <form class="mdl-grid" action="editar_bien.php" method="post" style="max-width: 800px; margin: 0 auto;">
+      <form class="mdl-grid" action="../php/save_test.php" method="post" style="max-width: 800px; margin: 0 auto;">
 
           <div class="mdl-cell mdl-cell--12-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-					$html = ' <input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required value="'.$prod['nombre'].'" readonly>';
-		 			echo $html;
-				?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
               <label class="mdl-textfield__label" for="nombre">Nombre General</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--12-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled" >
-			    <?php
-					$html = '<input class="mdl-textfield__input" type="text" id="descripcion" name="descripcion" required value="'.$prod['descripcion'].'" readonly>';
-		 			echo $html;
-				?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="descripcion" name="descripcion" required>
               <label class="mdl-textfield__label" for="descripcion">Descripción</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
@@ -196,174 +178,194 @@
 
         
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-					$html = '<input class="mdl-textfield__input" type="number" id="numero_de_acta" name="numero_de_acta" value="'.$prod['#_acta'].'" readonly>';
-		 			echo $html;
-				?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="numero_de_acta" name="numero_de_acta">
               <label class="mdl-textfield__label" for="numero_de_acta"># Acta</label>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<?php
-					$html = '<input class="mdl-textfield__input" type="number" id="anio" name="anio" value="'.$prod['año'].'" readonly>';
-		 			echo $html;
-				?>
+              <input class="mdl-textfield__input" type="number" id="anio" name="anio">
               <label class="mdl-textfield__label" for="anio">Año</label>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-					$campus = obtener_campus_por_id($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="campus" name="campus" value="'.$campus.'" readonly>';
-		 			echo $html;
-				?>
-              
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="campus" name="campus" required>
+                <option value=""></option>
+                <?php
+                $array_campus = getCampus($conexion);
+                echo "<script> console.log(" . json_encode($array_campus) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_campus); $i++){
+                    $html.= '<option value="'.$array_campus[$i]['id'].'">'.$array_campus[$i]['nombre'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
               <label class="mdl-textfield__label" for="campus">Campus</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           </div>
 
-        <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-			<?php
-					$area_de_ubicacion = obtener_ubicacion_por_id($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="area_de_ubicacion" name="area_de_ubicacion" value="'.$area_de_ubicacion.'" readonly>';
-		 			echo $html;
-				?>
+
+          <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="area_de_ubicacion" name="area_de_ubicacion" required>
+                <option value=""></option>
+                <?php
+                $array_area_de_ubicacion = getAreaDeUbicacion($conexion);
+                echo "<script> console.log(" . json_encode($array_area_de_ubicacion) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_area_de_ubicacion); $i++){
+                    $html.= '<option value="'.$array_area_de_ubicacion[$i]['id'].'">'.$array_area_de_ubicacion[$i]['direccion'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
               <label class="mdl-textfield__label" for="area_de_ubicacion">Área de ubicación</label>
-            </div>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
+          </div>
         </div>
 
 
         <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			<?php
-					$array_codigo_de_producto = obtener_array_codigo_de_producto($conexion, $id_prod);
-					$campus = obtener_campus_por_id($conexion, $id_prod);
-					$codigoISTG = $array_codigo_de_producto[0]['codigo'];
-					$codigoAdicional = isset($array_codigo_de_producto[1]['codigo'])? $array_codigo_de_producto[1]['codigo']: '';
-					$html = '<input class="mdl-textfield__input" type="text" id="codigoISTG" name="codigoISTG" required value="'.$codigoISTG.'" readonly>';
-		 			echo $html;
-				?>
-              
+              <input class="mdl-textfield__input" type="text" id="codigoISTG" name="codigoISTG" required>
               <label class="mdl-textfield__label" for="codigo">Código ISTG</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  div-codigoSENESCYT/SECAP/COLEGIO" id=divCodigo>
-		  <?php
-					$html = '<input class="mdl-textfield__input" type="text" id="codigoAdicional" name="codigoAdicional" value="'.$codigoAdicional.'" readonly>';
-		 			echo $html;
-				?>
-              
-              <label class="mdl-textfield__label" for="codigoAdicional">Código SENESCYT/SECAP/COLEGIO </label>
+          <div style="margin-top: 10px;">
+            <p style="display: inline-block; margin-right: 10px; font-size:14px">¿Deseas agregar otro código?</p>
+            <a href="#" class="mdl-color-text--primary" style="display: inline-block; margin-left: 10px; font-size:14px" onclick="mostrarInputNuevoCodigo()">Agregar Código Adicional</a>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label oculto div-codigoSENESCYT/SECAP/COLEGIO" id=divCodigo>
+              <input class="mdl-textfield__input" type="text" id="codigoSENESCYT/SECAP/COLEGIO" name="codigoSENESCYT/SECAP/COLEGIO">
+              <label class="mdl-textfield__label" for="codigo">Código SENESCYT/SECAP/COLEGIO </label>
           </div>
         </div>
 
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-					$origen = obtener_origen($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="origen_del_bien" name="origen_del_bien" value="'.$origen.'" readonly>';
-		 			echo $html;
-				
-				?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="origen_del_bien" name="origen_del_bien">
+                <option value=""></option>
+                <?php
+                $array_origen_del_bien = getOrigen($conexion);
+                echo "<script> console.log(" . json_encode($array_origen_del_bien) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_origen_del_bien); $i++){
+                    $html.= '<option value="'.$array_origen_del_bien[$i]['id'].'">'.$array_origen_del_bien[$i]['origen'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
               <label class="mdl-textfield__label" for="origen_del_bien">Origen del bien</label>
             </div>
           </div>
 
 
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-			<?php
-					$custodio = obtener_custodio($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="custodio" name="custodio" value="'.$custodio.'" readonly>';
-		 			echo $html;
-			?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="custodio" name="custodio">
+                <option value=""></option>
+                <?php
+                $array_custodio = getCustodio($conexion);
+                echo "<script> console.log(" . json_encode($array_custodio) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_custodio); $i++){
+                    $html.= '<option value="'.$array_custodio[$i]['id'].'">'.$array_custodio[$i]['nombres_completos'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
               <label class="mdl-textfield__label" for="custodio">Custodio</label>
             </div>
           </div>
-
-
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-			<?php
-					$proceso_de_adquisicion = obtener_proceso_adquisicion($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="proceso_de_adquisicion" name="proceso_de_adquisicion" value="'.$proceso_de_adquisicion.'" readonly>';
-		 			echo $html;
-			?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="proceso_de_adquisicion" name="proceso_de_adquisicion">
+                <option value=""></option>
+                <?php
+                $array_proceso_de_adquisicion = getProcesoDeAdquisicion($conexion);
+                echo "<script> console.log(" . json_encode($array_proceso_de_adquisicion) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_proceso_de_adquisicion); $i++){
+                    $html.= '<option value="'.$array_proceso_de_adquisicion[$i]['id'].'">'.$array_proceso_de_adquisicion[$i]['proceso'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
               <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
             </div>
           </div>
-
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-			<?php
-					$estado_de_uso = obtener_estado_uso($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="estado_de_uso" name="estado_de_uso" value="'.$estado_de_uso.'" readonly>';
-		 			echo $html;
-				?>
-              
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="estado_de_uso" name="estado_de_uso">
+                <option value=""></option>
+                <?php
+                $array_estado_de_uso = getEstadoDeUso($conexion);
+                echo "<script> console.log(" . json_encode($array_estado_de_uso) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_estado_de_uso); $i++){
+                    $html.= '<option value="'.$array_estado_de_uso[$i]['id'].'">'.$array_estado_de_uso[$i]['estado'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
               <label class="mdl-textfield__label" for="estado_de_uso">Estado de uso</label>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-			<?php
-					$estado_fisico = obtener_estado_fisico($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="estado_fisico" name="estado_fisico" value="'.$estado_fisico.'" readonly>';
-		 			echo $html;
-				?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="estado_fisico" name="estado_fisico">
+                <option value=""></option>
+                <?php
+                $array_estado_fisico = getEstadoFisico($conexion);
+                echo "<script> console.log(" . json_encode($array_estado_fisico) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_estado_fisico); $i++){
+                    $html.= '<option value="'.$array_estado_fisico[$i]['id'].'">'.$array_estado_fisico[$i]['estado'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
               <label class="mdl-textfield__label" for="estado_fisico">Estado físico</label>
             </div>
           </div>
 
-
           <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-					$acta_de_donacion = $prod['acta_de_donacion'];
-					switch ($acta_de_donacion) {
-						case '1':
-							$acta_de_donacion = 'SI';
-							break;
-						case '0':
-							$acta_de_donacion = 'NO';
-							break;
-						case NULL:
-							$acta_de_donacion = '';
-							break;
-						default:
-							$acta_de_donacion = '';
-							break;
-					}
-					$html = '<input class="mdl-textfield__input" type="text" id="acta_de_donacion" name="acta_de_donacion" value="'.$acta_de_donacion.'" readonly>';
-		 			echo $html;
-				?>
-              <!-- <input class="mdl-textfield__input" type="text" id="acta_de_donacion" name="acta_de_donacion" value="SI" readonly> -->
-              <label class="mdl-textfield__label" for="acta_de_donacion">Acta de donación</label>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="acta_de_donacion" name="acta_de_donacion">
+                <option value=""></option>
+                <option value="1">SI</option>
+                <option value="0">NO</option>
+              </select>
+              <label class="mdl-textfield__label" for="estado_fisico">Acta de donación</label>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<?php
-					$html = ' <textarea class="mdl-textfield__input" type="text" rows= "3" id="observaciones" name="observaciones" readonly>'.$prod['observaciones'].'</textarea>';
-		 			echo $html;
-				?>
-              <!-- <textarea class="mdl-textfield__input" type="text" rows= "3" id="observaciones" name="observaciones" readonly>Texto predeterminado</textarea> -->
+              <textarea class="mdl-textfield__input" type="text" rows= "3" id="observaciones" name="observaciones"></textarea>
               <label class="mdl-textfield__label" for="observaciones">Observaciones</label>
             </div>
           </div>
         
         <div class="mdl-cell mdl-cell--12-col">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
-              Habilitar Edición 
+              Actualizar 
             </button>
         </div>
 
