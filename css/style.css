@@ -5,4 +5,37 @@
 .oculto{
   display: none;
 }
+
+.form-button-icon {
+  background: none; /* Quita el fondo */
+  border: none; /* Quita los bordes */
+  outline: none; /* Quita el borde que se muestra al hacer clic */
+  cursor: pointer; /* Cambia el cursor a una mano cuando se pasa sobre el botón 
+}
+
+.form-button-icon:hover, .form-button-icon:focus {
+  outline: none;
+  background: none; /* Quita el efecto de fondo cuando se pasa el cursor o se hace clic */
+}
+
+.form-button-icon:active {
+  outline: none;
+  background: none; /* Quita el efecto de fondo al hacer clic */
+}
+
+
+
+
+.form-button-icon:link, .form-button-icon:visited {
+  color: #3F51B5; /* Establece el color del enlace */
+  text-decoration: none; /* Quita la subrayado del enlace */
+}
+
+.ver-detalles-eliminar {
+  display: inline-block;
+  margin-right: 10px; /* Agrega un espacio entre los formularios */
+}
+
+
+
   

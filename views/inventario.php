@@ -25,6 +25,8 @@
 	<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="../css/main.css">
 	<link rel="stylesheet" href="../css/style.css">
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<script src="https://kit.fontawesome.com/f342bdc8ac.js" crossorigin="anonymous"></script>	
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../js/jquery-1.11.2.min.js"><\/script>')</script>
@@ -161,6 +163,7 @@
 				<th class="mdl-data-table__cell--non-numeric">Área de Ubicación</th>
 				<th class="mdl-data-table__cell--non-numeric">Código ISTG</th>
 				<th class="mdl-data-table__cell--non-numeric">Código Adicional</th>
+				<th class="mdl-data-table__cell--non-numeric">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -171,6 +174,12 @@
 					$array_campus = obtener_array_campus($conexion, $array_bienes_registrados);
 					$array_ubicacion = obtener_array_ubicacion($conexion, $array_bienes_registrados);
 					$array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
+					$form_ver_detalles = '<form action="#" method="post" class="ver-detalles-eliminar">
+												<button type="submit" class="form-button-icon fas fa-eye" value="6" name="hola"></button>
+											</form>';
+					$form_eliminar = '<form action="#" method="post" class="ver-detalles-eliminar">
+												<button type="submit" class="form-button-icon fa-solid fa-trash" value="6" name="hola"></button>
+											</form>';
 						
 					for($i = 0; $i < count($array_bienes_registrados); $i++){
 						$codigo_adicional =  isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
@@ -183,6 +192,7 @@
 									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$codigo_adicional.'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$form_ver_detalles.$form_eliminar.'</td>
 								</tr> ';
 					}
 					echo $html;		

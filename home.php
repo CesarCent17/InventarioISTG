@@ -41,8 +41,6 @@
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/style.css">
 	<!-- <link rel="icon" type="image/x-icon" href="/assets/icons/logoISTG.ico"> -->
-	
-
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
@@ -167,10 +165,17 @@
 
 	<!-- pageContent -->
 	<section class="full-width pageContent">
+	<form>
+  <button class="mdl-button mdl-js-button mdl-button--icon">
+    	<i class="material-icons"></i>
+		<i class="fa-sharp fa-solid fa-eye"></i>
+  </button>
+</form>
 		<section class="full-width text-center" style="padding: 40px 0;">
 			<h3 class="text-center tittles">¡Hola! Bienvenido/a al sistema de inventario</h3>
 			<!-- Tiles -->
 			<article class="full-width tile">
+
 				<div class="tile-text">
 				<?php
 						$array_ids_productos = obtener_ids_productos($conexion);
@@ -241,6 +246,9 @@
 			</div>
 		  </section>
 	</section>
+
+
+
 	
 </body>
 </html>

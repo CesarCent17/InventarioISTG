@@ -122,4 +122,6 @@ function obtener_codigos_prod($conexion, $array_bienes_registrados){
     }
     return $array_resultado;
 }
+
+
 ?>
