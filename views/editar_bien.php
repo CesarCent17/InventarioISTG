@@ -280,29 +280,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </div>
         </div>
 
-<!-- 
-        <div class="mdl-cell mdl-cell--12-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <?php
-                $html = '<input class="mdl-textfield__input" type="text" id="codigoISTG" name="codigoISTG" required value="'.$codigoISTG.'">';
-                echo $html;
-              ?>
-              
-              <label class="mdl-textfield__label" for="codigo">Código ISTG</label>
-              <span class="mdl-textfield__error">Este campo es requerido</span>
-            </div>
-
-
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  div-codigoSENESCYT/SECAP/COLEGIO" id=divCodigo>
-          <?php
-                $html = ' <input class="mdl-textfield__input" type="text" id="codigoSENESCYT/SECAP/COLEGIO" name="codigoSENESCYT/SECAP/COLEGIO" value="'.$codigoAdicional.'">';
-                echo $html;
-              ?>
-             
-              <label class="mdl-textfield__label" for="codigo">Código SENESCYT/SECAP/COLEGIO </label>
-          </div> -->
-        </div>
-
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <select class="mdl-textfield__input" id="origen_del_bien" name="origen_del_bien">
