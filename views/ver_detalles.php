@@ -366,10 +366,7 @@
               Habilitar Edición 
             </button>
         </div>
-
     </form>
 	</section>
-
-	
 </body>
 </html>

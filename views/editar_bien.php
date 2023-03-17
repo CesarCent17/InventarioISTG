@@ -90,7 +90,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; AGREGAR BIEN</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; ACTUALIZAR BIEN</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -156,13 +156,40 @@
 	<div style="text-align: center; margin-top: 20px" >
 		<h5 class="mdl-color-text--primary">Actualizar Bien</h5>
   </div>
+  
+  <?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $numero_de_acta = $_POST['numero_de_acta'];
+    $anio = $_POST['anio'];
+    $area_de_ubicacion = $_POST['area_de_ubicacion'];
+    $codigoISTG = $_POST['codigoISTG'];
+    $codigoAdicional = $_POST['codigoAdicional'];
+    $origen_del_bien = $_POST['origen_del_bien'];
+    $custodio = $_POST['custodio'];
+    $proceso_de_adquisicion = $_POST['proceso_de_adquisicion'];
+    $estado_de_uso = $_POST['estado_de_uso'];
+    $estado_fisico = $_POST['estado_fisico'];
+    $acta_de_donacion = $_POST['acta_de_donacion'];
+    $observaciones = $_POST['observaciones'];
+}
+
+
+
+?>
 
 	<!-- Form -->
       <form class="mdl-grid" action="../php/save_test.php" method="post" style="max-width: 800px; margin: 0 auto;">
 
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
+              <?php
+                $html = ' <input class="mdl-textfield__input" type="text" id="nombre" name="nombre" value="'.$nombre.'" required>';
+                echo $html;
+              ?>
+             
               <label class="mdl-textfield__label" for="nombre">Nombre General</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
@@ -170,7 +197,11 @@
 
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="descripcion" name="descripcion" required>
+            <?php
+                $html = '<input class="mdl-textfield__input" type="text" id="descripcion" name="descripcion" value="'.$descripcion.'" required>';
+                echo $html;
+              ?>
+              
               <label class="mdl-textfield__label" for="descripcion">Descripción</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
@@ -179,14 +210,22 @@
         
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="number" id="numero_de_acta" name="numero_de_acta">
+            <?php
+                $html = '<input class="mdl-textfield__input" type="number" id="numero_de_acta" name="numero_de_acta" value="'.$numero_de_acta.'">';
+                echo $html;
+              ?>
+              
               <label class="mdl-textfield__label" for="numero_de_acta"># Acta</label>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="number" id="anio" name="anio">
+            <?php
+                $html = '<input class="mdl-textfield__input" type="number" id="anio" name="anio" value="'.$anio.'">';
+                echo $html;
+              ?>
+              
               <label class="mdl-textfield__label" for="anio">Año</label>
             </div>
           </div>
@@ -235,18 +274,22 @@
 
         <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="codigoISTG" name="codigoISTG" required>
+            <?php
+                $html = '<input class="mdl-textfield__input" type="text" id="codigoISTG" name="codigoISTG" required value="'.$codigoISTG.'">';
+                echo $html;
+              ?>
+              
               <label class="mdl-textfield__label" for="codigo">Código ISTG</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
-          
-          <div style="margin-top: 10px;">
-            <p style="display: inline-block; margin-right: 10px; font-size:14px">¿Deseas agregar otro código?</p>
-            <a href="#" class="mdl-color-text--primary" style="display: inline-block; margin-left: 10px; font-size:14px" onclick="mostrarInputNuevoCodigo()">Agregar Código Adicional</a>
-          </div>
 
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label oculto div-codigoSENESCYT/SECAP/COLEGIO" id=divCodigo>
-              <input class="mdl-textfield__input" type="text" id="codigoSENESCYT/SECAP/COLEGIO" name="codigoSENESCYT/SECAP/COLEGIO">
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  div-codigoSENESCYT/SECAP/COLEGIO" id=divCodigo>
+          <?php
+                $html = ' <input class="mdl-textfield__input" type="text" id="codigoSENESCYT/SECAP/COLEGIO" name="codigoSENESCYT/SECAP/COLEGIO" value="'.$codigoAdicional.'">';
+                echo $html;
+              ?>
+             
               <label class="mdl-textfield__label" for="codigo">Código SENESCYT/SECAP/COLEGIO </label>
           </div>
         </div>
@@ -358,7 +401,11 @@
 
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <textarea class="mdl-textfield__input" type="text" rows= "3" id="observaciones" name="observaciones"></textarea>
+            <?php
+                $html = '<textarea class="mdl-textfield__input" type="text" rows= "3" id="observaciones" name="observaciones">'.$observaciones.'</textarea>';
+                echo $html;
+              ?>
+              
               <label class="mdl-textfield__label" for="observaciones">Observaciones</label>
             </div>
           </div>
