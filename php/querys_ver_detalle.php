@@ -151,5 +151,20 @@ function obtener_estado_fisico($conexion, $id){
     }
     return $estado;
 }
+
+function eliminar_prod($conexion, $id){
+    $sql = "DELETE
+        FROM `inventorioistg`.`producto`
+        WHERE `id` = ?;";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("i", $id);
+    if (!$stmt->execute()) {
+        die("Error al eliminar el producto: " . $stmt->error);
+    }  
+}
 ?>
 

@@ -183,7 +183,7 @@
 						$form_ver_detalles = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
 												<button type="submit" class="form-button-icon fas fa-eye" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
 											</form>';
-						$form_eliminar = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
+						$form_eliminar = '<form action="../php/eliminar_product.php" method="post" class="ver-detalles-eliminar">
 												<button type="submit" class="form-button-icon fa-solid fa-trash" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
 											</form>';
 						$html .= '<tr>

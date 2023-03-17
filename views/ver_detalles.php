@@ -172,7 +172,20 @@
 	<!-- Form -->
       <form class="mdl-grid" action="editar_bien.php" method="post" style="max-width: 800px; margin: 0 auto;">
 
-          <div class="mdl-cell mdl-cell--12-col">
+
+	  	<div class="mdl-cell mdl-cell--2-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
+				<?php
+					$html = ' <input class="mdl-textfield__input" type="text" id="id_prod" name="id_prod" required value="'.$id_prod = $_POST['id_prod'].'" readonly>';
+		 			echo $html;
+				?>
+              <label class="mdl-textfield__label" for="id_prod">ID</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
+            </div>
+          </div>
+
+
+          <div class="mdl-cell mdl-cell--10-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
 				<?php
 					$html = ' <input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required value="'.$prod['nombre'].'" readonly>';

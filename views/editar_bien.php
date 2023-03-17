@@ -181,9 +181,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 	<!-- Form -->
-      <form class="mdl-grid" action="../php/save_test.php" method="post" style="max-width: 800px; margin: 0 auto;">
+      <form class="mdl-grid" action="../php/proceso_actualizacion.php" method="post" style="max-width: 800px; margin: 0 auto;">
 
-          <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-cell mdl-cell--2-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
+				<?php
+					$html = ' <input class="mdl-textfield__input" type="text" id="id_prod" name="id_prod" required value="'.$id_prod = $_POST['id_prod'].'" readonly>';
+		 			echo $html;
+				?>
+              <label class="mdl-textfield__label" for="id_prod">ID</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
+            </div>
+          </div>
+
+          <div class="mdl-cell mdl-cell--10-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <?php
                 $html = ' <input class="mdl-textfield__input" type="text" id="nombre" name="nombre" value="'.$nombre.'" required>';
@@ -214,7 +225,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $html = '<input class="mdl-textfield__input" type="number" id="numero_de_acta" name="numero_de_acta" value="'.$numero_de_acta.'">';
                 echo $html;
               ?>
-              
               <label class="mdl-textfield__label" for="numero_de_acta"># Acta</label>
             </div>
           </div>
@@ -225,7 +235,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $html = '<input class="mdl-textfield__input" type="number" id="anio" name="anio" value="'.$anio.'">';
                 echo $html;
               ?>
-              
               <label class="mdl-textfield__label" for="anio">Año</label>
             </div>
           </div>
@@ -271,7 +280,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </div>
         </div>
 
-
+<!-- 
         <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <?php
@@ -291,7 +300,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               ?>
              
               <label class="mdl-textfield__label" for="codigo">Código SENESCYT/SECAP/COLEGIO </label>
-          </div>
+          </div> -->
         </div>
 
           <div class="mdl-cell mdl-cell--6-col">

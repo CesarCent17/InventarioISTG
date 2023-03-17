@@ -185,7 +185,7 @@
 						}
 						$html = '<span class="text-condensedLight">
 									'.strval($bienes_registrados).'<br>
-									<small>Bienes Registrados</small>
+									<small>Bien(es) Registrado(s)</small>
 								</span>';
 						echo $html;
 					?>
@@ -203,7 +203,7 @@
 						}
 						$html = '<span class="text-condensedLight">
 									'.strval($usuarios_activos).'<br>
-									<small>Usuarios Activos</small>
+									<small>Usuario(s) Activo(s)</small>
 								</span>';
 						echo $html;
 					?>
