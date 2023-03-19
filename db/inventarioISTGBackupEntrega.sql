@@ -70,11 +70,11 @@ CREATE TABLE `codigo_institucion` (
   PRIMARY KEY (`id`),
   KEY `fk_institucion` (`id_institucion`),
   CONSTRAINT `fk_institucion` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8;
 
 /*Data for the table `codigo_institucion` */
 
-insert  into `codigo_institucion`(`id`,`codigo`,`id_institucion`) values (102,'ISTG-GYE-00000001',1),(103,'ISTG-GYE-00000002',1),(104,'ISTG-GYE-00000003',1),(105,'ISTG-GYE-00000004',1),(109,'gdsgdsgsgs',1);
+insert  into `codigo_institucion`(`id`,`codigo`,`id_institucion`) values (111,'ISTG-GYE-00000005',1),(112,'ISTG-GYE-00000001',1),(113,'ISTG-GYE-00000002',1);
 
 /*Table structure for table `codigo_producto` */
 
@@ -89,11 +89,11 @@ CREATE TABLE `codigo_producto` (
   KEY `fk_producto` (`id_producto`),
   CONSTRAINT `fk_codigo_institucion` FOREIGN KEY (`id_codigo_institucion`) REFERENCES `codigo_institucion` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 /*Data for the table `codigo_producto` */
 
-insert  into `codigo_producto`(`id`,`id_codigo_institucion`,`id_producto`) values (81,102,83),(82,103,84),(83,104,85),(84,105,86);
+insert  into `codigo_producto`(`id`,`id_codigo_institucion`,`id_producto`) values (91,112,93),(92,113,94);
 
 /*Table structure for table `custodio` */
 
@@ -240,11 +240,11 @@ CREATE TABLE `producto` (
   CONSTRAINT `fk_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_origen_del_bien` FOREIGN KEY (`id_origen_del_bien`) REFERENCES `origen_del_bien` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_proceso_de_adquisicion` FOREIGN KEY (`id_proceso_de_adquisicion`) REFERENCES `proceso_de_adquisicion` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
 
 /*Data for the table `producto` */
 
-insert  into `producto`(`id`,`nombre`,`descripcion`,`observaciones`,`acta_de_donacion`,`#_acta`,`año`,`id_campus`,`id_area_ubicacion`,`id_origen_del_bien`,`id_custodio`,`id_proceso_de_adquisicion`,`id_estado_de_uso`,`id_estado_fisico`,`fecha_registro`,`id_usuario`) values (83,'ARCHIVADOR AEREO','ARCHIVADOR AEREO METALICO C/AZUL',NULL,1,'70',NULL,1,1,1,NULL,1,1,1,'2023-03-17 12:42:02',7),(84,'DISPENSADOR DE AGUA ','DISPENSADOR DE AGUA MARCA SMC',NULL,1,'71',NULL,1,1,1,NULL,2,1,1,'2023-03-17 12:43:44',7),(85,'ROUTER','ROUTER  MARCA D-LINK COLOR NEGRO SERIE RZSQ2HB000630',NULL,1,'55',2018,1,1,1,NULL,NULL,NULL,NULL,'2023-03-17 12:45:08',7),(86,'SILLON','SILLON CINCO GARRUCHAS COLOR NEGRO','ACTA ENTREGA RECEPCION DE BIENES ENTRE LA DIRECCION DISTRITAL 09D06 EDUCACION Y EL INSTITUTO TECNOLOGICO SUPERIOR GUAYAQUIL 1 DE MARZO DEL 2019',NULL,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,'2023-03-17 12:47:00',7);
+insert  into `producto`(`id`,`nombre`,`descripcion`,`observaciones`,`acta_de_donacion`,`#_acta`,`año`,`id_campus`,`id_area_ubicacion`,`id_origen_del_bien`,`id_custodio`,`id_proceso_de_adquisicion`,`id_estado_de_uso`,`id_estado_fisico`,`fecha_registro`,`id_usuario`) values (93,'ARCHIVADOR AEREO','ARCHIVADOR AEREO METALICO C/AZUL',NULL,1,'70',NULL,1,1,1,NULL,1,1,1,'2023-03-18 21:38:10',17),(94,'DISPENSADOR DE AGUA ','DISPENSADOR DE AGUA MARCA SMC',NULL,1,'71',NULL,1,1,1,NULL,2,NULL,1,'2023-03-18 21:39:30',17);
 
 /*Table structure for table `rol` */
 
@@ -275,11 +275,11 @@ CREATE TABLE `usuario` (
   `id_usuario_rol` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cedula` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`id`,`nombre`,`apellido`,`cedula`,`contraseña`,`email`,`activo`,`id_usuario_rol`) values (6,'test','test','test','$2y$10$pZ0nJ0QhyNTCnrr0tNqPzOcX7YHjspFvUdsqdxD3Sj/teJtbSQ02S','cesarcent17@outlook.com',1,1),(7,'root','root','root','$2y$10$BfiyRByPZy0vtAPiGa0Hg.G/4JFLjQKE99bn9PSvtqHDfZ7ei2fWK','root@gmail.com',1,2);
+insert  into `usuario`(`id`,`nombre`,`apellido`,`cedula`,`contraseña`,`email`,`activo`,`id_usuario_rol`) values (17,'Mónica Mercedes','Merino Morocho','0911504579','$2y$10$vV.hLyKzmosTktwXJmNLp.qBU5gAPnbxsYU9dHJbTvsN43B9vD9tO','',1,8),(18,'Fany Maribel','Gansino Miranda','0921229050','$2y$10$hMAARxO87BDeJVEWM2dViO2ve7nGQX9uFTYsIo97vYyyJzg37RuKO','',1,9),(19,'Mayra','Aguirre Saavedra','1103943526','$2y$10$3kkkfG2VGlsSEalpxGIwb.Mihx82MbpAApayiM3pkpmNt9NeeH596','',1,10),(20,'Hugo Alfredo','Aguilar Pérez','0917766313','$2y$10$Bpr/XbUafhE/xwwr3omymuiOh8SVplNlQzsN.mvQ2e4S2.mqrrroi','',1,11);
 
 /*Table structure for table `usuario_rol` */
 
@@ -294,11 +294,11 @@ CREATE TABLE `usuario_rol` (
   KEY `fk_rol` (`id_rol`),
   CONSTRAINT `fk_rol` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `usuario_rol` */
 
-insert  into `usuario_rol`(`id`,`id_usuario`,`id_rol`) values (1,6,2),(2,7,1);
+insert  into `usuario_rol`(`id`,`id_usuario`,`id_rol`) values (8,17,2),(9,18,2),(10,19,1),(11,20,2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
