@@ -8,7 +8,9 @@ function obtener_bienes_registrados($conexion){
                 `id_campus`,
                 `id_area_ubicacion`
             FROM 
-                `producto`";
+                `producto`
+            WHERE
+                `oculto` = 0";
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {

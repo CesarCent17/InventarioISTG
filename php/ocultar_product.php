@@ -8,7 +8,7 @@
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_prod = $_POST['id_prod'];
-            eliminar_prod($conexion, $id_prod);
+            ocultar_prod($conexion, $id_prod);
             header("Location: ../views/inventario.php");
             exit;
         }

@@ -70,24 +70,5 @@
             // header('Location: ../views/bien.php'); // redirige al usuario a la página original
             // exit;
         }
-        
-
-
-        // $observaciones =  NULL;
-        // $acta_de_donacion = NULL;   
-        // $n_acta = NULL;
-        // $año = NULL;
-        // $id_origen_del_bien = NULL;
-        // $id_custodio = NULL;
-        // $id_proceso_de_adquisicion = NULL;
-        // $id_estado_de_uso = NULL;
-        // $id_estado_fisico = NULL;
-
-        // //Registrar producto
-        // $id_producto = insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-        //             $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico);
-
-        // header('Location: ../views/bien.php'); // redirige al usuario a la página original
-        // exit;
 }
 ?>

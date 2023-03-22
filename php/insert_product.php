@@ -74,7 +74,8 @@ function insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_
                     `id_proceso_de_adquisicion`,
                     `id_estado_de_uso`,
                     `id_estado_fisico`,
-                    `id_usuario`
+                    `id_usuario`,
+                    `oculto`
                 )
             VALUES 
                 (
@@ -91,7 +92,8 @@ function insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_
                     ?,
                     ?,
                     ?,
-                    ?
+                    ?,
+                    0
                 );";
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {

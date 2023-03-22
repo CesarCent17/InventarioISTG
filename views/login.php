@@ -19,10 +19,13 @@
 	<script src="../js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="../js/main.js" ></script>
 </head>
-<body class="cover">
-	<div class="container-login">
+<body class="cover" style="background-image: linear-gradient(to right top, #051937, #0b2753, #153770, #21468e, #3056ae);">
+	<div class="container-login" style="width: 18%;">
 		<p class="text-center" style="font-size: 110px;">
-			<i class="zmdi zmdi-account-circle"></i>
+			<!-- <i class="zmdi zmdi-account-circle"></i> -->
+            <img src="../assets/icons/logoISTG.ico" alt="Logo del ISTG" class="circle-img">
+	    </p>
+
 		</p>
 		<p class="text-center text-condensedLight"></p>
 

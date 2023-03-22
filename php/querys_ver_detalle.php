@@ -152,10 +152,10 @@ function obtener_estado_fisico($conexion, $id){
     return $estado;
 }
 
-function eliminar_prod($conexion, $id){
-    $sql = "DELETE
-        FROM `inventorioistg`.`producto`
-        WHERE `id` = ?;";
+function ocultar_prod($conexion, $id){
+    $sql = "UPDATE `producto`
+            SET `oculto` = '1'
+            WHERE `id` = ?;";
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
@@ -163,7 +163,7 @@ function eliminar_prod($conexion, $id){
     }
     $stmt->bind_param("i", $id);
     if (!$stmt->execute()) {
-        die("Error al eliminar el producto: " . $stmt->error);
+        die("Error al ocultar el bien: " . $stmt->error);
     }  
 }
 ?>

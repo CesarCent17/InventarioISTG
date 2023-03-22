@@ -183,8 +183,8 @@
 						$form_ver_detalles = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
 												<button type="submit" class="form-button-icon fas fa-eye" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
 											</form>';
-						$form_eliminar = '<form action="../php/eliminar_product.php" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fa-solid fa-trash" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
+						$form_ocultar = '<form action="../php/ocultar_product.php" method="post" class="ver-detalles-eliminar">
+												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
 											</form>';
 						$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
@@ -194,7 +194,7 @@
 									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$codigo_adicional.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$form_ver_detalles.$form_eliminar.'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$form_ver_detalles.$form_ocultar.'</td>
 								</tr> ';
 					}
 					echo $html;		

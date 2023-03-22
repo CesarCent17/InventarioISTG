@@ -1,6 +1,21 @@
 <?php
 function obtener_ids_productos($conexion){
-    $sql = "SELECT p.`id` FROM `producto` AS p;";
+    // $sql = "SELECT p.`id` FROM `producto` AS p WHERE oculto = 0;";
+
+    // $stmt = $conexion->prepare($sql);
+    // if (!$stmt) {
+    //     die("Error de consulta: " . $conexion->error);
+    // }
+    // $stmt->execute();
+    // $resultado = $stmt->get_result();
+
+    // while ($fila = $resultado->fetch_assoc()) {
+    //     $array_ids_productos[] = $fila;
+    // }
+    // return $array_ids_productos;
+
+    $sql = "SELECT p.`id` FROM `producto` AS p WHERE oculto = 0;";
+    $array_ids_productos = array();
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
@@ -10,7 +25,7 @@ function obtener_ids_productos($conexion){
     $resultado = $stmt->get_result();
 
     while ($fila = $resultado->fetch_assoc()) {
-        $array_ids_productos[] = $fila;
+        array_push($array_ids_productos, $fila);
     }
     return $array_ids_productos;
 }
@@ -36,9 +51,9 @@ function obtener_ult_prod($conexion){
                    prod.`nombre`, 
                    prod.`id_usuario`
             FROM producto AS prod
+            WHERE prod.`oculto` = 0
             ORDER BY prod.`fecha_registro` DESC
-            LIMIT 5;
-            ";
+            LIMIT 5;";
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
