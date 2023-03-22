@@ -213,42 +213,40 @@
 			</article>
 			
 		</section>
+		
+		<?php
+		$array_ult_prod = obtener_ult_prod($conexion);
+		if(count($array_ult_prod) >= 1){
+		    $array_ult_us = obtener_ult_us($conexion, $array_ult_prod);
+			$html = '<section class="full-width" style="padding: 0px 265px;">
+                                    <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--12-col">
+                                        <h4 class="tittles">Actividad Reciente</h4>					  
+                                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                                        <thead>
+                                            <tr>
+                                            <th class="mdl-data-table__cell--non-numeric" style="width: 30%;">Fecha</th>
+                                            <th class="mdl-data-table__cell--non-numeric" style="width: 45%;">Nombre General</th>
+                                            <th class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>';
+			for($i = 0; $i < count($array_ult_prod); $i++){
+			    $html .= '	<tr>
+								<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">'.$array_ult_prod[$i]['fecha_registro'].'</td>
+								<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">'.$array_ult_prod[$i]['nombre'].'</td>
+								<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">'.$array_ult_us[$i].'</td>
+							</tr>';
+							}
 
-		<section class="full-width" style="padding: 0px 265px;">
-			<div class="mdl-grid">
-			  <div class="mdl-cell mdl-cell--12-col">
-				<h4 class="tittles">Actividad Reciente</h4>					  
-				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-				  <thead>
-					<tr>
-					  <th class="mdl-data-table__cell--non-numeric" style="width: 30%;">Fecha</th>
-					  <th class="mdl-data-table__cell--non-numeric" style="width: 45%;">Nombre General</th>
-					  <th class="mdl-data-table__cell--non-numeric" style="width: 45%;">Usuario</th>
-					</tr>
-				  </thead>
-				  <tbody>
-					<?php
-						$array_ult_prod = obtener_ult_prod($conexion);
-						$array_ult_us = obtener_ult_us($conexion, $array_ult_prod);
-						$html = '';
-						for($i = 0; $i < count($array_ult_prod); $i++){
-							$html .= '	<tr>
-											<td class="mdl-data-table__cell--non-numeric" style="width: 30%;">'.$array_ult_prod[$i]['fecha_registro'].'</td>
-											<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">'.$array_ult_prod[$i]['nombre'].'</td>
-											<td class="mdl-data-table__cell--non-numeric" style="width: 45%;">'.$array_ult_us[$i].'</td>
-										</tr>';
-						}
-						echo $html;				
-					?>
-				  </tbody>
-				</table>
-			  </div>
-			</div>
-		  </section>
-	</section>
-
-
-
+            $html .= '</tbody></table></div></div></section></section>';
+			echo $html;	
+		} else {
+            $html = '<section class="full-width" style="padding: 0px 265px;">
+            <h4 class="tittles">No existe ningún registro en el Inventario</h4></section>';
+			echo $html;				
+        }								
+?>
 	
 </body>
 </html>
