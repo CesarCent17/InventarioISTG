@@ -1,6 +1,7 @@
 <?php
 
 function obtener_bienes_registrados($conexion){
+    $array_bienes_registrados =  array();
     $sql = "SELECT
                 `id`,
                 `nombre`,
@@ -20,7 +21,7 @@ function obtener_bienes_registrados($conexion){
     $resultado = $stmt->get_result();
 
     while ($fila = $resultado->fetch_assoc()) {
-        $array_bienes_registrados[] = $fila;
+        array_push($array_bienes_registrados, $fila);
     }
     return $array_bienes_registrados;
 }

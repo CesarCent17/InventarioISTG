@@ -116,7 +116,7 @@
                                     confirmButtonText: 'OK',
                                 }).then((result) => {
                                     if (result.isConfirmed) {
-                                        window.location.href = '../home.php';
+                                        window.location.href = '../index.php';
                                     }
                                 });
                                 </script>";

@@ -19,7 +19,7 @@
 						echo "<script> console.log(" . json_encode($listaUsuarios) . "); </script>";
                     } 
 		 else {
-			header("Location: ../home.php");
+			header("Location: ../index.php");
 			$msg = "No tiene acceso a la lista de usuarios!";
     		echo "<script> console.log(" . json_encode($usuario) . "); </script>";
 			echo "<script> console.log('" . $msg . "'); </script>";
@@ -110,7 +110,7 @@
 
 					<!-- INICIO -->
 					<li class="full-width">
-						<a href="../home.php" class="full-width">
+						<a href="../index.php" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-home"></i>
 							</div>

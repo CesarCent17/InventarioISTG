@@ -97,7 +97,7 @@
 
 					<!-- INICIO -->
 					<li class="full-width">
-						<a href="../home.php" class="full-width">
+						<a href="../index.php" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-home"></i>
 							</div>
