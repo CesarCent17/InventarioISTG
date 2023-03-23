@@ -1,7 +1,7 @@
 <?php
 	require('../php/mysqli_conexion.php');
 	require('../php/utils_query.php');
-	require('../php/querys_campus.php');
+	
 
     session_start();
 
@@ -29,7 +29,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Inventario | ISTG</title>
+	<title>Campus | ISTG</title>
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/sweetalert2.css">
 	<link rel="stylesheet" href="../css/material.min.css">
@@ -197,20 +197,23 @@
 
 	<!-- pageContent -->
 	<!-- <form action="procesar.php" style="padding-left:440px;"> -->
-	<form class="mdl-grid" action="../php/save_test.php" method="post" style="max-width: 400px; margin-left:600; margin-top: 55px">
+	<form class="mdl-grid" action="../php/guardar_campus.php" method="post" style="max-width: 400px; margin-left:600; margin-top: 55px">
 
-		<div class="mdl-card__title">
+		<div class="mdl-card__title" >
 				<h2 class="mdl-card__title-text">Agregar Campus</h2>
 			</div>
-		<div class="mdl-textfield mdl-js-textfield">
-			<input class="mdl-textfield__input" type="text" id="nombre" name="nombre">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
 			<label class="mdl-textfield__label" for="nombre">Nombre</label>
+			<span class="mdl-textfield__error">Este campo es requerido</span>
 		</div>
-		<div class="mdl-textfield mdl-js-textfield">
-			<input class="mdl-textfield__input" type="text" id="direccion" name="direccion">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" required>
 			<label class="mdl-textfield__label" for="direccion">Dirección</label>
+			<span class="mdl-textfield__error">Este campo es requerido</span>
 		</div>
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
 			Guardar
 		</button>
 	</form>
@@ -230,11 +233,19 @@
 			$html = '';
 			for($i = 0; $i < count($array_campus); $i++){
 				$No = $i+1;
+				// <i class="fa-solid fa-pen-to-square"></i>
+
+				$form_editar = '<form action="editar_campus.php" method="post" class="ver-detalles-eliminar">
+											<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$array_campus[$i]['id'].'" name="id_campus"></button>
+										</form>';
+				$form_eliminar = '<form action="../php/eliminar_campus.php" method="post" class="ver-detalles-eliminar">
+									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$array_campus[$i]['id'].'" name="id_campus"></button>
+								</form>';
 				$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['nombre'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['direccion'].'</td>
-									<th class="mdl-data-table__cell--non-numeric">Acciones</th>	
+									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
 						</tr> ';
 			}
 			echo $html;
