@@ -1,32 +1,32 @@
 <?php
 
-function update_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-                    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_prod){
-
-    $sql = "UPDATE `inventorioistg`.`producto`
+function update_prod($conexion, $nombre, $descripcion, $observaciones, $n_acta, $proceso_de_adquisicion, $año, $id_campus, $id_area_ubicacion, 
+                    $id_origen_del_bien, $id_custodio, $id_estado_de_uso, $id_estado_fisico, $id_administrador, $id_tipo_acta, $id_prod){
+    
+    $sql = "UPDATE `producto`
             SET 
-                `nombre` = ?,
-                `descripcion` = ?,
-                `observaciones` = ?,
-                `acta_de_donacion` = ?,
-                `#_acta` = ?,
-                `año` = ?,
-                `id_campus` = ?,
-                `id_area_ubicacion` = ?,
-                `id_origen_del_bien` = ?,
-                `id_custodio` = ?,
-                `id_proceso_de_adquisicion` = ?,
-                `id_estado_de_uso` = ?,
-                `id_estado_fisico` = ?
-
+            `nombre` = ?,
+            `descripcion` = ?,
+            `observaciones` = ?,
+            `#_acta` = ?,
+            `proceso_de_adquisicion` = ?,
+            `año` = ?,
+            `id_campus` = ?,
+            `id_area_ubicacion` = ?,
+            `id_origen_del_bien` = ?,
+            `id_custodio` = ?,
+            `id_estado_de_uso` = ?,
+            `id_estado_fisico` = ?,
+            `id_administrador` = ?,
+            `id_tipo_acta` = ?
             WHERE `id` = ?;";
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
     }
-    $stmt->bind_param("ssssssssssssss",$nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_prod);
+    $stmt->bind_param("sssssssssssssss", $nombre, $descripcion, $observaciones, $n_acta, $proceso_de_adquisicion, $año, $id_campus, $id_area_ubicacion, 
+    $id_origen_del_bien, $id_custodio, $id_estado_de_uso, $id_estado_fisico, $id_administrador, $id_tipo_acta, $id_prod);
 
     if ($stmt->execute() && $stmt->affected_rows == 1) {
         // La inserción se realizó correctamente

@@ -8,14 +8,6 @@ function obtener_producto_por_id($conexion, $id){
                 `#_acta`,
                 `proceso_de_adquisicion`,
                 `año`
-                -- `id_campus`,
-                -- `id_area_ubicacion`,
-                -- `id_origen_del_bien`,
-                -- `id_custodio`,
-                -- `id_estado_de_uso`,
-                -- `id_estado_fisico`,
-                -- `id_administrador`,
-                -- `id_tipo_acta`
             FROM `producto`
             WHERE `id` = ?;";
    
