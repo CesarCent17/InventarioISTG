@@ -277,15 +277,15 @@
           </div>
         </div>
 
-          <div class="mdl-cell mdl-cell--6-col">
+
+		  <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-					$origen = obtener_origen($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="origen_del_bien" name="origen_del_bien" value="'.$origen.'" readonly>';
+			<?php
+					$administrador = obtener_administrador($conexion, $id_prod);
+					$html = '<input class="mdl-textfield__input" type="text" id="administrador" name="administrador" value="'.$administrador.'" readonly>';
 		 			echo $html;
-				
-				?>
-              <label class="mdl-textfield__label" for="origen_del_bien">Origen del bien</label>
+			?>
+              <label class="mdl-textfield__label" for="administrador">Administrador</label>
             </div>
           </div>
 
@@ -304,16 +304,18 @@
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-			<?php
-					$proceso_de_adquisicion = obtener_proceso_adquisicion($conexion, $id_prod);
-					$html = '<input class="mdl-textfield__input" type="text" id="proceso_de_adquisicion" name="proceso_de_adquisicion" value="'.$proceso_de_adquisicion.'" readonly>';
+				<?php
+					$origen = obtener_origen($conexion, $id_prod);
+					$html = '<input class="mdl-textfield__input" type="text" id="origen_del_bien" name="origen_del_bien" value="'.$origen.'" readonly>';
 		 			echo $html;
-			?>
-              <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
+				
+				?>
+              <label class="mdl-textfield__label" for="origen_del_bien">Origen del bien</label>
             </div>
           </div>
+		  
 
-          <div class="mdl-cell mdl-cell--6-col">
+		  <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
 			<?php
 					$estado_de_uso = obtener_estado_uso($conexion, $id_prod);
@@ -324,6 +326,7 @@
               <label class="mdl-textfield__label" for="estado_de_uso">Estado de uso</label>
             </div>
           </div>
+
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
@@ -339,27 +342,23 @@
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-					$acta_de_donacion = $prod['acta_de_donacion'];
-					switch ($acta_de_donacion) {
-						case '1':
-							$acta_de_donacion = 'SI';
-							break;
-						case '0':
-							$acta_de_donacion = 'NO';
-							break;
-						case NULL:
-							$acta_de_donacion = '';
-							break;
-						default:
-							$acta_de_donacion = '';
-							break;
-					}
-					$html = '<input class="mdl-textfield__input" type="text" id="acta_de_donacion" name="acta_de_donacion" value="'.$acta_de_donacion.'" readonly>';
+			<?php
+					$tipo_acta = obtener_tipo_acta($conexion, $id_prod);
+					$html = '<input class="mdl-textfield__input" type="text" id="tipo_acta" name="tipo_acta" value="'.$tipo_acta.'" readonly>';
 		 			echo $html;
 				?>
-              <!-- <input class="mdl-textfield__input" type="text" id="acta_de_donacion" name="acta_de_donacion" value="SI" readonly> -->
-              <label class="mdl-textfield__label" for="acta_de_donacion">Acta de donación</label>
+              <label class="mdl-textfield__label" for="tipo_acta">Tipo de Acta</label>
+            </div>
+          </div>
+
+		  <div class="mdl-cell mdl-cell--12-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled" >
+			    <?php
+					$html = '<input class="mdl-textfield__input" type="text" id="proceso_de_adquisicion" name="proceso_de_adquisicion" required value="'.$prod['proceso_de_adquisicion'].'" readonly>';
+		 			echo $html;
+				?>
+              <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
           </div>
 

@@ -5,17 +5,18 @@ function obtener_producto_por_id($conexion, $id){
                 `nombre`,
                 `descripcion`,
                 `observaciones`,
-                `acta_de_donacion`,
                 `#_acta`,
-                `año`,
-                `id_campus`,
-                `id_area_ubicacion`,
-                `id_origen_del_bien`,
-                `id_custodio`,
-                `id_proceso_de_adquisicion`,
-                `id_estado_de_uso`,
-                `id_estado_fisico`
-            FROM `inventorioistg`.`producto`
+                `proceso_de_adquisicion`,
+                `año`
+                -- `id_campus`,
+                -- `id_area_ubicacion`,
+                -- `id_origen_del_bien`,
+                -- `id_custodio`,
+                -- `id_estado_de_uso`,
+                -- `id_estado_fisico`,
+                -- `id_administrador`,
+                -- `id_tipo_acta`
+            FROM `producto`
             WHERE `id` = ?;";
    
     $stmt = $conexion->prepare($sql);
@@ -79,12 +80,12 @@ function obtener_custodio($conexion, $id){
     return $custodio;
 }
 
-function obtener_proceso_adquisicion($conexion, $id){
-    $sql = 'SELECT pda.`proceso`
+function obtener_administrador($conexion, $id){
+    $sql = "SELECT concat(`administrador`.`nombre`, ' ', `administrador`.`apellido`) as nombres_completos
             FROM `producto` AS p
-            INNER JOIN `proceso_de_adquisicion` AS pda
-            ON p.`id_proceso_de_adquisicion` = pda.`id`
-            WHERE p.`id` = ?;';
+            INNER JOIN `administrador`
+            ON p.`id_administrador` = `administrador`.`id`
+            WHERE p.`id` = ?;";
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
@@ -95,13 +96,38 @@ function obtener_proceso_adquisicion($conexion, $id){
     $resultado = $stmt->get_result();
 
     if ($fila = $resultado->fetch_assoc()) {
-        $proceso = $fila['proceso'];
+        $administrador = $fila['nombres_completos'];
     } else {
         // $proceso = "No se encontró el proceso correspondiente al ID proporcionado.";
-        $proceso = "";
+        $administrador = "";
 
     }
-    return $proceso;
+    return $administrador;
+}
+
+function obtener_tipo_acta($conexion, $id){
+    $sql = "SELECT tda.descripcion 
+            FROM `producto` AS p
+            INNER JOIN `tipo_acta` as tda
+            ON p.`id_tipo_acta` = `tda`.`id`
+            WHERE p.`id` = ?;";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($fila = $resultado->fetch_assoc()) {
+        $tipo_acta = $fila['descripcion'];
+    } else {
+        // $proceso = "No se encontró el proceso correspondiente al ID proporcionado.";
+        $tipo_acta = "";
+
+    }
+    return $tipo_acta;
 }
 
 function obtener_estado_uso($conexion, $id){
