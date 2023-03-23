@@ -190,5 +190,45 @@
 			</nav>
 		</div>
 	</section>
+
+	<!-- pageContent -->
+	<!-- <form action="procesar.php" style="padding-left:440px;"> -->
+	<form class="mdl-grid" action="../php/save_test.php" method="post" style="max-width: 400px; margin-left:600; margin-top: 55px">
+
+		<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">Agregar Campus</h2>
+			</div>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input class="mdl-textfield__input" type="text" id="nombre" name="nombre">
+			<label class="mdl-textfield__label" for="nombre">Nombre</label>
+		</div>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input class="mdl-textfield__input" type="text" id="direccion" name="direccion">
+			<label class="mdl-textfield__label" for="direccion">Dirección</label>
+		</div>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+			Guardar
+		</button>
+	</form>
+
+	<!-- Crea la tabla con los campos de nombre y dirección -->
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
+	  <thead>
+	    <tr>
+		  <th class="mdl-data-table__cell--non-numeric">No</th>
+	      <th class="mdl-data-table__cell--non-numeric">Nombre</th>
+	      <th class="mdl-data-table__cell--non-numeric">Dirección</th>
+		  <th class="mdl-data-table__cell--non-numeric">Acciones</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+		 <td class="mdl-data-table__cell--non-numeric">1</td>
+	      <td class="mdl-data-table__cell--non-numeric">Juan Pérez</td>
+	      <td class="mdl-data-table__cell--non-numeric">Calle 123</td>
+	    </tr>
+
+	  </tbody>
+	</table>
 </body>
 </html>
