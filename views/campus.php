@@ -1,14 +1,22 @@
 <?php
 	require('../php/mysqli_conexion.php');
-	require('../php/querys_inventario.php');
     session_start();
+
 	 // Verificamos que el usuario esté iniciado sesión
     if(!isset($_SESSION['usuario'])) {
         // Si el usuario no está iniciado sesión, lo redirigimos a la página de inicio de sesión
-        header("Location: ../views/login.php");
+        header("Location: login.php");
     } else {
+		//Si el usuario tiene una sesion
 		$usuario = $_SESSION['usuario'];
-    	echo "<script> console.log(" . json_encode($usuario) . "); </script>";
+		$rol = $_SESSION['rol'];
+		if($rol == "Administrador"){
+						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
+                    } 
+		 else {
+			header("Location: ../index.php");
+
+		}
     }
 ?>
 
