@@ -85,7 +85,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; INVENTARIO</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; ÁREA DE UBICACIÓN</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -182,63 +182,5 @@
 			</nav>
 		</div>
 	</section>
-
-	<!-- pageContent -->
-	<div class="mdl-cell mdl-cell--12-col mdl-card">
-		<div class="mdl-card__supporting-text" style="padding-left:440px; width: 100%">
-			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">Bienes Registrados</h2>
-			</div>
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" >
-			<thead>
-				<tr>
-				<th class="mdl-data-table__cell--non-numeric">#</th>
-				<th class="mdl-data-table__cell--non-numeric">Nombre General</th>
-				<th class="mdl-data-table__cell--non-numeric">Descripción</th>
-				<th class="mdl-data-table__cell--non-numeric">Campus</th>
-				<th class="mdl-data-table__cell--non-numeric">Área de Ubicación</th>
-				<th class="mdl-data-table__cell--non-numeric">Código ISTG</th>
-				<th class="mdl-data-table__cell--non-numeric">Código Adicional</th>
-				<th class="mdl-data-table__cell--non-numeric">Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-					$array_bienes_registrados = obtener_bienes_registrados($conexion);
-					$html = '';
-					// echo "<script> console.log(". json_encode($array_bienes_registrados) ."); </script>";
-					$array_campus = obtener_array_campus($conexion, $array_bienes_registrados);
-					$array_ubicacion = obtener_array_ubicacion($conexion, $array_bienes_registrados);
-					$array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
-					
-						
-					for($i = 0; $i < count($array_bienes_registrados); $i++){
-						$codigo_adicional =  isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
-						$No = $i+1;
-						// ver_detalles
-						$form_ver_detalles = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fas fa-eye" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
-											</form>';
-						$form_ocultar = '<form action="../php/ocultar_product.php" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
-											</form>';
-						$html .= '<tr>
-									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['nombre'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['descripcion'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$codigo_adicional.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$form_ver_detalles.$form_ocultar.'</td>
-								</tr> ';
-					}
-					echo $html;		
-										
-				?>
-			</tbody>
-			</table>
-		</div>
-	</div>
 </body>
 </html>
