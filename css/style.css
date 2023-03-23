@@ -10,7 +10,7 @@
   background: none; /* Quita el fondo */
   border: none; /* Quita los bordes */
   outline: none; /* Quita el borde que se muestra al hacer clic */
-  cursor: pointer; /* Cambia el cursor a una mano cuando se pasa sobre el botón 
+  cursor: pointer;
 }
 
 .form-button-icon:hover, .form-button-icon:focus {
@@ -35,8 +35,6 @@
   display: inline-block;
   margin-right: 10px; /* Agrega un espacio entre los formularios */
 }
-
-
 
 
   

@@ -25,9 +25,11 @@
 	<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="../css/main.css">
 	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/style_select2.css">
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="../js/jquery-1.11.2.min.js"><\/script>')</script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../css/select2.min.css">
+  <script src="../js/select2.min.js"></script>
 	<script src="../js/material.min.js" ></script>
 	<script src="../js/sweetalert2.min.js" ></script>
 	<script src="../js/jquery.mCustomScrollbar.concat.min.js" ></script>
@@ -273,22 +275,23 @@
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="custodio" name="custodio">
-                <option value=""></option>
-                <?php
-                $array_custodio = getCustodio($conexion);
-                echo "<script> console.log(" . json_encode($array_custodio) . "); </script>";
+                <select class="mdl-textfield__input js-example-basic-single" id="BuscadorCustodio" name="custodio">
+                    <option value=""></option>
+                    <?php
+                    $array_custodio = getCustodio($conexion);
+                    echo "<script> console.log(" . json_encode($array_custodio) . "); </script>";
 
-                $html = '';
-                for($i = 0; $i < count($array_custodio); $i++){
-                    $html.= '<option value="'.$array_custodio[$i]['id'].'">'.$array_custodio[$i]['nombres_completos'].'</option>' ;
-                }
-                echo $html;
-                ?>
-              </select>
-              <label class="mdl-textfield__label" for="custodio">Custodio</label>
+                    $html = '';
+                    for($i = 0; $i < count($array_custodio); $i++){
+                        $html.= '<option value="'.$array_custodio[$i]['id'].'">'.$array_custodio[$i]['nombres_completos'].'</option>' ;
+                    }
+                    echo $html;
+                    ?>
+                </select>
+                <label class="mdl-textfield__label" for="custodio">Custodio</label>
             </div>
-          </div>
+        </div>
+
 
 
           <div class="mdl-cell mdl-cell--6-col">
@@ -329,7 +332,7 @@
             </div>
           </div>
 
-          <div class="mdl-cell mdl-cell--6-col">
+          <div class="mdl-cell mdl-cell--3-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <select class="mdl-textfield__input" id="estado_fisico" name="estado_fisico">
                 <option value=""></option>
@@ -348,16 +351,12 @@
             </div>
           </div>
 
-          <!-- <div class="mdl-cell mdl-cell--6-col">
+          <div class="mdl-cell mdl-cell--9-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="acta_de_donacion" name="acta_de_donacion">
-                <option value=""></option>
-                <option value="1">SI</option>
-                <option value="0">NO</option>
-              </select>
-              <label class="mdl-textfield__label" for="estado_fisico">Acta de donación</label>
+              <input class="mdl-textfield__input" type="text" id="proceso_de_adquisicion" name="proceso_de_adquisicion">
+              <label class="mdl-textfield__label" for="descripcion">Proceso de adquisición</label>
             </div>
-          </div> -->
+          </div>
 
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -378,3 +377,37 @@
 	
 </body>
 </html>
+
+<script>
+   $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+
+    $('.js-example-basic-single').select2({
+    // Otras opciones de configuración aquí
+    language: {
+      noResults: function () {
+        return 'No se encontraron resultados';
+      },
+      searching: function () {
+        return 'Buscando...';
+      }
+    },
+    templateResult: function (data) {
+      // Si se encuentra una coincidencia, se muestra normalmente
+      if (data.loading) {
+        // Si se está buscando, se muestra un mensaje de "Buscando..."
+        return data.text;
+      }
+      // Si no se encuentra una coincidencia, se muestra un mensaje personalizado
+      if (data.id === '') {
+        return 'Seleccione un Custodio';
+      }
+      // Si se encuentra una coincidencia, se muestra normalmente
+      return data.text;
+    }
+  });
+    
+});
+</script>
+
+

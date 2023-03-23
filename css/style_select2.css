@@ -1,0 +1,27 @@
+    /* Quitar el borde del cuadro de selección */
+    .select2-selection--single {
+        border: none !important;
+        outline: none !important;
+      }
+      
+      /* Quitar el borde del cuadro de selección cuando está enfocado */
+      .select2-container--default .select2-selection--single:focus {
+        border: none !important;
+        outline: none !important;
+      }
+      
+      /* Quitar el borde del cuadro de búsqueda en el menú desplegable */
+      .select2-search__field {
+        border: none !important;
+        outline: none !important;
+      }
+  
+      /* Ajustar la posición del texto seleccionado en el cuadro de selección */
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    margin-top: 30px;
+  }
+  
+  /* Ajustar la posición del cuadro de búsqueda en el menú desplegable */
+  .select2-search--dropdown .select2-search__field {
+    margin-top: 8px;
+  }
