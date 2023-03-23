@@ -16,17 +16,19 @@
 
             // Opcionales
             $observaciones = trim($_POST['observaciones']) === '' ? NULL : trim($_POST['observaciones']);
-            $acta_de_donacion = trim($_POST['acta_de_donacion']) === '' ? NULL : trim($_POST['acta_de_donacion']);
             $n_acta = trim($_POST['numero_de_acta']) === '' ? NULL : trim($_POST['numero_de_acta']);
+            $proceso_de_adquisicion = trim($_POST['proceso_de_adquisicion']) === '' ? NULL : trim($_POST['proceso_de_adquisicion']);
             $año = trim($_POST['anio']) === '' ? NULL : trim($_POST['anio']);
             $id_origen_del_bien = trim($_POST['origen_del_bien']) === '' ? NULL : trim($_POST['origen_del_bien']);
             $id_custodio = trim($_POST['custodio']) === '' ? NULL : trim($_POST['custodio']);
-            $id_proceso_de_adquisicion = trim($_POST['proceso_de_adquisicion']) === '' ? NULL : trim($_POST['proceso_de_adquisicion']);
             $id_estado_de_uso = trim($_POST['estado_de_uso']) === '' ? NULL : trim($_POST['estado_de_uso']);
             $id_estado_fisico = trim($_POST['estado_fisico']) === '' ? NULL : trim($_POST['estado_fisico']);
+            $id_administrador = trim($_POST['administrador']) === '' ? NULL : trim($_POST['administrador']);
+            $id_tipo_acta = trim($_POST['tipo_acta']) === '' ? NULL : trim($_POST['tipo_acta']);
 
-            $id_producto = insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-                    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_usuario);
+
+            $id_producto = insert_prod($conexion, $nombre, $descripcion, $observaciones, $n_acta, $proceso_de_adquisicion, $año, $id_campus, $id_area_ubicacion, 
+            $id_origen_del_bien, $id_custodio, $id_estado_de_uso, $id_estado_fisico, $id_usuario, $id_administrador, $id_tipo_acta);
             
             // Capturar codigos en un array
             $array_codigo_ISTG = array();

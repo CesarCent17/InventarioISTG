@@ -55,8 +55,8 @@ function insert_codeprod($conexion, $id_codigo_institucion, $id_producto){
    
 }
 
-function insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-                    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_usuario){
+function insert_prod($conexion, $nombre, $descripcion, $observaciones, $n_acta, $proceso_de_adquisicion, $año, $id_campus, $id_area_ubicacion, 
+                    $id_origen_del_bien, $id_custodio, $id_estado_de_uso, $id_estado_fisico, $id_usuario, $id_administrador, $id_tipo_acta){
     $last_inserted_id = null;
 
     $sql = "INSERT INTO `inventorioistg`.`producto`
@@ -64,43 +64,46 @@ function insert_prod($conexion, $nombre, $descripcion, $observaciones, $acta_de_
                     `nombre`,
                     `descripcion`,
                     `observaciones`,
-                    `acta_de_donacion`,
                     `#_acta`,
+                    `proceso_de_adquisicion`,
                     `año`,
                     `id_campus`,
                     `id_area_ubicacion`,
                     `id_origen_del_bien`,
                     `id_custodio`,
-                    `id_proceso_de_adquisicion`,
                     `id_estado_de_uso`,
                     `id_estado_fisico`,
+                    `oculto`,
                     `id_usuario`,
-                    `oculto`
+                    `id_administrador`,
+                    `id_tipo_acta`
                 )
             VALUES 
-                (
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    0
-                );";
+            (
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                0,
+                ?,
+                ?,
+                ?
+            );";
+
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
     }
-    $stmt->bind_param("ssssssssssssss",$nombre, $descripcion, $observaciones, $acta_de_donacion, $n_acta, $año, $id_campus, $id_area_ubicacion, 
-    $id_origen_del_bien, $id_custodio, $id_proceso_de_adquisicion, $id_estado_de_uso, $id_estado_fisico, $id_usuario);
+    $stmt->bind_param("sssssssssssssss",$nombre, $descripcion, $observaciones, $n_acta, $proceso_de_adquisicion, $año, $id_campus, $id_area_ubicacion, 
+    $id_origen_del_bien, $id_custodio, $id_estado_de_uso, $id_estado_fisico, $id_usuario, $id_administrador, $id_tipo_acta);
 
     if ($stmt->execute() && $stmt->affected_rows == 1) {
         // La inserción se realizó correctamente
