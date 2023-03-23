@@ -41,7 +41,8 @@ function actualizarEstadoUsuario($conexion, $id_usuario, $estado){
 }
 
 function getCampus($conexion){
-    $sql= "SELECT `id`, `nombre` FROM `campus`;";
+    $sql= "SELECT `id`, `nombre`, `direccion` FROM `campus`;";
+    $array_campus = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -58,6 +59,7 @@ function getCampus($conexion){
 
 function getAreaDeUbicacion($conexion){
     $sql= "SELECT `id`, `direccion` FROM `area_ubicacion`;";
+    $array_area_de_ubicacion = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -74,6 +76,7 @@ function getAreaDeUbicacion($conexion){
 
 function getOrigen($conexion){
     $sql= "SELECT `id`, `origen` FROM `origen_del_bien`;";
+    $array_origen_del_bien = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -90,6 +93,7 @@ function getOrigen($conexion){
 
 function getCustodio($conexion){
     $sql = "SELECT `id`, CONCAT(`nombre`, ' ', `apellido`) AS nombres_completos FROM `custodio`;";
+    $array_custodio = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -106,6 +110,7 @@ function getCustodio($conexion){
 
 function getAdministrador($conexion){
     $sql= "SELECT `id`, CONCAT(`nombre`, ' ', `apellido`) AS nombres_completos FROM `administrador`;";
+    $array_administrador = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -122,6 +127,7 @@ function getAdministrador($conexion){
 
 function getEstadoDeUso($conexion){
     $sql= "SELECT `id`, `estado` FROM `estado_de_uso`;";
+    $array_estado_de_uso = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -138,6 +144,7 @@ function getEstadoDeUso($conexion){
 
 function getEstadoFisico($conexion){
     $sql= "SELECT `id`, `estado` FROM `estado_fisico`;";
+    $array_estado_fisico = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -153,6 +160,7 @@ function getEstadoFisico($conexion){
 
 function getTipoActa($conexion){
     $sql = "SELECT `id`,`descripcion` FROM `tipo_acta`;";
+    $array_tipo_acta = array();
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);

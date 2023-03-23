@@ -1,5 +1,8 @@
 <?php
 	require('../php/mysqli_conexion.php');
+	require('../php/utils_query.php');
+	require('../php/querys_campus.php');
+
     session_start();
 
 	 // Verificamos que el usuario esté iniciado sesión
@@ -11,6 +14,7 @@
 		$usuario = $_SESSION['usuario'];
 		$rol = $_SESSION['rol'];
 		if($rol == "Administrador"){
+			 			$array_campus = getCampus($conexion);
 						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
                     } 
 		 else {
@@ -222,11 +226,19 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr>
-		 <td class="mdl-data-table__cell--non-numeric">1</td>
-	      <td class="mdl-data-table__cell--non-numeric">Juan Pérez</td>
-	      <td class="mdl-data-table__cell--non-numeric">Calle 123</td>
-	    </tr>
+	  <?php
+			$html = '';
+			for($i = 0; $i < count($array_campus); $i++){
+				$No = $i+1;
+				$html .= '<tr>
+									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['nombre'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['direccion'].'</td>
+									<th class="mdl-data-table__cell--non-numeric">Acciones</th>	
+						</tr> ';
+			}
+			echo $html;
+		?>
 
 	  </tbody>
 	</table>
