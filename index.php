@@ -94,8 +94,8 @@
 							$rol = $_SESSION['rol'];
 							echo "<small>".$nombrecompleto."</small><br>";
 							echo '<small>'. $rol . '</small>';
-
 						?>
+						
 					</span>
 				</figcaption>
 			</figure>

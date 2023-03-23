@@ -251,25 +251,25 @@
           </div>
         </div>
 
-
-        <div class="mdl-cell mdl-cell--6-col">
+          <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="administrador" name="administrador">
+              <select class="mdl-textfield__input" id="origen_del_bien" name="origen_del_bien">
                 <option value=""></option>
                 <?php
-                $array_administrador = getAdministrador($conexion);
-                echo "<script> console.log(" . json_encode($array_administrador) . "); </script>";
+                $array_origen_del_bien = getOrigen($conexion);
+                echo "<script> console.log(" . json_encode($array_origen_del_bien) . "); </script>";
 
                 $html = '';
-                for($i = 0; $i < count($array_administrador); $i++){
-                    $html.= '<option value="'.$array_administrador[$i]['id'].'">'.$array_administrador[$i]['nombres_completos'].'</option>' ;
+                for($i = 0; $i < count($array_origen_del_bien); $i++){
+                    $html.= '<option value="'.$array_origen_del_bien[$i]['id'].'">'.$array_origen_del_bien[$i]['origen'].'</option>' ;
                 }
                 echo $html;
                 ?>
               </select>
-              <label class="mdl-textfield__label" for="administrador">Administrador</label>
+              <label class="mdl-textfield__label" for="origen_del_bien">Origen del bien</label>
             </div>
           </div>
+
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -290,25 +290,43 @@
             </div>
           </div>
 
-
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="origen_del_bien" name="origen_del_bien">
+              <select class="mdl-textfield__input" id="proceso_de_adquisicion" name="proceso_de_adquisicion">
                 <option value=""></option>
                 <?php
-                $array_origen_del_bien = getOrigen($conexion);
-                echo "<script> console.log(" . json_encode($array_origen_del_bien) . "); </script>";
+                $array_proceso_de_adquisicion = getProcesoDeAdquisicion($conexion);
+                echo "<script> console.log(" . json_encode($array_proceso_de_adquisicion) . "); </script>";
 
                 $html = '';
-                for($i = 0; $i < count($array_origen_del_bien); $i++){
-                    $html.= '<option value="'.$array_origen_del_bien[$i]['id'].'">'.$array_origen_del_bien[$i]['origen'].'</option>' ;
+                for($i = 0; $i < count($array_proceso_de_adquisicion); $i++){
+                    $html.= '<option value="'.$array_proceso_de_adquisicion[$i]['id'].'">'.$array_proceso_de_adquisicion[$i]['proceso'].'</option>' ;
                 }
                 echo $html;
                 ?>
               </select>
-              <label class="mdl-textfield__label" for="origen_del_bien">Origen del bien</label>
+              <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
             </div>
           </div>
+
+          <!-- <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="proceso_de_adquisicion" name="proceso_de_adquisicion">
+                <option value=""></option>
+                <?php
+                $array_proceso_de_adquisicion = getProcesoDeAdquisicion($conexion);
+                echo "<script> console.log(" . json_encode($array_proceso_de_adquisicion) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_proceso_de_adquisicion); $i++){
+                    $html.= '<option value="'.$array_proceso_de_adquisicion[$i]['id'].'">'.$array_proceso_de_adquisicion[$i]['proceso'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
+              <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
+            </div>
+          </div> -->
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -348,7 +366,7 @@
             </div>
           </div>
 
-          <!-- <div class="mdl-cell mdl-cell--6-col">
+          <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <select class="mdl-textfield__input" id="acta_de_donacion" name="acta_de_donacion">
                 <option value=""></option>
@@ -357,7 +375,7 @@
               </select>
               <label class="mdl-textfield__label" for="estado_fisico">Acta de donación</label>
             </div>
-          </div> -->
+          </div>
 
           <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

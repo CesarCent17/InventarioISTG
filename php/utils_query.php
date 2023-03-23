@@ -104,8 +104,8 @@ function getCustodio($conexion){
     return $array_custodio;
 }
 
-function getProcesoDeAdquisicion($conexion){
-    $sql= "SELECT `id`, `proceso` FROM `proceso_de_adquisicion`;";
+function getAdministrador($conexion){
+    $sql= "SELECT `id`, CONCAT(`nombre`, ' ', `apellido`) AS nombres_completos FROM `administrador`;";
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);
@@ -114,10 +114,10 @@ function getProcesoDeAdquisicion($conexion){
     $resultado = $stmt->get_result();
 
     while ($fila = $resultado->fetch_assoc()) {
-        $array_proceso_de_adquisicion[] = $fila;
+        $array_administrador[] = $fila;
     }
     
-    return $array_proceso_de_adquisicion;
+    return $array_administrador;
 }
 
 function getEstadoDeUso($conexion){
