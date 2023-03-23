@@ -53,7 +53,7 @@
 
 <!-- navBar -->
 <div class="full-width navBar">
-		<div class="full-width navBar-options">
+		<div class="full-width navBar-options" style="background-color: #21468e">
 			<div class="mdl-tooltip" for="btn-menu">Menu</div>
 			<nav class="navBar-options-list">
 				<ul class="list-unstyle">
@@ -82,7 +82,7 @@
 	<section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
-			<div class="full-width navLateral-body-logo text-center tittles">
+			<div class="full-width navLateral-body-logo text-center tittles" style="background-color: #21468e">
 				<i class="zmdi zmdi-close btn-menu"></i> Inventario 
 			</div>
 			<figure class="full-width" style="height: 77px;">

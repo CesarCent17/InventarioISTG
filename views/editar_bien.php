@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Actualizar Bien | ISTG</title>
 	<link rel="stylesheet" href="../css/normalize.css">
@@ -25,9 +25,11 @@
 	<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="../css/main.css">
 	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/style_select2.css">
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="../js/jquery-1.11.2.min.js"><\/script>')</script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../css/select2.min.css">
+  <script src="../js/select2.min.js"></script>
 	<script src="../js/material.min.js" ></script>
 	<script src="../js/sweetalert2.min.js" ></script>
 	<script src="../js/jquery.mCustomScrollbar.concat.min.js" ></script>
@@ -40,7 +42,7 @@
 
 <!-- navBar -->
 <div class="full-width navBar">
-		<div class="full-width navBar-options">
+		<div class="full-width navBar-options" style="background-color: #21468e">
 			<div class="mdl-tooltip" for="btn-menu">Menu</div>
 			<nav class="navBar-options-list">
 				<ul class="list-unstyle">
@@ -69,7 +71,7 @@
 	<section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
-			<div class="full-width navLateral-body-logo text-center tittles">
+			<div class="full-width navLateral-body-logo text-center tittles" style="background-color: #21468e">
 				<i class="zmdi zmdi-close btn-menu"></i> Inventario 
 			</div>
 			<figure class="full-width" style="height: 77px;">
@@ -164,15 +166,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descripcion = $_POST['descripcion'];
     $numero_de_acta = $_POST['numero_de_acta'];
     $anio = $_POST['anio'];
-    $area_de_ubicacion = $_POST['area_de_ubicacion'];
     $codigoISTG = $_POST['codigoISTG'];
     $codigoAdicional = $_POST['codigoAdicional'];
-    $origen_del_bien = $_POST['origen_del_bien'];
-    $custodio = $_POST['custodio'];
     $proceso_de_adquisicion = $_POST['proceso_de_adquisicion'];
-    $estado_de_uso = $_POST['estado_de_uso'];
-    $estado_fisico = $_POST['estado_fisico'];
-    $acta_de_donacion = $_POST['acta_de_donacion'];
     $observaciones = $_POST['observaciones'];
 }
 
@@ -280,7 +276,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </div>
         </div>
 
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="administrador" name="administrador">
+                <option value=""></option>
+                <?php
+                $array_administrador = getAdministrador($conexion);
+                echo "<script> console.log(" . json_encode($array_administrador) . "); </script>";
+
+                $html = '';
+                for($i = 0; $i < count($array_administrador); $i++){
+                    $html.= '<option value="'.$array_administrador[$i]['id'].'">'.$array_administrador[$i]['nombres_completos'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
+              <label class="mdl-textfield__label" for="administrador">Administrador</label>
+            </div>
+          </div>
+
           <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <select class="mdl-textfield__input js-example-basic-single" id="BuscadorCustodio" name="custodio">
+                    <option value=""></option>
+                    <?php
+                    $array_custodio = getCustodio($conexion);
+                    echo "<script> console.log(" . json_encode($array_custodio) . "); </script>";
+
+                    $html = '';
+                    for($i = 0; $i < count($array_custodio); $i++){
+                        $html.= '<option value="'.$array_custodio[$i]['id'].'">'.$array_custodio[$i]['nombres_completos'].'</option>' ;
+                    }
+                    echo $html;
+                    ?>
+                </select>
+                <label class="mdl-textfield__label" for="custodio">Custodio</label>
+            </div>
+        </div>
+
+        <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <select class="mdl-textfield__input" id="origen_del_bien" name="origen_del_bien">
                 <option value=""></option>
@@ -299,43 +333,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
           </div>
 
-
-          <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="custodio" name="custodio">
-                <option value=""></option>
-                <?php
-                $array_custodio = getCustodio($conexion);
-                echo "<script> console.log(" . json_encode($array_custodio) . "); </script>";
-
-                $html = '';
-                for($i = 0; $i < count($array_custodio); $i++){
-                    $html.= '<option value="'.$array_custodio[$i]['id'].'">'.$array_custodio[$i]['nombres_completos'].'</option>' ;
-                }
-                echo $html;
-                ?>
-              </select>
-              <label class="mdl-textfield__label" for="custodio">Custodio</label>
-            </div>
-          </div>
-          <div class="mdl-cell mdl-cell--6-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="proceso_de_adquisicion" name="proceso_de_adquisicion">
-                <option value=""></option>
-                <?php
-                $array_proceso_de_adquisicion = getProcesoDeAdquisicion($conexion);
-                echo "<script> console.log(" . json_encode($array_proceso_de_adquisicion) . "); </script>";
-
-                $html = '';
-                for($i = 0; $i < count($array_proceso_de_adquisicion); $i++){
-                    $html.= '<option value="'.$array_proceso_de_adquisicion[$i]['id'].'">'.$array_proceso_de_adquisicion[$i]['proceso'].'</option>' ;
-                }
-                echo $html;
-                ?>
-              </select>
-              <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
-            </div>
-          </div>
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <select class="mdl-textfield__input" id="estado_de_uso" name="estado_de_uso">
@@ -376,12 +373,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <select class="mdl-textfield__input" id="acta_de_donacion" name="acta_de_donacion">
+            <select class="mdl-textfield__input" id="tipo_acta" name="tipo_acta">
                 <option value=""></option>
-                <option value="1">SI</option>
-                <option value="0">NO</option>
+                <?php
+                $array_tipo_acta = getTipoActa($conexion);
+
+                $html = '';
+                for($i = 0; $i < count($array_tipo_acta); $i++){
+                    $html.= '<option value="'.$array_tipo_acta[$i]['id'].'">'.$array_tipo_acta[$i]['descripcion'].'</option>' ;
+                }
+                echo $html;
+                ?>
               </select>
-              <label class="mdl-textfield__label" for="estado_fisico">Acta de donación</label>
+              <label class="mdl-textfield__label" for="tipo_acta">Tipo de Acta</label>
+            </div>
+          </div>
+
+          <div class="mdl-cell mdl-cell--12-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <?php
+                $html = ' <input class="mdl-textfield__input" type="text" id="proceso_de_adquisicion" name="proceso_de_adquisicion" value="'.$proceso_de_adquisicion.'">';
+                echo $html;
+              ?>
+              <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
             </div>
           </div>
 
@@ -408,3 +422,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 </body>
 </html>
+
+<script>
+   $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+
+    $('.js-example-basic-single').select2({
+    // Otras opciones de configuración aquí
+    language: {
+      noResults: function () {
+        return 'No se encontraron resultados';
+      },
+      searching: function () {
+        return 'Buscando...';
+      }
+    },
+    templateResult: function (data) {
+      // Si se encuentra una coincidencia, se muestra normalmente
+      if (data.loading) {
+        // Si se está buscando, se muestra un mensaje de "Buscando..."
+        return data.text;
+      }
+      // Si no se encuentra una coincidencia, se muestra un mensaje personalizado
+      if (data.id === '') {
+        return 'Seleccione un Custodio';
+      }
+      // Si se encuentra una coincidencia, se muestra normalmente
+      return data.text;
+    }
+  });
+    
+});
+</script>
