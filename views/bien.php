@@ -332,7 +332,7 @@
             </div>
           </div>
 
-          <div class="mdl-cell mdl-cell--3-col">
+          <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <select class="mdl-textfield__input" id="estado_fisico" name="estado_fisico">
                 <option value=""></option>
@@ -351,10 +351,28 @@
             </div>
           </div>
 
-          <div class="mdl-cell mdl-cell--9-col">
+          <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <select class="mdl-textfield__input" id="tipo_acta" name="tipo_acta">
+                <option value=""></option>
+                <?php
+                $array_tipo_acta = getTipoActa($conexion);
+
+                $html = '';
+                for($i = 0; $i < count($array_tipo_acta); $i++){
+                    $html.= '<option value="'.$array_tipo_acta[$i]['id'].'">'.$array_tipo_acta[$i]['descripcion'].'</option>' ;
+                }
+                echo $html;
+                ?>
+              </select>
+              <label class="mdl-textfield__label" for="tipo_acta">Tipo de Acta</label>
+            </div>
+          </div>
+
+          <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <input class="mdl-textfield__input" type="text" id="proceso_de_adquisicion" name="proceso_de_adquisicion">
-              <label class="mdl-textfield__label" for="descripcion">Proceso de adquisición</label>
+              <label class="mdl-textfield__label" for="proceso_de_adquisicion">Proceso de adquisición</label>
             </div>
           </div>
 

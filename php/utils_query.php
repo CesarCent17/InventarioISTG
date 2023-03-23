@@ -151,6 +151,21 @@ function getEstadoFisico($conexion){
     return $array_estado_fisico;
 }
 
- 
+function getTipoActa($conexion){
+    $sql = "SELECT `id`,`descripcion` FROM `tipo_acta`;";
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    while ($fila = $resultado->fetch_assoc()) {
+        $array_tipo_acta[] = $fila;
+    }
+    return $array_tipo_acta;
+}
+
+
 
 ?>
