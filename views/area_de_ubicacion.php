@@ -1,5 +1,6 @@
 <?php
 	require('../php/mysqli_conexion.php');
+	require('../php/utils_query.php');
     session_start();
 
 	 // Verificamos que el usuario esté iniciado sesión
@@ -11,6 +12,7 @@
 		$usuario = $_SESSION['usuario'];
 		$rol = $_SESSION['rol'];
 		if($rol == "Administrador"){
+						$array_area_de_ubicacion = getAreaDeUbicacion($conexion);
 						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
                     } 
 		 else {
@@ -190,5 +192,90 @@
 			</nav>
 		</div>
 	</section>
+
+	<!-- pageContent -->
+	<form class="mdl-grid" action="../php/guardar_area_de_ubicacion.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
+
+		<div class="mdl-card__title" >
+				<h2 class="mdl-card__title-text">Agregar Área de Ubicación</h2>
+			</div>
+		
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" required>
+			<label class="mdl-textfield__label" for="direccion">Dirección</label>
+			<span class="mdl-textfield__error">Este campo es requerido</span>
+		</div>
+
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
+			Guardar
+		</button>
+	</form>
+
+	<!-- Tabla de los Campus -->
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
+	  <thead>
+	    <tr>
+		  <th class="mdl-data-table__cell--non-numeric">No</th>
+	      <th class="mdl-data-table__cell--non-numeric">Dirección</th>
+		  <th class="mdl-data-table__cell--non-numeric">Acciones</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <?php
+		$elements_per_page = 5;
+		$total_elements = count($array_area_de_ubicacion);
+		$num_pages = ceil($total_elements / $elements_per_page);
+
+		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+		$page = max(1, min($page, $num_pages));
+
+		$first_element_index = ($page - 1) * $elements_per_page;
+		$current_area_de_ubicacion = array_slice($array_area_de_ubicacion, $first_element_index, $elements_per_page);
+
+		$html = '';
+		for($i = 0; $i < count($current_area_de_ubicacion); $i++){
+			$No = $i + $first_element_index + 1;
+
+			$form_editar = '<form action="editar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
+										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_area_de_ubicacion[$i]['id'].'" name="id_campus"></button>
+									</form>';
+			$form_eliminar = '<form action="../php/eliminar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
+									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_area_de_ubicacion[$i]['id'].'" name="id_campus"></button>
+								</form>';
+			$html .= '<tr>
+									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_area_de_ubicacion[$i]['direccion'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
+						</tr> ';
+		}
+
+		echo $html;
+	
+		if ($num_pages > 1) {
+			echo '<h5 class="mdl-card__title-text">Agregar Campus</h5>';
+			echo '<div style="margin-left:600px; margin-top: 40px;">'; 
+			
+			// Mostrar número de página actual
+			echo '<span>Página ' . $page . ' de ' . $num_pages .' '. '</span>';
+			
+			// Enlace para la página anterior
+			if ($page > 1) {
+				echo '<a href="?page='.($page-1).'">&laquo; Anterior'.' '.'</a>';
+			}
+			
+			// Enlace para la página siguiente
+			if ($page < $num_pages) {
+				echo '<a href="?page='.($page+1).'">Siguiente &raquo;</a>';
+			}
+			
+			echo '</div>';
+		}
+		
+		
+		?>
+		
+		
+	  </tbody>
+	</table>
 </body>
 </html>
