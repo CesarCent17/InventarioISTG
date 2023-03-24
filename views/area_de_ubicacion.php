@@ -211,7 +211,7 @@
 		</button>
 	</form>
 
-	<!-- Tabla de los Campus -->
+	<!-- Tabla -->
 	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
 	  <thead>
 	    <tr>

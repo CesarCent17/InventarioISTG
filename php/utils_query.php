@@ -108,6 +108,28 @@ function getCustodio($conexion){
     return $array_custodio;
 }
 
+function getCustodioDocente($conexion){
+    $sql = "SELECT
+                `id`,
+                `cedula`,
+                `nombre`,
+                `apellido`
+            FROM `custodio`;";
+    $array_custodio_docente = array();
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    while ($fila = $resultado->fetch_assoc()) {
+        $array_custodio_docente[] = $fila;
+    }
+    
+    return $array_custodio_docente;
+}
+
 function getAdministrador($conexion){
     $sql= "SELECT `id`, CONCAT(`nombre`, ' ', `apellido`) AS nombres_completos FROM `administrador`;";
     $array_administrador = array();

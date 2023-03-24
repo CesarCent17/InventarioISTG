@@ -1,5 +1,6 @@
 <?php
 	require('../php/mysqli_conexion.php');
+	require('../php/utils_query.php');
     session_start();
 
 	 // Verificamos que el usuario esté iniciado sesión
@@ -11,6 +12,7 @@
 		$usuario = $_SESSION['usuario'];
 		$rol = $_SESSION['rol'];
 		if($rol == "Administrador"){
+						$array_custodio_docente = getCustodioDocente($conexion);
 						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
                     } 
 		 else {
@@ -190,5 +192,128 @@
 			</nav>
 		</div>
 	</section>
+
+	<!-- pageContent -->
+
+	<div style="overflow: auto;">
+		<form class="mdl-grid" action="../php/guardar_docente.php" method="post" style="float: left; width: 30%; margin-left: 500px; margin-top: 55px">
+			<div class="mdl-card__title" >
+						<h2 class="mdl-card__title-text">Agregar Docente</h2>
+			</div>
+				
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="text" id="cedula" name="cedula" required maxlength="10">
+					<label class="mdl-textfield__label" for="cedula">Cédula</label>
+					<span class="mdl-textfield__error">Este campo es requerido</span>
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
+					<label class="mdl-textfield__label" for="nombre">Nombres</label>
+					<span class="mdl-textfield__error">Este campo es requerido</span>
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="text" id="apellido" name="apellido" required>
+					<label class="mdl-textfield__label" for="apellido">Apellidos</label>
+					<span class="mdl-textfield__error">Este campo es requerido</span>
+				</div>
+
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
+					Guardar
+				</button>
+			
+		</form>
+
+		<form class="mdl-grid" action="../php/buscar_editar_docente.php" method="post" style="float: right; width: 20%; margin-right: 300px; margin-top: 55px">
+	
+			<div class="mdl-card__title" ><h2 class="mdl-card__title-text">Editar Docente</h2></div>
+			<div>
+			<br><p style="margin-right: 10px; font-size:12px">Consultar por Cédula*</p>
+			</div>
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="text" id="cedula" name="cedula" required maxlength="10">
+				<label class="mdl-textfield__label" for="cedula">Cédula</label>
+				<span class="mdl-textfield__error">Este campo es requerido</span>
+			</div>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
+				BUSCAR
+			</button>
+		</form>
+	</div>
+	
+
+
+	<!-- Tabla -->
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:500; margin-top: 55px">
+	  <thead>
+	    <tr>
+		  <th class="mdl-data-table__cell--non-numeric">No</th>
+	      <th class="mdl-data-table__cell--non-numeric">Cédula</th>
+		  <th class="mdl-data-table__cell--non-numeric">Nombres</th>
+		  <th class="mdl-data-table__cell--non-numeric">Apellidos</th>
+		  <th class="mdl-data-table__cell--non-numeric">Acciones</th>
+
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <?php
+		$elements_per_page = 5;
+		$total_elements = count($array_custodio_docente);
+		$num_pages = ceil($total_elements / $elements_per_page);
+
+		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+		$page = max(1, min($page, $num_pages));
+
+		$first_element_index = ($page - 1) * $elements_per_page;
+		$current_custodio_docente = array_slice($array_custodio_docente, $first_element_index, $elements_per_page);
+
+		$html = '';
+		for($i = 0; $i < count($current_custodio_docente); $i++){
+			$No = $i + $first_element_index + 1;
+
+			$form_editar = '<form action="editar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
+										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_custodio_docente[$i]['id'].'" name="id_area"></button>
+									</form>';
+			$form_eliminar = '<form action="../php/eliminar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
+									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_custodio_docente[$i]['id'].'" name="id_area"></button>
+								</form>';
+			$html .= '<tr>
+									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_custodio_docente[$i]['cedula'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_custodio_docente[$i]['nombre'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_custodio_docente[$i]['apellido'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
+						</tr> ';
+		}
+
+		echo $html;
+	
+		if ($num_pages > 1) {
+			echo '<h5 class="mdl-card__title-text">Agregar Campus</h5>';
+			echo '<div style="margin-left:500px; margin-top: 40px;">'; 
+			
+			// Mostrar número de página actual
+			echo '<span>Página ' . $page . ' de ' . $num_pages .' '. '</span>';
+			
+			// Enlace para la página anterior
+			if ($page > 1) {
+				echo '<a href="?page='.($page-1).'">&laquo; Anterior'.' '.'</a>';
+			}
+			
+			// Enlace para la página siguiente
+			if ($page < $num_pages) {
+				echo '<a href="?page='.($page+1).'">Siguiente &raquo;</a>';
+			}
+			
+			echo '</div>';
+		}
+		
+		
+		?>
+		
+	  </tbody>
+	</table>
+
 </body>
 </html>

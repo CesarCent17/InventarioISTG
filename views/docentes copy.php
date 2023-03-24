@@ -1,8 +1,5 @@
 <?php
 	require('../php/mysqli_conexion.php');
-	require('../php/utils_query.php');
-	
-
     session_start();
 
 	 // Verificamos que el usuario esté iniciado sesión
@@ -14,7 +11,6 @@
 		$usuario = $_SESSION['usuario'];
 		$rol = $_SESSION['rol'];
 		if($rol == "Administrador"){
-			 			$array_campus = getCampus($conexion);
 						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
                     } 
 		 else {
@@ -29,7 +25,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Campus | ISTG</title>
+	<title>Docentes | ISTG</title>
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/sweetalert2.css">
 	<link rel="stylesheet" href="../css/material.min.css">
@@ -97,7 +93,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; CAMPUS</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; DOCENTES</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -196,19 +192,27 @@
 	</section>
 
 	<!-- pageContent -->
-	<form class="mdl-grid" action="../php/guardar_campus.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
+	<form class="mdl-grid" action="../php/guardar_docente.php" method="post" style="max-width: 550px; margin-left:450; margin-top: 55px">
 
 		<div class="mdl-card__title" >
-				<h2 class="mdl-card__title-text">Agregar Campus</h2>
+				<h2 class="mdl-card__title-text">Agregar Docente</h2>
 			</div>
+		
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
-			<label class="mdl-textfield__label" for="nombre">Nombre</label>
+			<input class="mdl-textfield__input" type="text" id="cedula" name="cedula" required>
+			<label class="mdl-textfield__label" for="cedula">Cédula</label>
 			<span class="mdl-textfield__error">Este campo es requerido</span>
 		</div>
+
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" required>
-			<label class="mdl-textfield__label" for="direccion">Dirección</label>
+			<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
+			<label class="mdl-textfield__label" for="nombre">Nombres</label>
+			<span class="mdl-textfield__error">Este campo es requerido</span>
+		</div>
+
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<input class="mdl-textfield__input" type="text" id="apellido" name="apellido" required>
+			<label class="mdl-textfield__label" for="apellido">Apellidos</label>
 			<span class="mdl-textfield__error">Este campo es requerido</span>
 		</div>
 
@@ -217,12 +221,22 @@
 		</button>
 	</form>
 
-	<!-- Tabla de los Campus -->
+	<form class="mdl-grid" action="../php/buscar_editar_docente.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<input class="mdl-textfield__input" type="text" id="cedula" name="cedula" required>
+			<label class="mdl-textfield__label" for="cedula">Cédula</label>
+			<span class="mdl-textfield__error">Este campo es requerido</span>
+		</div>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
+			Editar
+		</button>
+	</form>
+
+	<!-- Tabla -->
 	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
 	  <thead>
 	    <tr>
 		  <th class="mdl-data-table__cell--non-numeric">No</th>
-	      <th class="mdl-data-table__cell--non-numeric">Nombre</th>
 	      <th class="mdl-data-table__cell--non-numeric">Dirección</th>
 		  <th class="mdl-data-table__cell--non-numeric">Acciones</th>
 	    </tr>
@@ -230,29 +244,28 @@
 	  <tbody>
 	  <?php
 		$elements_per_page = 5;
-		$total_elements = count($array_campus);
+		$total_elements = count($array_area_de_ubicacion);
 		$num_pages = ceil($total_elements / $elements_per_page);
 
 		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 		$page = max(1, min($page, $num_pages));
 
 		$first_element_index = ($page - 1) * $elements_per_page;
-		$current_campus = array_slice($array_campus, $first_element_index, $elements_per_page);
+		$current_area_de_ubicacion = array_slice($array_area_de_ubicacion, $first_element_index, $elements_per_page);
 
 		$html = '';
-		for($i = 0; $i < count($current_campus); $i++){
+		for($i = 0; $i < count($current_area_de_ubicacion); $i++){
 			$No = $i + $first_element_index + 1;
 
-			$form_editar = '<form action="editar_campus.php" method="post" class="ver-detalles-eliminar">
-										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
+			$form_editar = '<form action="editar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
+										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_area_de_ubicacion[$i]['id'].'" name="id_area"></button>
 									</form>';
-			$form_eliminar = '<form action="../php/eliminar_campus.php" method="post" class="ver-detalles-eliminar">
-									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
+			$form_eliminar = '<form action="../php/eliminar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
+									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_area_de_ubicacion[$i]['id'].'" name="id_area"></button>
 								</form>';
 			$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$current_campus[$i]['nombre'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$current_campus[$i]['direccion'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_area_de_ubicacion[$i]['direccion'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
 						</tr> ';
 		}
@@ -285,5 +298,6 @@
 		
 	  </tbody>
 	</table>
+
 </body>
 </html>
