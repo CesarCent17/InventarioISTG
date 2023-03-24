@@ -227,7 +227,7 @@
 
 		<form class="mdl-grid" action="../php/buscar_editar_docente.php" method="post" style="float: right; width: 20%; margin-right: 300px; margin-top: 55px">
 	
-			<div class="mdl-card__title" ><h2 class="mdl-card__title-text">Editar Docente</h2></div>
+			<div class="mdl-card__title" ><h2 class="mdl-card__title-text">Acciones</h2></div>
 			<div>
 			<br><p style="margin-right: 10px; font-size:12px">Consultar por Cédula*</p>
 			</div>
@@ -237,7 +237,10 @@
 				<span class="mdl-textfield__error">Este campo es requerido</span>
 			</div>
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
-				BUSCAR
+				EDITAR
+			</button>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px; margin-left: 20px; background-color: #F44336">
+				ELIMINAR
 			</button>
 		</form>
 	</div>
@@ -245,14 +248,14 @@
 
 
 	<!-- Tabla -->
-	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:500; margin-top: 55px">
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:500; margin-top: 55px;">
 	  <thead>
 	    <tr>
 		  <th class="mdl-data-table__cell--non-numeric">No</th>
 	      <th class="mdl-data-table__cell--non-numeric">Cédula</th>
 		  <th class="mdl-data-table__cell--non-numeric">Nombres</th>
 		  <th class="mdl-data-table__cell--non-numeric">Apellidos</th>
-		  <th class="mdl-data-table__cell--non-numeric">Acciones</th>
+		  <!-- <th class="mdl-data-table__cell--non-numeric">Acciones</th> -->
 
 	    </tr>
 	  </thead>
@@ -278,12 +281,12 @@
 			$form_eliminar = '<form action="../php/eliminar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
 									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_custodio_docente[$i]['id'].'" name="id_area"></button>
 								</form>';
+			$acciones = '<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>';
 			$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$current_custodio_docente[$i]['cedula'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$current_custodio_docente[$i]['nombre'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$current_custodio_docente[$i]['apellido'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
 						</tr> ';
 		}
 
