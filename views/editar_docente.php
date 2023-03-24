@@ -217,7 +217,7 @@
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <?php
                     $cedula = $custodio_docente['cedula'];
-                    $html = '<input class="mdl-textfield__input" type="text" id="cedula" name="cedula" required maxlength="10" value="'.$cedula.'">';
+                    $html = '<input class="mdl-textfield__input" type="text" id="cedula" name="cedula" required maxlength="10" readonly value="'.$cedula.'">';
                     echo $html
                 ?>
 					<label class="mdl-textfield__label" for="cedula">Cédula</label>
