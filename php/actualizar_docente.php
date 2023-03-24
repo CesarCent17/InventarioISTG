@@ -9,10 +9,13 @@
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Requeridos
-            $id_campus = $_POST['id_campus'];
-            $nombre = $_POST['nombre'];
-            $direccion = $_POST['direccion'];
-            update_docente($conexion, $nombre, $direccion, $id_campus); 
+            $nombre = trim($_POST['nombre']);
+            $apellido = trim($_POST['apellido']);
+            $id_docente = trim($_POST['id_docente']);
+            $cedula = trim($_POST['cedula']);
+            $nombre = strtoupper($nombre);
+            $apellido = strtoupper($apellido);
+            update_docente($conexion, $nombre, $apellido, $id_docente, $cedula); 
         }
     }
 

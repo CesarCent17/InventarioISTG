@@ -139,18 +139,18 @@ function insert_docente($conexion, $cedula, $nombre, $apellido){
 //     return $fila;
 // }
 
-function update_docente($conexion, $nombre, $direccion, $id_campus){
-    $sql = "UPDATE `campus`
+function update_docente($conexion, $nombre, $apellido, $id_docente, $cedula){
+    $sql = "UPDATE `custodio`
             SET 
             `nombre` = ?,
-            `direccion` = ?
-            WHERE `id` = ?;";
+            `apellido` = ?
+            WHERE `id` = ? AND `cedula` = ?;";
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
     die("Error de consulta: " . $conexion->error);
     }
-    $stmt->bind_param("sss", $nombre, $direccion, $id_campus);
+    $stmt->bind_param("ssss", $nombre, $apellido, $id_docente, $cedula);
 
     if ($stmt->execute() && $stmt->affected_rows == 1) {
     
@@ -183,10 +183,10 @@ function update_docente($conexion, $nombre, $direccion, $id_campus){
                 Swal.fire({
                     icon: \'success\',
                     title: \'Actualización exitosa\',
-                    text: \'El campus se ha actualizado con éxito\',
+                    text: \'El docente se ha actualizado con éxito\',
                     confirmButtonText: \'OK\',
                     }).then((result) => { if (result.isConfirmed) {
-                        window.location.href = \'../views/campus.php\';
+                        window.location.href = \'../views/docentes.php\';
                     }
                     });
             </script>
@@ -228,7 +228,7 @@ function update_docente($conexion, $nombre, $direccion, $id_campus){
                     text: "Error al actualizar el registro",
                     confirmButtonText: "OK",
                     }).then((result) => { if (result.isConfirmed) {
-                        window.location.href = "../views/campus.php";
+                        window.location.href = "../views/docentes.php";
                     }
                     });
             </script>
