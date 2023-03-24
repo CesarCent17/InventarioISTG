@@ -194,7 +194,7 @@
 				<tr>
 				<th class="mdl-data-table__cell--non-numeric">#</th>
 				<th class="mdl-data-table__cell--non-numeric">Nombre General</th>
-				<th class="mdl-data-table__cell--non-numeric">Descripción</th>
+				<!-- <th class="mdl-data-table__cell--non-numeric">Descripción</th> -->
 				<th class="mdl-data-table__cell--non-numeric">Campus</th>
 				<th class="mdl-data-table__cell--non-numeric">Área de Ubicación</th>
 				<th class="mdl-data-table__cell--non-numeric">Código ISTG</th>
@@ -233,10 +233,10 @@
 						$form_ocultar = '<form action="../php/ocultar_product.php" method="post" class="ver-detalles-eliminar">
 												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
 											</form>';
+						$descripcion = '<td class="mdl-data-table__cell--non-numeric">'.$current_bienes[$i]['descripcion'].'</td>';
 						$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$current_bienes[$i]['nombre'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$current_bienes[$i]['descripcion'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
