@@ -30,7 +30,7 @@ function update_prod($conexion, $nombre, $descripcion, $observaciones, $n_acta, 
 
     if ($stmt->execute() && $stmt->affected_rows == 1) {
         // La inserción se realizó correctamente
-        $last_inserted_id = mysqli_insert_id($conexion);
+        // $last_inserted_id = mysqli_insert_id($conexion);
         // echo "El registro ha sido insertado correctamente en la tabla producto.";
         $html = '<!DOCTYPE html>
             <html lang="en">

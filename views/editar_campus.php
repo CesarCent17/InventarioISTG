@@ -201,7 +201,7 @@
 	</section>
 
 	<!-- pageContent -->
-	<form class="mdl-grid" action="../php/guardar_campus.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
+	<form class="mdl-grid" action="../php/actualizar_campus.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
 
 		<div class="mdl-card__title" >
 				<h2 class="mdl-card__title-text">Editar Campus</h2>
@@ -212,11 +212,11 @@
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $id_campus = $_POST['id_campus'];
                     $campus = get_campus_id($conexion, $id_campus);
-                    $html = ' <input class="mdl-textfield__input" type="text" id="id_prod" name="id_prod" required value="'.$campus['id'].' "readonly>';
+                    $html = ' <input class="mdl-textfield__input" type="text" id="id_campus" name="id_campus" required value="'.$campus['id'].' "readonly>';
 		 			echo $html;
                 }	
 				?>
-              <label class="mdl-textfield__label" for="id_prod">ID</label>
+              <label class="mdl-textfield__label" for="id_campus">ID</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
         </div>
        

@@ -1,5 +1,4 @@
 <?php
-
     require('mysqli_conexion.php');
     require('insert_product.php');
     require('querys_actualizacion.php');
