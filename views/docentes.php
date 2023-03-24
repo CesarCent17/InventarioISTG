@@ -225,7 +225,7 @@
 			
 		</form>
 
-		<form class="mdl-grid" action="../php/buscar_editar_docente.php" method="post" style="float: right; width: 20%; margin-right: 300px; margin-top: 55px">
+		<form class="mdl-grid" action="../php/acciones_docente.php" method="post" style="float: right; width: 20%; margin-right: 300px; margin-top: 55px">
 	
 			<div class="mdl-card__title" ><h2 class="mdl-card__title-text">Acciones</h2></div>
 			<div>
@@ -236,11 +236,19 @@
 				<label class="mdl-textfield__label" for="cedula">Cédula</label>
 				<span class="mdl-textfield__error">Este campo es requerido</span>
 			</div>
+
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="accion" name="accion" required>
+                <option value=""></option>
+				<option value="editar">EDITAR</option>
+				<option value="eliminar">ELIMINAR</option>
+              </select>
+              <label class="mdl-textfield__label" for="accion">Elige una Acción</label>
+			  <span class="mdl-textfield__error">Este campo es requerido</span>
+            </div>
+
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
-				EDITAR
-			</button>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px; margin-left: 20px; background-color: #F44336">
-				ELIMINAR
+				ENVIAR
 			</button>
 		</form>
 	</div>

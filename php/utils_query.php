@@ -196,6 +196,25 @@ function getTipoActa($conexion){
     return $array_tipo_acta;
 }
 
+function getCustodioDocenteCedula($conexion, $cedula){
+    $sql = "SELECT
+                `id`,
+                `cedula`,
+                `nombre`,
+                `apellido`
+            FROM `custodio`
+            WHERE `cedula` = ?
+            LIMIT 1;";
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+    die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("s", $cedula);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
 
+    $fila = $resultado->fetch_assoc();
+    return $fila;
+}
 
 ?>
