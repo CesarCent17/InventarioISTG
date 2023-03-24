@@ -196,7 +196,6 @@
 	</section>
 
 	<!-- pageContent -->
-	<!-- <form action="procesar.php" style="padding-left:440px;"> -->
 	<form class="mdl-grid" action="../php/guardar_campus.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
 
 		<div class="mdl-card__title" >
@@ -218,7 +217,7 @@
 		</button>
 	</form>
 
-	<!-- Crea la tabla con los campos de nombre y dirección -->
+	<!-- Tabla de los Campus -->
 	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
 	  <thead>
 	    <tr>
@@ -230,27 +229,60 @@
 	  </thead>
 	  <tbody>
 	  <?php
-			$html = '';
-			for($i = 0; $i < count($array_campus); $i++){
-				$No = $i+1;
-				// <i class="fa-solid fa-pen-to-square"></i>
+		$elements_per_page = 5;
+		$total_elements = count($array_campus);
+		$num_pages = ceil($total_elements / $elements_per_page);
 
-				$form_editar = '<form action="editar_campus.php" method="post" class="ver-detalles-eliminar">
-											<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$array_campus[$i]['id'].'" name="id_campus"></button>
-										</form>';
-				$form_eliminar = '<form action="../php/eliminar_campus.php" method="post" class="ver-detalles-eliminar">
-									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$array_campus[$i]['id'].'" name="id_campus"></button>
+		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+		$page = max(1, min($page, $num_pages));
+
+		$first_element_index = ($page - 1) * $elements_per_page;
+		$current_campus = array_slice($array_campus, $first_element_index, $elements_per_page);
+
+		$html = '';
+		for($i = 0; $i < count($current_campus); $i++){
+			$No = $i + $first_element_index + 1;
+
+			$form_editar = '<form action="editar_campus.php" method="post" class="ver-detalles-eliminar">
+										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
+									</form>';
+			$form_eliminar = '<form action="../php/eliminar_campus.php" method="post" class="ver-detalles-eliminar">
+									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
 								</form>';
-				$html .= '<tr>
+			$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['nombre'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['direccion'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_campus[$i]['nombre'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_campus[$i]['direccion'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
 						</tr> ';
-			}
-			echo $html;
-		?>
+		}
 
+		echo $html;
+	
+		if ($num_pages > 1) {
+			echo '<h5 class="mdl-card__title-text">Agregar Campus</h5>';
+			echo '<div style="margin-left:600px; margin-top: 40px;">'; 
+			
+			// Mostrar número de página actual
+			echo '<span>Página ' . $page . ' de ' . $num_pages .' '. '</span>';
+			
+			// Enlace para la página anterior
+			if ($page > 1) {
+				echo '<a href="?page='.($page-1).'">&laquo; Anterior'.' '.'</a>';
+			}
+			
+			// Enlace para la página siguiente
+			if ($page < $num_pages) {
+				echo '<a href="?page='.($page+1).'">Siguiente &raquo;</a>';
+			}
+			
+			echo '</div>';
+		}
+		
+		
+		?>
+		
+		
 	  </tbody>
 	</table>
 </body>
