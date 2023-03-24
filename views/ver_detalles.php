@@ -57,7 +57,7 @@
 
 					<li class="noLink">
 					<form action="../php/logout.php" method="post">
-						<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Cerrar sesión</button>
+						<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background-color: #F44336">Cerrar sesión</button>
 					</form>
 					</li>
 

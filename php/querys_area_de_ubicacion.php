@@ -102,20 +102,20 @@ function insert_area_de_ubicacion($conexion, $direccion){
 
 
 
-// function eliminar_campus($conexion, $id_campus){
-//     $sql = "DELETE
-//     FROM `campus`
-//     WHERE `id` = ?;";
+function eliminar_area($conexion, $id_area){
+    $sql = "DELETE
+    FROM `area_ubicacion`
+    WHERE `id` = ?;";
 
-//     $stmt = $conexion->prepare($sql);
-//     if (!$stmt) {
-//         die("Error de consulta: " . $conexion->error);
-//     }
-//     $stmt->bind_param("i", $id_campus);
-//     if (!$stmt->execute()) {
-//         die("Error al eliminar el campus: " . $stmt->error);
-//     }  
-// }
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("i", $id_area);
+    if (!$stmt->execute()) {
+        die("Error al eliminar el Area de Ubicacion: " . $stmt->error);
+    }  
+}
 
 function get_area_id($conexion, $id_area){
     $sql = "SELECT
