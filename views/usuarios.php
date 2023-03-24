@@ -288,7 +288,7 @@
 								echo $html;
 						?>
 			        <!-- Table -->
-					<div class="mdl-grid">
+					<div class="mdl-grid" style="width: 64%;">
     					<div class="mdl-cell mdl-cell--12-col">
 							<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
 								<thead>
