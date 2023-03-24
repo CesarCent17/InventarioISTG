@@ -212,20 +212,31 @@
 					$array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
 					
 						
-					for($i = 0; $i < count($array_bienes_registrados); $i++){
-						$codigo_adicional =  isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
-						$No = $i+1;
-						// ver_detalles
+					$elements_per_page = 12;
+					$total_elements = count($array_bienes_registrados);
+					$num_pages = ceil($total_elements / $elements_per_page);
+
+					$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+					$page = max(1, min($page, $num_pages));
+
+					$first_element_index = ($page - 1) * $elements_per_page;
+					$current_bienes = array_slice($array_bienes_registrados, $first_element_index, $elements_per_page);
+
+					$html = '';
+					for($i = 0; $i < count($current_bienes); $i++){
+						$codigo_adicional = isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
+						$No = $i + $first_element_index + 1;
+
 						$form_ver_detalles = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fas fa-eye" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
+												<button type="submit" class="form-button-icon fas fa-eye" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
 											</form>';
 						$form_ocultar = '<form action="../php/ocultar_product.php" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$array_bienes_registrados[$i]['id'].'" name="id_prod"></button>
+												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
 											</form>';
 						$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['nombre'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_bienes_registrados[$i]['descripcion'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_bienes[$i]['nombre'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$current_bienes[$i]['descripcion'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
@@ -233,8 +244,28 @@
 									<td class="mdl-data-table__cell--non-numeric">'.$form_ver_detalles.$form_ocultar.'</td>
 								</tr> ';
 					}
-					echo $html;		
-										
+
+					echo $html;
+
+					if ($num_pages > 1) {
+						echo '<div style="margin-bottom:30px; margin-top: 20px; margin-left:16px">'; 
+						
+						// Mostrar número de página actual
+						echo '<span>Página ' . $page . ' de ' . $num_pages .' '. '</span>';
+						
+						// Enlace para la página anterior
+						if ($page > 1) {
+							echo '<a href="?page='.($page-1).'">&laquo; Anterior'.' '.'</a>';
+						}
+						
+						// Enlace para la página siguiente
+						if ($page < $num_pages) {
+							echo '<a href="?page='.($page+1).'">Siguiente &raquo;</a>';
+						}
+						
+						echo '</div>';
+					}
+					
 				?>
 			</tbody>
 			</table>

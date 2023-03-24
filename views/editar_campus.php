@@ -245,47 +245,9 @@
 			<label class="mdl-textfield__label" for="direccion">Dirección</label>
 			<span class="mdl-textfield__error">Este campo es requerido</span>
 		</div>
-
-        
-            
-
-
 		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
 			Actualizar
 		</button>
 	</form>
-
-	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
-	  <thead>
-	    <tr>
-		  <th class="mdl-data-table__cell--non-numeric">No</th>
-	      <th class="mdl-data-table__cell--non-numeric">Nombre</th>
-	      <th class="mdl-data-table__cell--non-numeric">Dirección</th>
-		  <th class="mdl-data-table__cell--non-numeric">Acciones</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  <?php
-			$html = '';
-			for($i = 0; $i < count($array_campus); $i++){
-				$No = $i+1;
-				$form_editar = '<form action="editar_campus.php" method="post" class="ver-detalles-eliminar">
-											<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$array_campus[$i]['id'].'" name="id_campus"></button>
-										</form>';
-				$form_eliminar = '<form action="../php/eliminar_campus.php" method="post" class="ver-detalles-eliminar">
-									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$array_campus[$i]['id'].'" name="id_campus"></button>
-								</form>';
-				$html .= '<tr>
-									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['nombre'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i]['direccion'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
-						</tr> ';
-			}
-			echo $html;
-		?>
-
-	  </tbody>
-	</table>
 </body>
 </html>
