@@ -117,4 +117,24 @@ function eliminar_campus($conexion, $id_campus){
     }  
 }
 
+function get_campus_id($conexion, $id_campus){
+    $sql = "SELECT
+                `id`,
+                `nombre`,
+                `direccion`
+            FROM `campus`
+            WHERE `id` = ? LIMIT 1;";
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("s", $id_campus);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    $fila = $resultado->fetch_assoc();
+    return $fila;
+}
+
+
 ?>

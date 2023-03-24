@@ -1,6 +1,6 @@
 <?php
 require('mysqli_conexion.php');
-require('../php/querys_campus.php');
+require('querys_campus.php');
 session_start();
 // Verificamos que el usuario esté iniciado sesión
 if(!isset($_SESSION['usuario'])) {

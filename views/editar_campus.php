@@ -1,8 +1,7 @@
 <?php
 	require('../php/mysqli_conexion.php');
 	require('../php/utils_query.php');
-	
-
+	require('../php/querys_campus.php');
     session_start();
 
 	 // Verificamos que el usuario esté iniciado sesión
@@ -10,15 +9,21 @@
         // Si el usuario no está iniciado sesión, lo redirigimos a la página de inicio de sesión
         header("Location: login.php");
     } else {
-		//Si el usuario tiene una sesion
-		$usuario = $_SESSION['usuario'];
-		$rol = $_SESSION['rol'];
-		if($rol == "Administrador"){
-			 			$array_campus = getCampus($conexion);
-						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
-                    } 
-		 else {
-			header("Location: ../index.php");
+         // Si el metodo es diferente a post lo redirigimos al index
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            header("Location: ../index.php");
+        } else {
+            //Si el usuario tiene una sesion
+            $usuario = $_SESSION['usuario'];
+            $rol = $_SESSION['rol'];
+            if($rol == "Administrador"){
+                            $array_campus = getCampus($conexion);
+                            echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
+                        } 
+            else {
+                header("Location: ../index.php");
+            }
+		
 
 		}
     }
@@ -97,7 +102,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; CAMPUS</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; EDITAR CAMPUS</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -196,29 +201,60 @@
 	</section>
 
 	<!-- pageContent -->
-	<!-- <form action="procesar.php" style="padding-left:440px;"> -->
 	<form class="mdl-grid" action="../php/guardar_campus.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
 
 		<div class="mdl-card__title" >
-				<h2 class="mdl-card__title-text">Agregar Campus</h2>
-			</div>
+				<h2 class="mdl-card__title-text">Editar Campus</h2>
+		</div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
+				<?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $id_campus = $_POST['id_campus'];
+                    $campus = get_campus_id($conexion, $id_campus);
+                    $html = ' <input class="mdl-textfield__input" type="text" id="id_prod" name="id_prod" required value="'.$campus['id'].' "readonly>';
+		 			echo $html;
+                }	
+				?>
+              <label class="mdl-textfield__label" for="id_prod">ID</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
+        </div>
+       
+
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
+            <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $id_campus = $_POST['id_campus'];
+                    $campus = get_campus_id($conexion, $id_campus);
+                    $html = '<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" value="'.$campus['nombre'].'"required>';
+                    echo $html;
+                }   
+            ?>
 			<label class="mdl-textfield__label" for="nombre">Nombre</label>
 			<span class="mdl-textfield__error">Este campo es requerido</span>
 		</div>
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" required>
+        <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $id_campus = $_POST['id_campus'];
+                    $campus = get_campus_id($conexion, $id_campus);
+                    $html = '<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" value="'.$campus['direccion'].' "required>';
+                    echo $html;
+                }   
+            ?>
 			<label class="mdl-textfield__label" for="direccion">Dirección</label>
 			<span class="mdl-textfield__error">Este campo es requerido</span>
 		</div>
 
+        
+            
+
+
 		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
-			Guardar
+			Actualizar
 		</button>
 	</form>
 
-	<!-- Crea la tabla con los campos de nombre y dirección -->
 	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
 	  <thead>
 	    <tr>
@@ -233,8 +269,6 @@
 			$html = '';
 			for($i = 0; $i < count($array_campus); $i++){
 				$No = $i+1;
-				// <i class="fa-solid fa-pen-to-square"></i>
-
 				$form_editar = '<form action="editar_campus.php" method="post" class="ver-detalles-eliminar">
 											<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$array_campus[$i]['id'].'" name="id_campus"></button>
 										</form>';
