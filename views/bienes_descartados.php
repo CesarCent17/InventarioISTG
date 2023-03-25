@@ -1,26 +1,14 @@
 <?php
 	require('../php/mysqli_conexion.php');
-	require('../php/utils_query.php');
-	
-
+	require('../php/querys_inventario.php');
     session_start();
-
 	 // Verificamos que el usuario esté iniciado sesión
     if(!isset($_SESSION['usuario'])) {
         // Si el usuario no está iniciado sesión, lo redirigimos a la página de inicio de sesión
-        header("Location: login.php");
+        header("Location: ../views/login.php");
     } else {
-		//Si el usuario tiene una sesion
 		$usuario = $_SESSION['usuario'];
-		$rol = $_SESSION['rol'];
-		if($rol == "Administrador"){
-			 			$array_campus = getCampus($conexion);
-						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
-                    } 
-		 else {
-			header("Location: ../index.php");
-
-		}
+    	echo "<script> console.log(" . json_encode($usuario) . "); </script>";
     }
 ?>
 
@@ -29,7 +17,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Campus | ISTG</title>
+	<title>Bienes Descartados  | ISTG</title>
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/sweetalert2.css">
 	<link rel="stylesheet" href="../css/material.min.css">
@@ -97,7 +85,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; CAMPUS</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; BIENES DESCARTADOS</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -144,16 +132,15 @@
 									<li class="full-width divider-menu-h"></li>
 										<li class="full-width">
 										<a href="bienes_descartados.php" class="full-width">
-										<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-tag-close"></i>
-										</div>
-										<div class="navLateral-body-cr hide-on-tablet">
-										BIENES DESCARTADOS
-										</div>
+											<div class="navLateral-body-cl">
+											<i class="zmdi zmdi-tag-close"></i>
+											</div>
+											<div class="navLateral-body-cr hide-on-tablet">
+											BIENES DESCARTADOS
+											</div>
 										</a>
 									</li>
-							
-							
+
 							
 									<li class="full-width divider-menu-h"></li>
          								<li class="full-width">
@@ -211,94 +198,92 @@
 	</section>
 
 	<!-- pageContent -->
-	<form class="mdl-grid" action="../php/guardar_campus.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
-
-		<div class="mdl-card__title" >
-				<h2 class="mdl-card__title-text">Agregar Campus</h2>
+	<div class="mdl-cell mdl-cell--12-col mdl-card">
+		<div class="mdl-card__supporting-text" style="padding-left:440px; width: 100%">
+			<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">Bienes Descartados</h2>
 			</div>
-		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" required>
-			<label class="mdl-textfield__label" for="nombre">Nombre</label>
-			<span class="mdl-textfield__error">Este campo es requerido</span>
-		</div>
-		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" required>
-			<label class="mdl-textfield__label" for="direccion">Dirección</label>
-			<span class="mdl-textfield__error">Este campo es requerido</span>
-		</div>
+			<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" >
+			<thead>
+				<tr>
+				<th class="mdl-data-table__cell--non-numeric">#</th>
+				<th class="mdl-data-table__cell--non-numeric">Nombre General</th>
+				<!-- <th class="mdl-data-table__cell--non-numeric">Descripción</th> -->
+				<th class="mdl-data-table__cell--non-numeric">Campus</th>
+				<th class="mdl-data-table__cell--non-numeric">Área de Ubicación</th>
+				<th class="mdl-data-table__cell--non-numeric">Código ISTG</th>
+				<th class="mdl-data-table__cell--non-numeric">Código Adicional</th>
+				<th class="mdl-data-table__cell--non-numeric">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$array_bienes_registrados = obtener_bienes_descartados($conexion);
+					$html = '';
+					// echo "<script> console.log(". json_encode($array_bienes_registrados) ."); </script>";
+					$array_campus = obtener_array_campus($conexion, $array_bienes_registrados);
+					$array_ubicacion = obtener_array_ubicacion($conexion, $array_bienes_registrados);
+					$array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
+					
+						
+					$elements_per_page = 12;
+					$total_elements = count($array_bienes_registrados);
+					$num_pages = ceil($total_elements / $elements_per_page);
 
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
-			Guardar
-		</button>
-	</form>
+					$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+					$page = max(1, min($page, $num_pages));
 
-	<!-- Tabla de los Campus -->
-	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-left:600; margin-top: 55px">
-	  <thead>
-	    <tr>
-		  <th class="mdl-data-table__cell--non-numeric">No</th>
-	      <th class="mdl-data-table__cell--non-numeric">Nombre</th>
-	      <th class="mdl-data-table__cell--non-numeric">Dirección</th>
-		  <th class="mdl-data-table__cell--non-numeric">Acciones</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  <?php
-		$elements_per_page = 5;
-		$total_elements = count($array_campus);
-		$num_pages = ceil($total_elements / $elements_per_page);
+					$first_element_index = ($page - 1) * $elements_per_page;
+					$current_bienes = array_slice($array_bienes_registrados, $first_element_index, $elements_per_page);
 
-		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-		$page = max(1, min($page, $num_pages));
+					$html = '';
+					for($i = 0; $i < count($current_bienes); $i++){
+						$codigo_adicional = isset($array_resultado[$i][1]['codigo']) ? $array_resultado[$i][1]['codigo'] : '';
+						$No = $i + $first_element_index + 1;
 
-		$first_element_index = ($page - 1) * $elements_per_page;
-		$current_campus = array_slice($array_campus, $first_element_index, $elements_per_page);
-
-		$html = '';
-		for($i = 0; $i < count($current_campus); $i++){
-			$No = $i + $first_element_index + 1;
-
-			$form_editar = '<form action="editar_campus.php" method="post" class="ver-detalles-eliminar">
-										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
-									</form>';
-			$form_eliminar = '<form action="../php/eliminar_campus.php" method="post" class="ver-detalles-eliminar">
-									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
-								</form>';
-			$html .= '<tr>
+						$form_ver_detalles = '<form action="ver_detalles_retornar.php" method="post" class="ver-detalles-eliminar">
+												<button type="submit" class="form-button-icon fas fa-eye" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
+											</form>';
+						$form_mostrar = '<form action="../php/mostrar_product.php" method="post" class="ver-detalles-eliminar">
+												<button type="submit" class="form-button-icon fa-solid fa-rotate-left" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
+											</form>';
+						$descripcion = '<td class="mdl-data-table__cell--non-numeric">'.$current_bienes[$i]['descripcion'].'</td>';
+						$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$current_campus[$i]['nombre'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$current_campus[$i]['direccion'].'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$form_editar.$form_eliminar.'</td>
-						</tr> ';
-		}
+									<td class="mdl-data-table__cell--non-numeric">'.$current_bienes[$i]['nombre'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_campus[$i].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$codigo_adicional.'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$form_ver_detalles.$form_mostrar.'</td>
+								</tr> ';
+					}
 
-		echo $html;
-	
-		if ($num_pages > 1) {
-			echo '<h5 class="mdl-card__title-text">Agregar Campus</h5>';
-			echo '<div style="margin-left:600px; margin-top: 40px;">'; 
-			
-			// Mostrar número de página actual
-			echo '<span>Página ' . $page . ' de ' . $num_pages .' '. '</span>';
-			
-			// Enlace para la página anterior
-			if ($page > 1) {
-				echo '<a href="?page='.($page-1).'">&laquo; Anterior'.' '.'</a>';
-			}
-			
-			// Enlace para la página siguiente
-			if ($page < $num_pages) {
-				echo '<a href="?page='.($page+1).'">Siguiente &raquo;</a>';
-			}
-			
-			echo '</div>';
-		}
-		
-		
-		?>
-		
-		
-	  </tbody>
-	</table>
+					echo $html;
+
+					if ($num_pages > 1) {
+						echo '<div style="margin-bottom:30px; margin-top: 20px; margin-left:16px">'; 
+						
+						// Mostrar número de página actual
+						echo '<span>Página ' . $page . ' de ' . $num_pages .' '. '</span>';
+						
+						// Enlace para la página anterior
+						if ($page > 1) {
+							echo '<a href="?page='.($page-1).'">&laquo; Anterior'.' '.'</a>';
+						}
+						
+						// Enlace para la página siguiente
+						if ($page < $num_pages) {
+							echo '<a href="?page='.($page+1).'">Siguiente &raquo;</a>';
+						}
+						
+						echo '</div>';
+					}
+					
+				?>
+			</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

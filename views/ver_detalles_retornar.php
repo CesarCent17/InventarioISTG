@@ -93,7 +93,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; VER DETALLES</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; VER BIEN DESCARTADO</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -207,7 +207,7 @@
 
 	<section class="full-width pageContent">
 	<div style="text-align: center; margin-top: 20px" >
-		<h5 class="mdl-color-text--primary">Ver Detalles</h5>
+		<h5 class="mdl-color-text--primary">Ver Detalles Bien Descartado</h5>
   </div>
 	
 
@@ -220,7 +220,7 @@
 	<!-- <script>console.log('holaaa')</script> -->
 
 	<!-- Form -->
-      <form class="mdl-grid" action="editar_bien.php" method="post" style="max-width: 800px; margin: 0 auto;">
+      <form class="mdl-grid" action="../php/mostrar_product.php" method="post" style="max-width: 800px; margin: 0 auto;">
 
 
 	  	<div class="mdl-cell mdl-cell--2-col">
@@ -425,7 +425,7 @@
         
         <div class="mdl-cell mdl-cell--12-col">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
-              Habilitar Edición 
+              Retornar a Inventario
             </button>
         </div>
     </form>

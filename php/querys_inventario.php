@@ -26,6 +26,33 @@ function obtener_bienes_registrados($conexion){
     return $array_bienes_registrados;
 }
 
+
+function obtener_bienes_descartados($conexion){
+    $array_bienes_descartados =  array();
+    $sql = "SELECT
+                `id`,
+                `nombre`,
+                `descripcion`,
+                `id_campus`,
+                `id_area_ubicacion`
+            FROM 
+                `producto`
+            WHERE
+                `oculto` = 1";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    while ($fila = $resultado->fetch_assoc()) {
+        array_push($array_bienes_descartados, $fila);
+    }
+    return $array_bienes_descartados;
+}
+
 function obtener_array_campus($conexion, $array_bienes_registrados){
     $array_campus = array();
     for($i = 0; $i < count($array_bienes_registrados) ; $i++){

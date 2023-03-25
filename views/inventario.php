@@ -128,7 +128,20 @@
 					<?php
 						$rol = $_SESSION['rol'];
 						if($rol == 'Administrador'){
-							$html = '<li class="full-width divider-menu-h"></li>
+							$html = '
+										<li class="full-width divider-menu-h"></li>
+											<li class="full-width">
+											<a href="bienes_descartados.php" class="full-width">
+												<div class="navLateral-body-cl">
+												<i class="zmdi zmdi-tag-close"></i>
+												</div>
+												<div class="navLateral-body-cr hide-on-tablet">
+												BIENES DESCARTADOS
+												</div>
+											</a>
+										</li>
+							
+										<li class="full-width divider-menu-h"></li>
          								<li class="full-width">
 											<a href="usuarios.php" class="full-width">
 												<div class="navLateral-body-cl">

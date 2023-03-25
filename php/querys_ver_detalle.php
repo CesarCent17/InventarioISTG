@@ -184,5 +184,20 @@ function ocultar_prod($conexion, $id){
         die("Error al ocultar el bien: " . $stmt->error);
     }  
 }
+
+function mostrar_prod($conexion, $id){
+    $sql = "UPDATE `producto`
+            SET `oculto` = '0'
+            WHERE `id` = ?;";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("i", $id);
+    if (!$stmt->execute()) {
+        die("Error al retornar el bien al inventario: " . $stmt->error);
+    }  
+}
 ?>
 
