@@ -14,8 +14,12 @@
             $id_campus = $_POST['campus'];
             $id_area_ubicacion = $_POST['area_de_ubicacion'];
 
+            $nombre = strtoupper($nombre);
+            $descripcion = strtoupper($descripcion);
+
             // Opcionales
             $observaciones = trim($_POST['observaciones']) === '' ? NULL : trim($_POST['observaciones']);
+            $observaciones = strtoupper($observaciones);
             $n_acta = trim($_POST['numero_de_acta']) === '' ? NULL : trim($_POST['numero_de_acta']);
             $proceso_de_adquisicion = trim($_POST['proceso_de_adquisicion']) === '' ? NULL : trim($_POST['proceso_de_adquisicion']);
             $año = trim($_POST['anio']) === '' ? NULL : trim($_POST['anio']);
