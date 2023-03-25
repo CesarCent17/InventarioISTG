@@ -8,7 +8,7 @@
         header("Location: ../views/login.php");
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id_area = $_POST['id_area'];
+            $id_area = htmlspecialchars(trim($_POST['id_area']));
             eliminar_area($conexion, $id_area);
             header("Location: ../views/area_de_ubicacion.php");
             exit;

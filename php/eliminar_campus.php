@@ -8,7 +8,7 @@
         header("Location: ../views/login.php");
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id_campus = $_POST['id_campus'];
+            $id_campus = htmlspecialchars(trim($_POST['id_campus']));
             eliminar_campus($conexion, $id_campus);
             header("Location: ../views/campus.php");
             exit;

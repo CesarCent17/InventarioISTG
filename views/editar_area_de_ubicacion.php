@@ -13,7 +13,8 @@
 		$usuario = $_SESSION['usuario'];
 		$rol = $_SESSION['rol'];
 		if($rol == "Administrador"){
-						$array_area_de_ubicacion = getAreaDeUbicacion($conexion);
+						$id_area = $_POST['id_area'];
+						$area_de_ubicacion = get_area_id($conexion, $id_area);
 						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
                     } 
 		 else {
@@ -204,8 +205,6 @@
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
 				<?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $id_area = $_POST['id_area'];
-                    $area_de_ubicacion = get_area_id($conexion, $id_area);
                     $html = ' <input class="mdl-textfield__input" type="text" id="id_area" name="id_area" required value="'.$area_de_ubicacion['id'].' "readonly>';
 		 			echo $html;
                 }	
@@ -217,8 +216,6 @@
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $id_area = $_POST['id_area'];
-                    $area_de_ubicacion = get_area_id($conexion, $id_area);
                     $html = '<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" value="'.$area_de_ubicacion['direccion'].' "required>';
                     echo $html;
                 }   
@@ -231,8 +228,6 @@
 			Actualizar
 		</button>
 	</form>
-		
-		
 	  </tbody>
 	</table>
 </body>

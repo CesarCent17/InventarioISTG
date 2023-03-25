@@ -11,9 +11,9 @@ if(!isset($_SESSION['usuario'])) {
    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
     
     // Requeridos
-    $cedula = trim($_POST['cedula']);
-    $nombre = trim($_POST['nombre']);
-    $apellido = trim($_POST['apellido']);
+    $cedula = htmlspecialchars(trim($_POST['cedula']));
+    $nombre = htmlspecialchars(trim($_POST['nombre']));
+    $apellido = htmlspecialchars(trim($_POST['apellido']));
     $nombre = strtoupper($nombre);
     $apellido = strtoupper($apellido);
     insert_docente($conexion, $cedula, $nombre, $apellido);

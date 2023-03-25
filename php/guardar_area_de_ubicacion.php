@@ -10,9 +10,10 @@ if(!isset($_SESSION['usuario'])) {
    //Si el usuario tiene una sesion y esta utilizando el metodo POST
    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
     
-    // Requeridos
-    $direccion = $_POST['direccion'];
-    insert_area_de_ubicacion($conexion, $direccion);
+      // Requeridos
+      $direccion = htmlspecialchars(trim($_POST['direccion']));
+      $direccion = strtoupper($direccion);
+      insert_area_de_ubicacion($conexion, $direccion);
    }
 }
 ?>

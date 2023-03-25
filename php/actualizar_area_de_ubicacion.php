@@ -9,10 +9,10 @@
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Requeridos
-            $id_area = $_POST['id_area'];
-            $direccion = $_POST['direccion'];
+            $id_area = htmlspecialchars(trim($_POST['id_area']));
+            $direccion = htmlspecialchars(trim($_POST['direccion']));
+            $direccion = strtoupper($direccion);
             update_area_de_ubicacion($conexion, $direccion, $id_area); 
         }
     }
-
 ?>

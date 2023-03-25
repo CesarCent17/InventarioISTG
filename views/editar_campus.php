@@ -17,7 +17,8 @@
             $usuario = $_SESSION['usuario'];
             $rol = $_SESSION['rol'];
             if($rol == "Administrador"){
-                            $array_campus = getCampus($conexion);
+							$id_campus = $_POST['id_campus'];
+							$campus = get_campus_id($conexion, $id_campus);
                             echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
                         } 
             else {
@@ -210,8 +211,6 @@
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
 				<?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $id_campus = $_POST['id_campus'];
-                    $campus = get_campus_id($conexion, $id_campus);
                     $html = ' <input class="mdl-textfield__input" type="text" id="id_campus" name="id_campus" required value="'.$campus['id'].' "readonly>';
 		 			echo $html;
                 }	
@@ -224,8 +223,6 @@
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $id_campus = $_POST['id_campus'];
-                    $campus = get_campus_id($conexion, $id_campus);
                     $html = '<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" value="'.$campus['nombre'].'"required>';
                     echo $html;
                 }   
@@ -236,8 +233,6 @@
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $id_campus = $_POST['id_campus'];
-                    $campus = get_campus_id($conexion, $id_campus);
                     $html = '<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" value="'.$campus['direccion'].' "required>';
                     echo $html;
                 }   

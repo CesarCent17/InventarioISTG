@@ -9,14 +9,13 @@
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Requeridos
-            $nombre = trim($_POST['nombre']);
-            $apellido = trim($_POST['apellido']);
-            $id_docente = trim($_POST['id_docente']);
-            $cedula = trim($_POST['cedula']);
+            $nombre = htmlspecialchars(trim($_POST['nombre']));
+            $apellido = htmlspecialchars(trim($_POST['apellido']));
+            $id_docente = htmlspecialchars(trim($_POST['id_docente']));
+            $cedula = htmlspecialchars(trim($_POST['cedula']));
             $nombre = strtoupper($nombre);
             $apellido = strtoupper($apellido);
             update_docente($conexion, $nombre, $apellido, $id_docente, $cedula); 
         }
     }
-
 ?>

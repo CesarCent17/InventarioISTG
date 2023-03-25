@@ -9,13 +9,13 @@
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Requeridos
-            $id_campus = $_POST['id_campus'];
-            $nombre = $_POST['nombre'];
-            $direccion = $_POST['direccion'];
+            $id_campus = htmlspecialchars(trim($_POST['id_campus']));
+            $nombre = htmlspecialchars(trim($_POST['nombre']));
+            $direccion = htmlspecialchars(trim($_POST['direccion']));
+            $nombre = strtoupper($nombre);
             update_campus($conexion, $nombre, $direccion, $id_campus); 
         }
     }
-
 ?>
 
 
