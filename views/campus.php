@@ -262,7 +262,7 @@
 										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
 									</form>';
 			$form_eliminar = '<form action="../php/eliminar_campus.php" method="post" class="ver-detalles-eliminar">
-									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
+									<button type="submit" class="form-button-icon fa-solid fa-trash" value="'.$current_campus[$i]['id'].'" name="id_campus"></button>
 								</form>';
 			$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>

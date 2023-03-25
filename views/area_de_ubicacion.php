@@ -255,7 +255,7 @@
 										<button type="submit" class="form-button-icon fa-solid fa-pen-to-square" value="'.$current_area_de_ubicacion[$i]['id'].'" name="id_area"></button>
 									</form>';
 			$form_eliminar = '<form action="../php/eliminar_area_de_ubicacion.php" method="post" class="ver-detalles-eliminar">
-									<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_area_de_ubicacion[$i]['id'].'" name="id_area"></button>
+									<button type="submit" class="form-button-icon fa-solid fa-trash" value="'.$current_area_de_ubicacion[$i]['id'].'" name="id_area"></button>
 								</form>';
 			$html .= '<tr>
 									<td class="mdl-data-table__cell--non-numeric">'.$No.'</td>

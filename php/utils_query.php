@@ -18,11 +18,11 @@ function consultarListaUsuarios($conexion){
 
 function actualizarEstadoUsuario($conexion, $id_usuario, $estado){
     $sql = "UPDATE 
-	`inventorioistg`.`usuario` 
-    SET 
-        `activo` = ? 
-    WHERE 
-        `id` = ?";
+	            `usuario` 
+            SET 
+                `activo` = ? 
+            WHERE 
+                `id` = ?";
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error de consulta: " . $conexion->error);

@@ -38,7 +38,7 @@
 
             $contrasena_encriptada = password_hash($contrasena, PASSWORD_DEFAULT);
             
-             $sql = "INSERT INTO `inventorioistg`.`usuario`
+             $sql = "INSERT INTO `usuario`
                         (
                             `nombre`,
                             `apellido`,

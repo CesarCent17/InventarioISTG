@@ -2,7 +2,7 @@
 
 function insert_codeinst_and_get_last_id($conexion, $id_institucion, $codigo){
     $last_inserted_id = null;
-    $sql = "INSERT INTO `inventorioistg`.`codigo_institucion`
+    $sql = "INSERT INTO `codigo_institucion`
                     (
                         `codigo`,
                         `id_institucion`
@@ -29,7 +29,7 @@ function insert_codeinst_and_get_last_id($conexion, $id_institucion, $codigo){
 }
 
 function insert_codeprod($conexion, $id_codigo_institucion, $id_producto){
-    $sql = "INSERT INTO `inventorioistg`.`codigo_producto`
+    $sql = "INSERT INTO `codigo_producto`
                 (
                     `id_codigo_institucion`,
                     `id_producto`
@@ -59,7 +59,7 @@ function insert_prod($conexion, $nombre, $descripcion, $observaciones, $n_acta, 
                     $id_origen_del_bien, $id_custodio, $id_estado_de_uso, $id_estado_fisico, $id_usuario, $id_administrador, $id_tipo_acta){
     $last_inserted_id = null;
 
-    $sql = "INSERT INTO `inventorioistg`.`producto`
+    $sql = "INSERT INTO `producto`
                 (
                     `nombre`,
                     `descripcion`,
