@@ -61,7 +61,7 @@ $sheet->getColumnDimension('C')->setWidth(35);
 $sheet->getColumnDimension('D')->setWidth(45);
 $sheet->getColumnDimension('E')->setWidth(30);
 $sheet->getColumnDimension('F')->setWidth(50);
-$sheet->getColumnDimension('G')->setWidth(50);
+$sheet->getColumnDimension('G')->setWidth(60);
 $sheet->getColumnDimension('H')->setWidth(25);
 $sheet->getColumnDimension('I')->setWidth(40);
 $sheet->getColumnDimension('J')->setWidth(40);
@@ -107,9 +107,6 @@ $styleArray = [
 ];
 $sheet->getStyle('A3:Q3')->applyFromArray($styleArray);
 
-
-
-
 $No = 1;
 $row_init = 4;
 for ($i = 0; $i < count($array_bienes_registrados); $i++){
@@ -121,6 +118,7 @@ for ($i = 0; $i < count($array_bienes_registrados); $i++){
             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
         ],
     ];
+    // $styleArray['wrapText'] = true;
     $sheet->getStyle('A'.strval($row_init).':Q'.strval($row_init))->applyFromArray($styleArray);
 
 
@@ -133,11 +131,15 @@ for ($i = 0; $i < count($array_bienes_registrados); $i++){
     $sheet->setCellValue('E'.$row_init, $array_resultado[$i][0]['codigo']);
     $sheet->setCellValue('F'.$row_init, $codigo_adicional);
     $sheet->setCellValue('G'.$row_init, $array_bienes_registrados[$i]['descripcion']);
+    $cell = $sheet->getCell('G'.$row_init);
+    $cell->getStyle()->getAlignment()->setWrapText(true);
     $sheet->setCellValue('H'.$row_init, $array_origen[$i]); //ORIGEN DEL BIEN
     $sheet->setCellValue('I'.$row_init, $array_administrador[$i]); // ADMINISTRADOR
     $sheet->setCellValue('J'.$row_init, $array_custodio[$i]); // CUSTODIO
     $sheet->setCellValue('K'.$row_init, $array_bienes_registrados[$i]['proceso_de_adquisicion']);
     $sheet->setCellValue('L'.$row_init, $array_bienes_registrados[$i]['observaciones']); // OBSERVACIONES
+    $cell = $sheet->getCell('L'.$row_init);
+    $cell->getStyle()->getAlignment()->setWrapText(true);
     $sheet->setCellValue('M'.$row_init, $array_tipo_acta[$i]); // TIPO DE ACTA
     $sheet->setCellValue('N'.$row_init, $array_bienes_registrados[$i]['#_acta']);
     $sheet->setCellValue('O'.$row_init, $array_bienes_registrados[$i]['año']);

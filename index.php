@@ -131,6 +131,18 @@
 					</li>
 
 					<li class="full-width divider-menu-h"></li>
+						<li class="full-width">
+						<a href="views/reportes.php" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-file-text"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								REPORTES
+							</div>
+						</a>
+						</li>
+
+					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="views/inventario.php" class="full-width">
 							<div class="navLateral-body-cl">
@@ -159,9 +171,7 @@
 											</a>
 										</li>
 											
-							
-							
-							
+
 										<li class="full-width divider-menu-h"></li>
          								<li class="full-width">
 											<a href="views/usuarios.php" class="full-width">

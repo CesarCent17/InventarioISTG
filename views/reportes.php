@@ -1,26 +1,15 @@
 <?php
 	require('../php/mysqli_conexion.php');
+	require('../php/querys_inventario.php');
 	require('../php/utils_query.php');
-    require('../php/querys_area_de_ubicacion.php');
     session_start();
-
 	 // Verificamos que el usuario esté iniciado sesión
     if(!isset($_SESSION['usuario'])) {
         // Si el usuario no está iniciado sesión, lo redirigimos a la página de inicio de sesión
-        header("Location: login.php");
+        header("Location: ../views/login.php");
     } else {
-		//Si el usuario tiene una sesion
 		$usuario = $_SESSION['usuario'];
-		$rol = $_SESSION['rol'];
-		if($rol == "Administrador"){
-						$id_area = $_POST['id_area'];
-						$area_de_ubicacion = get_area_id($conexion, $id_area);
-						echo "<script> console.log(" . json_encode($usuario) . "); </script>";		
-                    } 
-		 else {
-			header("Location: ../index.php");
-
-		}
+    	echo "<script> console.log(" . json_encode($usuario) . "); </script>";
     }
 ?>
 
@@ -29,7 +18,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Área de Ubicación | ISTG</title>
+	<title>Reportes  | ISTG</title>
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/sweetalert2.css">
 	<link rel="stylesheet" href="../css/material.min.css">
@@ -97,7 +86,7 @@
 				</figcaption>
 			</figure>
 			<div class="full-width tittles navLateral-body-tittle-menu">
-				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; EDITAR ÁREA DE UBICACIÓN</span>
+				<i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; REPORTES</span>
 			</div>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
@@ -107,22 +96,23 @@
 						require('nav_lateral_opciones.php');
 						$rol = $_SESSION['rol'];
 						if($rol == 'Administrador'){
-							$html = '
+							$html = '	
 									<li class="full-width divider-menu-h"></li>
 										<li class="full-width">
 										<a href="bienes_descartados.php" class="full-width">
-										<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-tag-close"></i>
-										</div>
-										<div class="navLateral-body-cr hide-on-tablet">
-										BIENES DESCARTADOS
-										</div>
+											<div class="navLateral-body-cl">
+											<i class="zmdi zmdi-tag-close"></i>
+											</div>
+											<div class="navLateral-body-cr hide-on-tablet">
+											BIENES DESCARTADOS
+											</div>
 										</a>
 									</li>
+
+									
+
 							
-							
-							
-										<li class="full-width divider-menu-h"></li>
+									<li class="full-width divider-menu-h"></li>
          								<li class="full-width">
 											<a href="usuarios.php" class="full-width">
 												<div class="navLateral-body-cl">
@@ -178,39 +168,36 @@
 	</section>
 
 	<!-- pageContent -->
-	<form class="mdl-grid" action="../php/actualizar_area_de_ubicacion.php" method="post" style="max-width: 550px; margin-left:600; margin-top: 55px">
+	<form class="mdl-grid" action="../php/actualizar_campus.php" method="post" style="max-width: 550px; margin-left:850; margin-top: 55px">
 
 		<div class="mdl-card__title" >
-				<h2 class="mdl-card__title-text">Editar Área de Ubicación</h2>
-		</div>
-        
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-				<?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $html = ' <input class="mdl-textfield__input" type="text" id="id_area" name="id_area" required value="'.$area_de_ubicacion['id'].' "readonly>';
-		 			echo $html;
-                }	
-				?>
-              <label class="mdl-textfield__label" for="id_area">ID</label>
-              <span class="mdl-textfield__error">Este campo es requerido</span>
-        </div>
-		
-		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $html = '<input class="mdl-textfield__input" type="text" id="direccion" name="direccion" value="'.$area_de_ubicacion['direccion'].' "required>';
-                    echo $html;
-                }   
-            ?>
-			<label class="mdl-textfield__label" for="direccion">Dirección</label>
-			<span class="mdl-textfield__error">Este campo es requerido</span>
+				<h2 class="mdl-card__title-text">Informe de inventario</h2>
 		</div>
 
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
+		<select class="mdl-textfield__input" id="campus" name="campus" required>
+                <option value=""></option>
+				
+                <?php
+                $array_campus = getCampus($conexion);
+                echo "<script> console.log(" . json_encode($array_campus) . "); </script>";
+				echo '<option value="completo">INVENTARIO COMPLETO</option>';
+                $html = '';
+                for($i = 0; $i < count($array_campus); $i++){
+                    $html.= '<option value="'.$array_campus[$i]['id'].'">'.$array_campus[$i]['nombre'].'</option>' ;
+                }
+                echo $html;
+				
+                ?>
+              </select>
+              <label class="mdl-textfield__label" for="campus">Campus</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
+        </div>
+       
 		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
-			Actualizar
+			Generar
 		</button>
 	</form>
-	  </tbody>
-	</table>
+
 </body>
 </html>

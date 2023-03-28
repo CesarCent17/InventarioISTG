@@ -98,41 +98,8 @@
 				<ul class="full-width list-unstyle menu-principal">
 
 					<!-- INICIO -->
-					<li class="full-width">
-						<a href="../index.php" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-home"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								INICIO
-							</div>
-						</a>
-					</li>
-
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="bien.php" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-plus"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								AGREGAR BIEN
-							</div>
-						</a>
-					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="inventario.php" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-folder"></i>
-							</div>
-							
-							<div class="navLateral-body-cr hide-on-tablet">
-								INVENTARIO
-							</div>
-						</a>
-					</li>
           <?php
+            require('nav_lateral_opciones.php');
 						$rol = $_SESSION['rol'];
 						if($rol == 'Administrador'){
 							$html = '
