@@ -168,7 +168,7 @@
 	</section>
 
 	<!-- pageContent -->
-	<form class="mdl-grid" action="../php/actualizar_campus.php" method="post" style="max-width: 550px; margin-left:850; margin-top: 55px">
+	<form class="mdl-grid" action="../php/proceso_reporte.php" method="post" style="max-width: 550px; margin-left:850; margin-top: 55px">
 
 		<div class="mdl-card__title" >
 				<h2 class="mdl-card__title-text">Informe de inventario</h2>

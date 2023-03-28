@@ -30,6 +30,37 @@ function obtener_bienes_registrados($conexion){
     return $array_bienes_registrados;
 }
 
+function obtener_bienes_registrados_campus($conexion, $id_campus){
+    $array_bienes_registrados =  array();
+    $sql = "SELECT
+                `id`,
+                `nombre`,
+                `descripcion`,
+                `id_campus`,
+                `id_area_ubicacion`,
+                `#_acta`,
+                `proceso_de_adquisicion`,
+                `año`,
+                `observaciones`
+            FROM 
+                `producto`
+            WHERE `oculto` = 0 AND id_campus = ?";
+
+    
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("s", $id_campus);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    while ($fila = $resultado->fetch_assoc()) {
+        array_push($array_bienes_registrados, $fila);
+    }
+    return $array_bienes_registrados;
+}
+
 
 function obtener_bienes_descartados($conexion){
     $array_bienes_descartados =  array();
