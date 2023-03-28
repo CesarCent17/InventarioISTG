@@ -16,8 +16,8 @@ $array_origen = obtener_array_origen($conexion, $array_bienes_registrados);
 $array_administrador = obtener_array_administrador($conexion, $array_bienes_registrados);
 $array_custodio = obtener_array_custodio($conexion, $array_bienes_registrados);
 $array_tipo_acta = obtener_array_tipo_acta($conexion, $array_bienes_registrados);
-// $array_estado_de_uso = obtener_array_estado_uso($conexion, $array_bienes_registrados);
-// $array_estado_fisico = obtener_array_estado_fisico($conexion, $array_bienes_registrados);
+$array_estado_de_uso = obtener_array_estado_uso($conexion, $array_bienes_registrados);
+$array_estado_fisico = obtener_array_estado_fisico($conexion, $array_bienes_registrados);
 
 
 
@@ -141,8 +141,8 @@ for ($i = 0; $i < count($array_bienes_registrados); $i++){
     $sheet->setCellValue('M'.$row_init, $array_tipo_acta[$i]); // TIPO DE ACTA
     $sheet->setCellValue('N'.$row_init, $array_bienes_registrados[$i]['#_acta']);
     $sheet->setCellValue('O'.$row_init, $array_bienes_registrados[$i]['año']);
-    $sheet->setCellValue('P'.$row_init, $array_campus[$i]); // ESTADO DE USO
-    $sheet->setCellValue('Q'.$row_init, $array_campus[$i]); // ESTADO FISICO
+    $sheet->setCellValue('P'.$row_init, $array_estado_de_uso[$i]); // ESTADO DE USO
+    $sheet->setCellValue('Q'.$row_init, $array_estado_fisico[$i]); // ESTADO FISICO
     $row_init++;
     $No++;
 }

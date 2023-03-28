@@ -108,6 +108,74 @@ function obtener_array_tipo_acta($conexion, $array_bienes_registrados){
     return $array_tipo_acta;
 }
 
+function obtener_array_estado_uso($conexion, $array_bienes_registrados){
+    $array_estado_de_uso = array();
+    for($i = 0; $i < count($array_bienes_registrados) ; $i++){
+        $id = $array_bienes_registrados[$i]['id'];
+        $estado_de_uso = obtener_estado_de_uso_por_id($conexion, $id);
+        array_push($array_estado_de_uso, $estado_de_uso);
+    }
+    return $array_estado_de_uso;
+}
+
+
+function obtener_array_estado_fisico($conexion, $array_bienes_registrados){
+    $array_estado_fisico = array();
+    for($i = 0; $i < count($array_bienes_registrados) ; $i++){
+        $id = $array_bienes_registrados[$i]['id'];
+        $estado_fisico = obtener_estado_fisico_por_id($conexion, $id);
+        array_push($array_estado_fisico, $estado_fisico);
+    }
+    return $array_estado_fisico;
+}
+
+
+function obtener_estado_fisico_por_id($conexion, $id){
+    $sql = "SELECT `estado_fisico`.`estado`
+            FROM `producto` AS p
+            INNER JOIN `estado_fisico` ON p.`id_estado_fisico` = estado_fisico.`id`
+            WHERE p.`id` = ?;";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($fila = $resultado->fetch_assoc()) {
+        $estado_fisico = $fila['estado'];
+    } else {
+        $estado_fisico = "";
+    }
+    return $estado_fisico;
+}
+
+function obtener_estado_de_uso_por_id($conexion, $id){
+    $sql = "SELECT `estado_de_uso`.`estado`
+            FROM `producto` AS p
+            INNER JOIN `estado_de_uso` ON p.`id_estado_de_uso` = estado_de_uso.`id`
+            WHERE p.`id` = ?;";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        die("Error de consulta: " . $conexion->error);
+    }
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($fila = $resultado->fetch_assoc()) {
+        $estado_de_uso = $fila['estado'];
+    } else {
+        $estado_de_uso = "";
+    }
+    return $estado_de_uso;
+}
+
+
+
 function obtener_tipo_acta_por_id($conexion, $id){
     $sql = "SELECT ta.`descripcion`
             FROM `producto` AS p
