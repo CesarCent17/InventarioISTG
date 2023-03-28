@@ -19,20 +19,27 @@ $array_tipo_acta = obtener_array_tipo_acta($conexion, $array_bienes_registrados)
 $array_estado_de_uso = obtener_array_estado_uso($conexion, $array_bienes_registrados);
 $array_estado_fisico = obtener_array_estado_fisico($conexion, $array_bienes_registrados);
 
-
-
+$campus = $array_campus[0];
 
 // Cargar la hoja de cálculo
 $spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
+// Agregar imagen como icono
+$icono = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+$icono->setPath('../../assets/icons/logoISTG.ico');
+$icono->setWidth(60); // Establecer el ancho de la imagen
+$icono->setHeight(60); // Establecer el alto de la imagen
+$icono->setCoordinates('G1'); // Establecer la celda donde se insertará la imagen
+$icono->setWorksheet($sheet);
+$icono->setOffsetX(250);
 
 // Combinar celdas de F1 a P1
-$sheet->mergeCells('A1:Q1');
+$sheet->mergeCells('B1:Q1');
 
 // Establecer el valor de la celda combinada
-$sheet->setCellValue('A1', 'BIENES DEL INSTITUTO SUPERIOR TECNOLOGICO GUAYAQUIL');
-$sheet->getStyle('A1')->applyFromArray([
+$sheet->setCellValue('B1', 'BIENES DEL INSTITUTO SUPERIOR TECNOLOGICO GUAYAQUIL');
+$sheet->getStyle('B1')->applyFromArray([
     'font' => [
         'bold' => true,
     ],
@@ -41,10 +48,11 @@ $sheet->getStyle('A1')->applyFromArray([
         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
     ],
 ]);
+$sheet->getRowDimension(1)->setRowHeight(40);
 
-$sheet->mergeCells('A2:Q2');
-$sheet->setCellValue('A2', 'CAMPUS CMI');
-$sheet->getStyle('A2')->applyFromArray([
+$sheet->mergeCells('B2:Q2');
+$sheet->setCellValue('B2', $campus);
+$sheet->getStyle('B2')->applyFromArray([
     'font' => [
         'bold' => true,
     ],
@@ -53,7 +61,6 @@ $sheet->getStyle('A2')->applyFromArray([
         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
     ],
 ]);
-
 
 $sheet->getColumnDimension('A')->setWidth(10);
 $sheet->getColumnDimension('B')->setWidth(35);
@@ -74,7 +81,7 @@ $sheet->getColumnDimension('P')->setWidth(25);
 $sheet->getColumnDimension('Q')->setWidth(25);
 
 // Obtener la fila 3
-$row = 3;
+$row = 4;
 
 // Establecer los valores de las celdas
 $sheet->setCellValue('A'.$row, 'No');

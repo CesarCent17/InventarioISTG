@@ -27,7 +27,16 @@ $spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
 
-// Combinar celdas de F1 a P1
+// Agregar imagen como icono
+$icono = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+$icono->setPath('../../assets/icons/logoISTG.ico');
+$icono->setWidth(60); // Establecer el ancho de la imagen
+$icono->setHeight(60); // Establecer el alto de la imagen
+$icono->setCoordinates('G1'); // Establecer la celda donde se insertará la imagen
+$icono->setWorksheet($sheet);
+$icono->setOffsetX(250);
+
+// Combinar celdas de F1 a Q1
 $sheet->mergeCells('A1:Q1');
 
 // Establecer el valor de la celda combinada
@@ -41,6 +50,8 @@ $sheet->getStyle('A1')->applyFromArray([
         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
     ],
 ]);
+
+$sheet->getRowDimension(1)->setRowHeight(40);
 
 $sheet->mergeCells('A2:Q2');
 $sheet->setCellValue('A2', 'INVENTARIO COMPLETO');
