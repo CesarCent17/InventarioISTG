@@ -7,7 +7,11 @@ function obtener_bienes_registrados($conexion){
                 `nombre`,
                 `descripcion`,
                 `id_campus`,
-                `id_area_ubicacion`
+                `id_area_ubicacion`,
+                `#_acta`,
+                `proceso_de_adquisicion`,
+                `año`,
+                `observaciones`
             FROM 
                 `producto`
             WHERE
@@ -152,6 +156,7 @@ function obtener_codigos_prod($conexion, $array_bienes_registrados){
     }
     return $array_resultado;
 }
+
 
 
 ?>
