@@ -11,6 +11,13 @@ $array_bienes_registrados = obtener_bienes_registrados($conexion);
 $array_campus = obtener_array_campus($conexion, $array_bienes_registrados);
 $array_ubicacion = obtener_array_ubicacion($conexion, $array_bienes_registrados);
 $array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
+$array_origen = obtener_array_origen($conexion, $array_bienes_registrados);
+
+$array_administrador = obtener_array_administrador($conexion, $array_bienes_registrados);
+$array_custodio = obtener_array_custodio($conexion, $array_bienes_registrados);
+$array_tipo_acta = obtener_array_tipo_acta($conexion, $array_bienes_registrados);
+// $array_estado_de_uso = obtener_array_estado_uso($conexion, $array_bienes_registrados);
+// $array_estado_fisico = obtener_array_estado_fisico($conexion, $array_bienes_registrados);
 
 
 
@@ -51,13 +58,13 @@ $sheet->getStyle('A2')->applyFromArray([
 $sheet->getColumnDimension('A')->setWidth(10);
 $sheet->getColumnDimension('B')->setWidth(35);
 $sheet->getColumnDimension('C')->setWidth(35);
-$sheet->getColumnDimension('D')->setWidth(35);
+$sheet->getColumnDimension('D')->setWidth(45);
 $sheet->getColumnDimension('E')->setWidth(30);
 $sheet->getColumnDimension('F')->setWidth(50);
 $sheet->getColumnDimension('G')->setWidth(50);
 $sheet->getColumnDimension('H')->setWidth(25);
-$sheet->getColumnDimension('I')->setWidth(35);
-$sheet->getColumnDimension('J')->setWidth(35);
+$sheet->getColumnDimension('I')->setWidth(40);
+$sheet->getColumnDimension('J')->setWidth(40);
 $sheet->getColumnDimension('K')->setWidth(40);
 $sheet->getColumnDimension('L')->setWidth(50);
 $sheet->getColumnDimension('M')->setWidth(20);
@@ -126,16 +133,16 @@ for ($i = 0; $i < count($array_bienes_registrados); $i++){
     $sheet->setCellValue('E'.$row_init, $array_resultado[$i][0]['codigo']);
     $sheet->setCellValue('F'.$row_init, $codigo_adicional);
     $sheet->setCellValue('G'.$row_init, $array_bienes_registrados[$i]['descripcion']);
-    $sheet->setCellValue('H'.$row_init, 'DATO QUEMADO'); //ORIGEN DEL BIEN
-    $sheet->setCellValue('I'.$row_init, 'DATO QUEMADO'); // ADMINISTRADOR
-    $sheet->setCellValue('J'.$row_init, 'DATO QUEMADO'); // CUSTODIO
+    $sheet->setCellValue('H'.$row_init, $array_origen[$i]); //ORIGEN DEL BIEN
+    $sheet->setCellValue('I'.$row_init, $array_administrador[$i]); // ADMINISTRADOR
+    $sheet->setCellValue('J'.$row_init, $array_custodio[$i]); // CUSTODIO
     $sheet->setCellValue('K'.$row_init, $array_bienes_registrados[$i]['proceso_de_adquisicion']);
     $sheet->setCellValue('L'.$row_init, $array_bienes_registrados[$i]['observaciones']); // OBSERVACIONES
-    $sheet->setCellValue('M'.$row_init, 'DATO QUEMADO'); // TIPO DE ACTA
+    $sheet->setCellValue('M'.$row_init, $array_tipo_acta[$i]); // TIPO DE ACTA
     $sheet->setCellValue('N'.$row_init, $array_bienes_registrados[$i]['#_acta']);
     $sheet->setCellValue('O'.$row_init, $array_bienes_registrados[$i]['año']);
-    $sheet->setCellValue('P'.$row_init, 'DATO QUEMADO'); // ESTADO DE USO
-    $sheet->setCellValue('Q'.$row_init, 'DATO QUEMADO'); // ESTADO FISICO
+    $sheet->setCellValue('P'.$row_init, $array_campus[$i]); // ESTADO DE USO
+    $sheet->setCellValue('Q'.$row_init, $array_campus[$i]); // ESTADO FISICO
     $row_init++;
     $No++;
 }
