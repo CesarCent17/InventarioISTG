@@ -55,7 +55,7 @@ CREATE TABLE `campus` (
   `nombre` varchar(200) DEFAULT NULL,
   `direccion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 /*Data for the table `campus` */
 
@@ -72,11 +72,9 @@ CREATE TABLE `codigo_institucion` (
   PRIMARY KEY (`id`),
   KEY `fk_institucion` (`id_institucion`),
   CONSTRAINT `fk_institucion` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8;
 
 /*Data for the table `codigo_institucion` */
-
-insert  into `codigo_institucion`(`id`,`codigo`,`id_institucion`) values (177,'ISTG-GYE-00000001',1);
 
 /*Table structure for table `codigo_producto` */
 
@@ -91,11 +89,9 @@ CREATE TABLE `codigo_producto` (
   KEY `fk_producto` (`id_producto`),
   CONSTRAINT `fk_codigo_institucion` FOREIGN KEY (`id_codigo_institucion`) REFERENCES `codigo_institucion` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=utf8;
 
 /*Data for the table `codigo_producto` */
-
-insert  into `codigo_producto`(`id`,`id_codigo_institucion`,`id_producto`) values (156,177,155);
 
 /*Table structure for table `custodio` */
 
@@ -211,11 +207,9 @@ CREATE TABLE `producto` (
   CONSTRAINT `fk_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_origen_del_bien` FOREIGN KEY (`id_origen_del_bien`) REFERENCES `origen_del_bien` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tipo_acta` FOREIGN KEY (`id_tipo_acta`) REFERENCES `tipo_acta` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8;
 
 /*Data for the table `producto` */
-
-insert  into `producto`(`id`,`nombre`,`descripcion`,`observaciones`,`#_acta`,`proceso_de_adquisicion`,`año`,`id_campus`,`id_area_ubicacion`,`id_origen_del_bien`,`id_custodio`,`id_estado_de_uso`,`id_estado_fisico`,`fecha_registro`,`oculto`,`id_usuario`,`id_administrador`,`id_tipo_acta`) values (155,'ARCHIVADOR AEREO','ARCHIVADOR AEREO METALICO C/AZUL','','70','DONACION FATIMA YCAZA',NULL,55,1,1,NULL,1,1,'2023-03-25 12:18:02',1,19,NULL,11);
 
 /*Table structure for table `rol` */
 
