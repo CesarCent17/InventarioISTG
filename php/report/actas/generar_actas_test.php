@@ -1,6 +1,7 @@
 <?php
 require '../vendor/autoload.php';
-
+require('../../mysqli_conexion.php');
+require('../../querys_ver_detalle.php');
 
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -10,25 +11,31 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 $archivo = "plantilla_actas.xlsx";
 $documento = IOFactory::load($archivo);
 
+$id_prod = htmlspecialchars(trim($_GET['id']));
+// Consulta
+// $prod = obtener_producto_por_id($conexion, $id_prod);
+// var_dump($prod);
 
 // Seleccionar la hoja "ACTA"
 $hoja_acta_entrega = $documento->getSheetByName('ACTA ENTREGA');
 
 // Escribir valores en las celdas
 $hoja_acta_entrega->setCellValue('C15', 'Valor C15'); // Codigo ISTG
-
+// $hoja_acta_entrega->setCellValue('D15', $prod['nombre']); // Nombre General
+// $hoja_acta_entrega->setCellValue('E15', $prod['descripcion']); // Descripcion
 $hoja_acta_entrega->setCellValue('F15', 'Valor F15'); // Estado Fisico
 $hoja_acta_entrega->setCellValue('G15', 'Valor G15'); // Campus
 $hoja_acta_entrega->setCellValue('H15', 'Valor H15'); // Area de Ubicacion
-
+// $hoja_acta_entrega->setCellValue('I15', $prod['observaciones']); // Observaciones
 
 $hoja_acta_donacion = $documento->getSheetByName('ACTA DONACION');
 $hoja_acta_donacion->setCellValue('B13', 'DATO QUEMADO');
-
+// $hoja_acta_donacion->setCellValue('C13', $prod['nombre']);
+// $hoja_acta_donacion->setCellValue('D13', $prod['descripcion']);
 $hoja_acta_donacion->setCellValue('E13', 'DATO QUEMADO');
 $hoja_acta_donacion->setCellValue('F13', 'DATO QUEMADO');
 $hoja_acta_donacion->setCellValue('G13', 'DATO QUEMADO');
-
+// $hoja_acta_donacion->setCellValue('H13', $prod['observaciones']);
 
 
 // Guardar el archivo modificado en memoria
