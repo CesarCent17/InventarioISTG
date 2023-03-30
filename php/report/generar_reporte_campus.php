@@ -80,8 +80,7 @@ $sheet->getColumnDimension('O')->setWidth(15);
 $sheet->getColumnDimension('P')->setWidth(25);
 $sheet->getColumnDimension('Q')->setWidth(25);
 
-// Obtener la fila 3
-$row = 4;
+$row = 3;
 
 // Establecer los valores de las celdas
 $sheet->setCellValue('A'.$row, 'No');
