@@ -75,9 +75,28 @@ $meses = [
 $mes_actual_espanol = $meses[$mes_actual];
 $anio_actual = date('Y');
 
-$string_A11_J11 = 'En la ciudad de Guayaquil, Provincia de Guayas a los '.$dia_actual.' días del mes de '.$mes_actual_espanol.' de '.$anio_actual.', en las oficinas del ISTG, ubicadas _______________________________ se reúnen por una parte_______________________, en calidad de Custodio Administrativo, y quien recibe ________________, quien labora físicamente en  el ISTG  con cargo de ________________con el fin de realizar el acta de entrega recepción de los bienes que se detalla a continuación, conforme lo indica el reglamento general para la Administración, Utilización, Manejo y Control de los bienes e inventarios del sector público en su capítulo III, Art. 41.';
+$ubicacion_oficina = "TEXTO";
+$custodio_administrativo = "TEXTO";
+$recibe = "TEXTO";
+$cargo = "TEXTO";
+$n_acta = "N° 00001-ISTG-EJEMPLO";
+$nombre_entrega = "NOMBRE DE EJEMPLO";
+$cedula_entrega = "0987654321";
+$nombre_recibe = "NOMBRE DE EJEMPLO";
+$cedula_recibe = "0987654321";
+
+$string_A11_J11 = 'En la ciudad de Guayaquil, Provincia de Guayas a los '.$dia_actual.' días del mes de '.$mes_actual_espanol.' de '.$anio_actual.', en las oficinas del ISTG, ubicadas '.$ubicacion_oficina.' se reúnen por una parte '.$custodio_administrativo.', en calidad de Custodio Administrativo, y quien recibe '.$recibe.', quien labora físicamente en  el ISTG  con cargo de '.$cargo.' con el fin de realizar el acta de entrega recepción de los bienes que se detalla a continuación, conforme lo indica el reglamento general para la Administración, Utilización, Manejo y Control de los bienes e inventarios del sector público en su capítulo III, Art. 41.';
 $hoja_acta_entrega->setCellValue('A11', $string_A11_J11);
 $hoja_acta_entrega->mergeCells('A11:J11');
+$hoja_acta_entrega->setCellValue('I9', $n_acta);
+$hoja_acta_entrega->setCellValue('D35', $nombre_entrega);
+$hoja_acta_entrega->setCellValue('D36', $cedula_entrega);
+
+$hoja_acta_entrega->setCellValue('G35', $nombre_recibe);
+$hoja_acta_entrega->mergeCells('G35:H35');
+$hoja_acta_entrega->setCellValue('G36', $cedula_recibe);
+$hoja_acta_entrega->mergeCells('G36:H36');
+
 
 
 
