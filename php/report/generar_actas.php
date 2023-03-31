@@ -3,7 +3,7 @@
     use PhpOffice\PhpSpreadsheet\IOFactory;
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     require('../mysqli_conexion.php');
-    // require('../querys_ver_detalle.php');
+    require('querys_actas.php');
     require('../querys_inventario.php');
    
 
