@@ -32,16 +32,16 @@
     );
     // echo "<script> console.log(" . json_encode($bien) . "); </script>";
 
-    // Cargar el archivo
-$archivo = "actas/plantilla_actas.xlsx";
+// Cargar el archivo
+$archivo = "plantilla_actas.xlsx";
 $documento = IOFactory::load($archivo);
 
 
-//  // Seleccionar la hoja "ACTA"
+// Seleccionar la hoja "ACTA ENTREGA"
  $hoja_acta_entrega = $documento->getSheetByName('ACTA ENTREGA');
 
-//  // Escribir valores en las celdas
- $hoja_acta_entrega->setCellValue('C15', $bien['codigoISTG']); // Codigo ISTG
+// Escribir valores en las celdas
+$hoja_acta_entrega->setCellValue('C15', $bien['codigoISTG']); // Codigo ISTG
 $hoja_acta_entrega->setCellValue('D15', $bien['nombre']); // Nombre General
 $hoja_acta_entrega->setCellValue('E15', $bien['descripcion']); // Descripcion
 $hoja_acta_entrega->setCellValue('F15', $bien['estado_fisico']); // Estado Fisico
@@ -50,17 +50,16 @@ $hoja_acta_entrega->setCellValue('H15', $bien['area_de_ubicacion']); // Area de 
 $hoja_acta_entrega->setCellValue('I15', $bien['observaciones']); // Observaciones
 
 
- // Seleccionar la hoja "ACTA DONACION"
-//  $hoja_acta_donacion = $documento->getSheetByName('ACTA DONACION');
+$hoja_acta_donacion = $documento->getSheetByName('ACTA DONACION');
+$hoja_acta_donacion->setCellValue('B13', $bien['codigoISTG']);
+$hoja_acta_donacion->setCellValue('C13', $bien['nombre']);
+$hoja_acta_donacion->setCellValue('D13', $bien['descripcion']);
+$hoja_acta_donacion->setCellValue('E13', $bien['estado_fisico']);
+$hoja_acta_donacion->setCellValue('F13', $bien['campus']);
+$hoja_acta_donacion->setCellValue('G13', $bien['area_de_ubicacion']);
+$hoja_acta_donacion->setCellValue('H13', $bien['observaciones']);
 
- // Escribir valores en las celdas
-//  $hoja_acta_donacion->setCellValue('B13', 'DATO QUEMADO');
- 
-//  $hoja_acta_donacion->setCellValue('E13', 'DATO QUEMADO');
-//  $hoja_acta_donacion->setCellValue('F13', 'DATO QUEMADO');
-//  $hoja_acta_donacion->setCellValue('G13', 'DATO QUEMADO');
 
-//  $writer = IOFactory::createWriter($documento, 'Xlsx');
  $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($documento);
  ob_start(); // Iniciar el buffer de salida
 

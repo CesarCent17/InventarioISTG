@@ -11,7 +11,7 @@
             $id_prod = htmlspecialchars(trim($_POST['id_prod']));
             $prod = obtener_producto_por_id($conexion, $id_prod);
             echo $prod['nombre'];
-            header("Location: report/test_acta.php?id=".urlencode($id_prod));
+            header("Location: report/generar_actas.php?id=".urlencode($id_prod));
         }
     }
 ?>
