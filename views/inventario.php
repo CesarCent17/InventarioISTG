@@ -211,7 +211,7 @@
 												<button type="submit" class="form-button-icon fas fa-eye" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
 											</form>';
 
-						$form_generar_actas = '<form action="../php/proceso_acta.php" method="post" class="ver-detalles-eliminar">
+						$form_generar_actas = '<form action="../php/proceso_acta_get.php" method="post" class="ver-detalles-eliminar">
 												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-clipboard" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
 											</form>';
 
