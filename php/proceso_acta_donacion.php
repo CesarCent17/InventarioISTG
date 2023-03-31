@@ -9,10 +9,10 @@
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_prod = htmlspecialchars(trim($_POST['id_prod']));
-            $prod = obtener_producto_por_id($conexion, $id_prod);
-            echo $prod['nombre'];
-            echo "ACTA DONACION";
-            // header("Location: report/generar_actas.php?id=".urlencode($id_prod));
+            // $prod = obtener_producto_por_id($conexion, $id_prod);
+            // echo $prod['nombre'];
+            // echo "ACTA DONACION";
+            header("Location: report/generar_acta_donacion.php?id=".urlencode($id_prod));
         }
     }
 ?>
