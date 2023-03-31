@@ -50,37 +50,6 @@ $hoja_acta_entrega->setCellValue('H15', $bien['area_de_ubicacion']); // Area de 
 $hoja_acta_entrega->setCellValue('I15', $bien['observaciones']); // Observaciones
 
 
-
-date_default_timezone_set('America/Guayaquil');
-setlocale(LC_TIME, 'es_ES.UTF-8');
-
-$dia_actual = date('d');
-$mes_actual = date('F');
-
-$meses = [
-    'January' => 'Enero',
-    'February' => 'Febrero',
-    'March' => 'Marzo',
-    'April' => 'Abril',
-    'May' => 'Mayo',
-    'June' => 'Junio',
-    'July' => 'Julio',
-    'August' => 'Agosto',
-    'September' => 'Septiembre',
-    'October' => 'Octubre',
-    'November' => 'Noviembre',
-    'December' => 'Diciembre'
-];
-
-$mes_actual_espanol = $meses[$mes_actual];
-$anio_actual = date('Y');
-
-$string_A11_J11 = 'En la ciudad de Guayaquil, Provincia de Guayas a los '.$dia_actual.' días del mes de '.$mes_actual_espanol.' de '.$anio_actual.', en las oficinas del ISTG, ubicadas _______________________________ se reúnen por una parte_______________________, en calidad de Custodio Administrativo, y quien recibe ________________, quien labora físicamente en  el ISTG  con cargo de ________________con el fin de realizar el acta de entrega recepción de los bienes que se detalla a continuación, conforme lo indica el reglamento general para la Administración, Utilización, Manejo y Control de los bienes e inventarios del sector público en su capítulo III, Art. 41.';
-$hoja_acta_entrega->setCellValue('A11', $string_A11_J11);
-$hoja_acta_entrega->mergeCells('A11:J11');
-
-
-
  $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($documento);
  ob_start(); // Iniciar el buffer de salida
 
