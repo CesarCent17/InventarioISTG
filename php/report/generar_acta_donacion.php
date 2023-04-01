@@ -9,7 +9,10 @@
 
     $id_prod = htmlspecialchars(trim($_GET['id']));
     $prod = obtener_producto_por_id($conexion, $id_prod);
-    // echo "<script> console.log(" . json_encode($prod) . "); </script>";
+    $n_acta = htmlspecialchars(trim($_GET['n_acta']));
+    $nombre_donante = htmlspecialchars(trim($_GET['nombre_donante']));
+    $cedula_donante = htmlspecialchars(trim($_GET['cedula_donante']));
+    $cargo_donante = htmlspecialchars(trim($_GET['cargo_donante']));
 
     $array_codigo_de_producto = obtener_array_codigo_de_producto($conexion, $id_prod);
 
@@ -30,10 +33,9 @@
         'area_de_ubicacion' => $area_de_ubicacion,
         'codigoISTG' => $codigoISTG
     );
-    // echo "<script> console.log(" . json_encode($bien) . "); </script>";
 
     // Cargar el archivo
-    $archivo = "plantilla_acta_donacion.xlsx";
+    $archivo = "plantilla_acta_donacion_istg.xlsx";
     $documento = IOFactory::load($archivo);
 
 
@@ -71,30 +73,33 @@
     $mes_actual_espanol = $meses[$mes_actual];
     $anio_actual = date('Y');
 
-    $ubicacion_oficina = "TEXTO";
-    $rectora = "TEXTO";
-    $donante = "TEXTO";
-    $n_acta = "N° 00001-ISTG-EJEMPLO";
-    $nombre_entrega = "NOMBRE DE EJEMPLO";
-    $cedula_entrega = "0987654321";
-    $nombre_recibe = "NOMBRE DE EJEMPLO";
-    $cedula_recibe = "0987654321";
 
-    $string_AJ8 = 'En la ciudad de Guayaquil, Provincia de Guayas a los '.$dia_actual.' días del mes de '.$mes_actual_espanol.' de '.$anio_actual.', en las oficinas del ISTG, ubicadas '.$ubicacion_oficina.' se reúnen por una parte '.$rectora.', en calidad de Rectora, y  por otra parte '.$donante.' en calidad de donante . ';
-    $string_AJ10 = $donante.' realizará la donación de bienes muebles al Instituto Superior Tecnológico Guayaquil, los mismos que se detallan a continuación.  ';
+    $nombre_rectora = "Alma Rosa Zeballos Proaño";
+    $nombre_rectora = "Alma Rosa Zeballos ProaÑo";
+    $nombre_rectora = strtoupper($nombre_rectora);
+    $cedula_rectora = "0909173247";
 
-    $hoja_acta_donacion->setCellValue('A8', $string_AJ8);
-    $hoja_acta_donacion->mergeCells('A8:J8');
+    $string_AJ9 = 'En la ciudad de Guayaquil, a los '.$dia_actual.' días del mes de '.$mes_actual_espanol.' del '.$anio_actual.', se reúnen para celebrar un acto de donación de bienes, por una parte la Mgs. '.$nombre_rectora.', en calidad de rectora del Instituto Superior Tecnológico Guayaquil y por otra parte '.$nombre_donante.', en calidad de '.$cargo_donante.' a quien se le denomina donador. 
 
-    $hoja_acta_donacion->setCellValue('A10', $string_AJ10);
-    $hoja_acta_donacion->mergeCells('A10:J10');
-    $hoja_acta_donacion->setCellValue('H7', $n_acta);
-    $hoja_acta_donacion->setCellValue('B29', $nombre_entrega);
-    $hoja_acta_donacion->setCellValue('B30', $cedula_entrega);
-    $hoja_acta_donacion->setCellValue('G29', $nombre_recibe);
-    $hoja_acta_donacion->setCellValue('G30', $cedula_recibe);
+El Sr/Sra '.$nombre_donante.' realizará la donación de bienes muebles al Instituto Superior Tecnológico Guayaquil, los mismos que detallan a continuación.  ';
 
+    $string_AJ16 = 'El donador de manera voluntaria, decide hacer la donación del bien para uso exclusivo del Instituto Superior Tecnológico Guayaquil. 
+Para constancia de lo actuado y en fe de conformidad y aceptación suscriben la presente acta en 3 ejemplares de igual tenor y efecto la Mgs. '.$nombre_rectora.' en calidad de rectora del Instituto Tecnológico Superior Guayaquil y el Sr/Sra. '.$nombre_donante.' a quien se le denomina donador';
 
+    $hoja_acta_donacion->setCellValue('H8', 'N° '.$n_acta);
+    $hoja_acta_donacion->setCellValue('A9', $string_AJ9);
+    $hoja_acta_donacion->mergeCells('A9:J9');
+
+    $hoja_acta_donacion->setCellValue('A16', $string_AJ16);
+    $hoja_acta_donacion->mergeCells('A16:J16');
+
+    $hoja_acta_donacion->setCellValue('G27', $nombre_rectora);
+    $hoja_acta_donacion->mergeCells('G27:H27');
+    $hoja_acta_donacion->setCellValue('G28', $cedula_rectora);
+    $hoja_acta_donacion->mergeCells('G28:H28');
+
+    $hoja_acta_donacion->setCellValue('B27', $nombre_donante);
+    $hoja_acta_donacion->setCellValue('B28', $cedula_donante);
 
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($documento);
     ob_start(); // Iniciar el buffer de salida

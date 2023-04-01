@@ -8,11 +8,15 @@
         header("Location: ../views/login.php");
     } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id_prod = htmlspecialchars(trim($_POST['id_prod']));
-            // $prod = obtener_producto_por_id($conexion, $id_prod);
-            // echo $prod['nombre'];
-            // echo "ACTA DONACION";
-            header("Location: report/generar_acta_donacion.php?id=".urlencode($id_prod));
+            $id_prod = htmlspecialchars(trim($_POST['bien']));
+            $n_acta = htmlspecialchars(trim($_POST['n_acta']));
+            $nombre_donante = htmlspecialchars(trim($_POST['nombre_donante']));
+            $cedula_donante = htmlspecialchars(trim($_POST['cedula_donante']));
+            $cargo_donante = htmlspecialchars(trim($_POST['cargo_donante']));
+
+            header("Location: report/generar_acta_donacion.php?id=".urlencode($id_prod)."&n_acta=".$n_acta.
+            "&nombre_donante=".$nombre_donante."&cedula_donante=".$cedula_donante."&cargo_donante=".$cargo_donante);
+
         }
     }
 ?>

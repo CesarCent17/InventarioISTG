@@ -210,17 +210,7 @@
 						$form_ver_detalles = '<form action="ver_detalles.php" method="post" class="ver-detalles-eliminar">
 												<button type="submit" class="form-button-icon fas fa-eye" value="'.$current_bienes[$i]['id'].'" name="id_prod" title="Ver Detalles"></button>
 											</form>';
-
-						$form_generar_actas = '<form action="../php/proceso_acta_get.php" method="post" class="ver-detalles-eliminar">
-												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-clipboard" value="'.$current_bienes[$i]['id'].'" name="id_prod"></button>
-											</form>';
-						$form_acta_recepcion = '<form action="../php/proceso_acta_recepcion.php" method="post" class="ver-detalles-eliminar">
-													<button type="submit" class="form-button-icon fa-sharp fa-solid fa-file-circle-check" value="'.$current_bienes[$i]['id'].'" name="id_prod" title="Descargar Acta de Recepción"></button>
-												</form>';
-						$form_acta_donacion = '<form action="../php/proceso_acta_donacion.php" method="post" class="ver-detalles-eliminar">
-													<button type="submit" class="form-button-icon fa-sharp fa-solid fa-file-circle-check" value="'.$current_bienes[$i]['id'].'" name="id_prod" title="Descargar Acta de Donación"></button>
-												</form>';
-
+											
 						$form_ocultar = '<form action="../php/ocultar_product.php" method="post" class="ver-detalles-eliminar">
 												<button type="submit" class="form-button-icon fa-sharp fa-solid fa-square-minus" value="'.$current_bienes[$i]['id'].'" name="id_prod" title="Descartar"></button>
 											</form>';
@@ -232,7 +222,7 @@
 									<td class="mdl-data-table__cell--non-numeric">'.$array_ubicacion[$i].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$array_resultado[$i][0]['codigo'].'</td>
 									<td class="mdl-data-table__cell--non-numeric">'.$codigo_adicional.'</td>
-									<td class="mdl-data-table__cell--non-numeric">'.$form_acta_recepcion.$form_acta_donacion.$form_ver_detalles.$form_ocultar.'</td>
+									<td class="mdl-data-table__cell--non-numeric">'.$form_ver_detalles.$form_ocultar.'</td>
 								</tr> ';
 					}
 

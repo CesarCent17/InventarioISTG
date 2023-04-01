@@ -171,7 +171,7 @@
 	<!-- pageContent -->
 
 	<!-- Formulario Acta de Entrega a Recepción -->
-	<form class="mdl-grid" action="../php/proceso_acta_recepcion.php" method="post" style="max-width: 550px; margin-left:850; margin-top: 55px">
+	<form class="mdl-grid" action="../php/proceso_acta_recepcion.php" method="post" style="max-width: 550px; margin-left:850; margin-top: 55px;">
 
 		<div class="mdl-card__title" >
 				<h2 class="mdl-card__title-text">Acta de Entrega a Recepción</h2>
@@ -274,35 +274,60 @@
 
 
 	<!-- Formulario Acta de Donación -->
-	<!-- <form class="mdl-grid" action="../php/proceso_reporte.php" method="post" style="max-width: 550px; margin-left:850; margin-top: 55px">
+	<form class="mdl-grid" action="../php/proceso_acta_donacion.php" method="post" style="max-width: 550px; margin-left:850; margin-top: 55px;">
+
 		<div class="mdl-card__title" >
 				<h2 class="mdl-card__title-text">Acta de Donación</h2>
 		</div>
+		
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <select class="mdl-textfield__input js-bien" id="" name="bien" required>
+                    <option value=""></option>
+                    <?php
+					$array_bienes_registrados = obtener_bienes_registrados($conexion);
+					$array_resultado = obtener_codigos_prod($conexion, $array_bienes_registrados);
 
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">
-		<select class="mdl-textfield__input" id="campus" name="campus" required>
-                <option value=""></option>
-				
-                <?php
-                $array_campus = getCampus($conexion);
-                echo "<script> console.log(" . json_encode($array_campus) . "); </script>";
-				echo '<option value="completo">INVENTARIO COMPLETO</option>';
-                $html = '';
-                for($i = 0; $i < count($array_campus); $i++){
-                    $html.= '<option value="'.$array_campus[$i]['id'].'">'.$array_campus[$i]['nombre'].'</option>' ;
-                }
-                echo $html;
-				
-                ?>
-              </select>
-              <label class="mdl-textfield__label" for="campus">Campus</label>
+                    $html = '';
+                    for($i = 0; $i < count($array_bienes_registrados); $i++){
+						$bien1 = 'ID: '.$array_bienes_registrados[$i]['id'].' | '.$array_bienes_registrados[$i]['nombre'].' | '.$array_resultado[$i][0]['codigo'];
+						$bien = $array_bienes_registrados[$i]['nombre'].' | ID: '.$array_bienes_registrados[$i]['id'];
+
+                        $html.= '<option value="'.$array_bienes_registrados[$i]['id'].'">'.$bien1.'</option>' ;
+                    }
+                    echo $html;
+                    ?>
+                </select>
+                <label class="mdl-textfield__label" for="bien">Bien Registrado</label>
+            </div>
+
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="n_acta" name="n_acta" required>
+              <label class="mdl-textfield__label" for="n_acta"># Acta</label>
               <span class="mdl-textfield__error">Este campo es requerido</span>
-        </div>
+            </div>
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="nombre_donante" name="nombre_donante" required>
+              <label class="mdl-textfield__label" for="nombre_donante">Nombres Completos del Donante</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
+            </div>
+
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="text" id="cedula_donante" name="cedula_donante" required maxlength="10">
+					<label class="mdl-textfield__label" for="cedula_donante">Cédula del Donante</label>
+					<span class="mdl-textfield__error">Este campo es requerido</span>
+			</div>
+
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="cargo_donante" name="cargo_donante" required>
+              <label class="mdl-textfield__label" for="cargo_donante">Cargo del Donante</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
+            </div>
+
        
 		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" style="margin-top: 20px;">
 			Generar
 		</button>
-	</form> -->
+	</form>
 
 </body>
 </html>
