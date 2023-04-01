@@ -179,7 +179,7 @@
 		
 		<!-- <div class="mdl-cell mdl-cell--6-col"> -->
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <select class="mdl-textfield__input js-bien" id="BuscadorBien" name="bien">
+                <select class="mdl-textfield__input js-bien" id="BuscadorBien" name="bien" required>
                     <option value=""></option>
                     <?php
 					$array_bienes_registrados = obtener_bienes_registrados($conexion);
@@ -217,7 +217,7 @@
 
                 $html = '';
                 for($i = 0; $i < count($array_administrador); $i++){
-                    $html.= '<option value="'.$array_administrador[$i]['nombres_completos'].'">'.$array_administrador[$i]['nombres_completos'].'</option>' ;
+                    $html.= '<option value="'.$array_administrador[$i]['id'].'">'.$array_administrador[$i]['nombres_completos'].'</option>' ;
                 }
                 echo $html;
                 ?>
@@ -227,7 +227,7 @@
             </div>
 
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <select class="mdl-textfield__input js-example-basic-single" id="BuscadorCustodio" name="receptor">
+                <select class="mdl-textfield__input js-example-basic-single" id="BuscadorCustodio" name="receptor" required>
                     <option value=""></option>
 					<?php
                     $array_custodio = getCustodio($conexion);
@@ -235,12 +235,18 @@
 
                     $html = '';
                     for($i = 0; $i < count($array_custodio); $i++){
-                        $html.= '<option value="'.$array_custodio[$i]['nombres_completos'].'">'.$array_custodio[$i]['nombres_completos'].'</option>' ;
+                        $html.= '<option value="'.$array_custodio[$i]['id'].'">'.$array_custodio[$i]['nombres_completos'].'</option>' ;
                     }
                     echo $html;
                     ?>
                 </select>
                 <label class="mdl-textfield__label" for="receptor">Receptor</label>
+            </div>
+		
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="cargo_receptor" name="cargo_receptor" required>
+              <label class="mdl-textfield__label" for="cargo_receptor">Cargo del Receptor</label>
+              <span class="mdl-textfield__error">Este campo es requerido</span>
             </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-disabled">

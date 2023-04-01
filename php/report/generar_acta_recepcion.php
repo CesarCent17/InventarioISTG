@@ -9,9 +9,13 @@
 
     $id_prod = htmlspecialchars(trim($_GET['id']));
     $n_acta = htmlspecialchars(trim($_GET['n_acta']));
-    $custodio_administrativo = htmlspecialchars(trim($_GET['custodio_administrativo']));
-    $receptor = htmlspecialchars(trim($_GET['receptor']));
+    $nombre_custodio_administrativo = htmlspecialchars(trim($_GET['nombre_custodio_administrativo']));
+    $cedula_custodio_administrativo = htmlspecialchars(trim($_GET['cedula_custodio_administrativo']));
+    $nombre_receptor = htmlspecialchars(trim($_GET['nombre_receptor']));
+    $cedula_receptor = htmlspecialchars(trim($_GET['cedula_receptor']));
     $ubicacion_oficina = htmlspecialchars(trim($_GET['ubicacion_oficina']));
+    $cargo_receptor = htmlspecialchars(trim($_GET['cargo_receptor']));
+
 
 
     $prod = obtener_producto_por_id($conexion, $id_prod);
@@ -81,23 +85,16 @@ $meses = [
 $mes_actual_espanol = $meses[$mes_actual];
 $anio_actual = date('Y');
 
-
-$cargo = "TEXTO";
-$nombre_entrega = "NOMBRE DE EJEMPLO";
-$cedula_entrega = "0987654321";
-$nombre_recibe = "NOMBRE DE EJEMPLO";
-$cedula_recibe = "0987654321";
-
-$string_A11_J11 = 'En la ciudad de Guayaquil, Provincia de Guayas a los '.$dia_actual.' días del mes de '.$mes_actual_espanol.' de '.$anio_actual.', en las oficinas del ISTG, ubicadas en '.$ubicacion_oficina.' se reúnen por una parte '.$custodio_administrativo.', en calidad de Custodio Administrativo, y quien recibe '.$receptor.', quien labora físicamente en  el ISTG  con cargo de '.$cargo.' con el fin de realizar el acta de entrega recepción de los bienes que se detalla a continuación, conforme lo indica el reglamento general para la Administración, Utilización, Manejo y Control de los bienes e inventarios del sector público en su capítulo III, Art. 41.';
+$string_A11_J11 = 'En la ciudad de Guayaquil, Provincia de Guayas a los '.$dia_actual.' días del mes de '.$mes_actual_espanol.' de '.$anio_actual.', en las oficinas del ISTG, ubicadas en '.$ubicacion_oficina.' se reúnen por una parte '.$nombre_custodio_administrativo.', en calidad de Custodio Administrativo, y quien recibe '.$nombre_receptor.', quien labora físicamente en  el ISTG  con cargo de '.$cargo_receptor.' con el fin de realizar el acta de entrega recepción de los bienes que se detalla a continuación, conforme lo indica el reglamento general para la Administración, Utilización, Manejo y Control de los bienes e inventarios del sector público en su capítulo III, Art. 41.';
 $hoja_acta_entrega->setCellValue('A11', $string_A11_J11);
 $hoja_acta_entrega->mergeCells('A11:J11');
 $hoja_acta_entrega->setCellValue('I9', $n_acta);
-$hoja_acta_entrega->setCellValue('D35', $nombre_entrega);
-$hoja_acta_entrega->setCellValue('D36', $cedula_entrega);
+$hoja_acta_entrega->setCellValue('D35', $nombre_custodio_administrativo);
+$hoja_acta_entrega->setCellValue('D36', $cedula_custodio_administrativo);
 
-$hoja_acta_entrega->setCellValue('G35', $receptor);
+$hoja_acta_entrega->setCellValue('G35', $nombre_receptor);
 $hoja_acta_entrega->mergeCells('G35:H35');
-$hoja_acta_entrega->setCellValue('G36', $cedula_recibe);
+$hoja_acta_entrega->setCellValue('G36', $cedula_receptor);
 $hoja_acta_entrega->mergeCells('G36:H36');
 
 

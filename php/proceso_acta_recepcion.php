@@ -1,6 +1,6 @@
 <?php
     require('mysqli_conexion.php');
-    // require('querys_proceso_acta.php');
+    require('querys_actas.php');
 
     session_start();
     if(!isset($_SESSION['usuario'])) {
@@ -10,16 +10,34 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_prod = htmlspecialchars(trim($_POST['bien']));
             $n_acta = htmlspecialchars(trim($_POST['n_acta']));
-            $custodio_administrativo = htmlspecialchars(trim($_POST['administrador']));
-            $receptor = htmlspecialchars(trim($_POST['receptor']));
+            $id_custodio_administrativo = htmlspecialchars(trim($_POST['administrador']));
+            $id_receptor = htmlspecialchars(trim($_POST['receptor']));
             $ubicacion_oficina = htmlspecialchars(trim($_POST['campus']));
+            $cargo_receptor = htmlspecialchars(trim($_POST['cargo_receptor']));
+            $cargo_receptor = strtoupper($cargo_receptor);
 
 
-            // echo $n_acta;
-            // $prod = obtener_producto_por_id($conexion, $id_prod);
-            // echo $prod['nombre'];
-            // echo "ACTA RECEPCION";
-            header("Location: report/generar_acta_recepcion.php?id=".urlencode($id_prod)."&n_acta=".$n_acta."&custodio_administrativo=".$custodio_administrativo."&receptor=".$receptor."&ubicacion_oficina=".$ubicacion_oficina);
+
+            $fila_custodio_administrativo = obtener_custodio_administrativo_por_id($conexion, $id_custodio_administrativo);
+            $nombre_custodio_administrativo = $fila_custodio_administrativo['nombres_completos'];
+            $cedula_custodio_administrativo = $fila_custodio_administrativo['cedula'];
+
+            $fila_receptor = obtener_receptor_por_id($conexion, $id_receptor);
+            $nombre_receptor = $fila_receptor['nombres_completos'];
+            $cedula_receptor = $fila_receptor['cedula'];
+           
+
+
+            echo 'el custodio_administrativo se llama: '.$nombre_custodio_administrativo.'y su cedula es: '.$cedula_custodio_administrativo.'<br>';
+            echo 'el receptor se llama: '.$nombre_receptor.'y su cedula es: '.$cedula_receptor;
+
+            header("Location: report/generar_acta_recepcion.php?id=".urlencode($id_prod)."&n_acta=".$n_acta.
+            "&nombre_custodio_administrativo=".$nombre_custodio_administrativo.
+            "&cedula_custodio_administrativo=".$cedula_custodio_administrativo.
+            "&nombre_receptor=".$nombre_receptor.
+            "&cedula_receptor=".$cedula_receptor.
+            "&cargo_receptor=".$cargo_receptor.
+            "&ubicacion_oficina=".$ubicacion_oficina);
         }
     }
 ?>
