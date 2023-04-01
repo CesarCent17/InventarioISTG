@@ -32,6 +32,17 @@
 </li>
 <li class="full-width divider-menu-h"></li>
 <li class="full-width">
+   <a href="actas.php" class="full-width">
+      <div class="navLateral-body-cl">
+         <i class="zmdi zmdi-collection-bookmark"></i>
+      </div>
+      <div class="navLateral-body-cr hide-on-tablet">
+         ACTAS
+      </div>
+   </a>
+</li>
+<li class="full-width divider-menu-h"></li>
+<li class="full-width">
    <a href="inventario.php" class="full-width">
       <div class="navLateral-body-cl">
          <i class="zmdi zmdi-folder"></i>
