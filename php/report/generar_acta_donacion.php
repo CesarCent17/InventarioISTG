@@ -84,7 +84,7 @@
 El Sr/Sra '.$nombre_donante.' realizará la donación de bienes muebles al Instituto Superior Tecnológico Guayaquil, los mismos que detallan a continuación.  ';
 
     $string_AJ16 = 'El donador de manera voluntaria, decide hacer la donación del bien para uso exclusivo del Instituto Superior Tecnológico Guayaquil. 
-Para constancia de lo actuado y en fe de conformidad y aceptación suscriben la presente acta en 3 ejemplares de igual tenor y efecto la Mgs. '.$nombre_rectora.' en calidad de rectora del Instituto Tecnológico Superior Guayaquil y el Sr/Sra. '.$nombre_donante.' a quien se le denomina donador';
+Para constancia de lo actuado y en fe de conformidad y aceptación suscriben la presente acta en 3 ejemplares de igual tenor y efecto la Mgs. '.$nombre_rectora.' en calidad de rectora del Instituto Tecnológico Superior Guayaquil y el Sr/Sra. '.$nombre_donante.' a quien se le denomina donador.';
 
     $hoja_acta_donacion->setCellValue('H8', 'N° '.$n_acta);
     $hoja_acta_donacion->setCellValue('A9', $string_AJ9);
