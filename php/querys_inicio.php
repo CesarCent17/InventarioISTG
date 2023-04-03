@@ -1,19 +1,5 @@
 <?php
 function obtener_ids_productos($conexion){
-    // $sql = "SELECT p.`id` FROM `producto` AS p WHERE oculto = 0;";
-
-    // $stmt = $conexion->prepare($sql);
-    // if (!$stmt) {
-    //     die("Error de consulta: " . $conexion->error);
-    // }
-    // $stmt->execute();
-    // $resultado = $stmt->get_result();
-
-    // while ($fila = $resultado->fetch_assoc()) {
-    //     $array_ids_productos[] = $fila;
-    // }
-    // return $array_ids_productos;
-
     $sql = "SELECT p.`id` FROM `producto` AS p WHERE oculto = 0;";
     $array_ids_productos = array();
 
@@ -47,26 +33,6 @@ function obtener_ids_usuarios_activos($conexion){
 }
 
 function obtener_ult_prod($conexion){
-    // $sql = "SELECT DATE_FORMAT(prod.`fecha_registro`, '%d %b %Y %H:%i:%s') AS fecha_registro,
-    //                prod.`nombre`, 
-    //                prod.`id_usuario`
-    //         FROM producto AS prod
-    //         WHERE prod.`oculto` = 0
-    //         ORDER BY prod.`fecha_registro` DESC
-    //         LIMIT 5;";
-
-    // $stmt = $conexion->prepare($sql);
-    // if (!$stmt) {
-    //     die("Error de consulta: " . $conexion->error);
-    // }
-    // $stmt->execute();
-    // $resultado = $stmt->get_result();
-
-    // while ($fila = $resultado->fetch_assoc()) {
-    //     $array_ult_prod[] = $fila;
-    // }
-    // return $array_ult_prod;
-
     $array_ult_prod =  array();
     $sql = "SELECT DATE_FORMAT(prod.`fecha_registro`, '%d %b %Y %H:%i:%s') AS fecha_registro,
                    prod.`nombre`, 

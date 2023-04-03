@@ -72,7 +72,7 @@ CREATE TABLE `codigo_institucion` (
   PRIMARY KEY (`id`),
   KEY `fk_institucion` (`id_institucion`),
   CONSTRAINT `fk_institucion` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8;
 
 /*Data for the table `codigo_institucion` */
 
@@ -89,7 +89,7 @@ CREATE TABLE `codigo_producto` (
   KEY `fk_producto` (`id_producto`),
   CONSTRAINT `fk_codigo_institucion` FOREIGN KEY (`id_codigo_institucion`) REFERENCES `codigo_institucion` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8;
 
 /*Data for the table `codigo_producto` */
 
@@ -207,7 +207,7 @@ CREATE TABLE `producto` (
   CONSTRAINT `fk_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_origen_del_bien` FOREIGN KEY (`id_origen_del_bien`) REFERENCES `origen_del_bien` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tipo_acta` FOREIGN KEY (`id_tipo_acta`) REFERENCES `tipo_acta` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=utf8;
 
 /*Data for the table `producto` */
 

@@ -10,7 +10,6 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Requeridos
             if($_POST['campus'] === 'completo'){
-                echo 'HACER REPORTE COMPLETO';
                 header("Location: report/generar_reporte_inventario_completo.php");
             } else{
                 $id_campus = htmlspecialchars(trim($_POST['campus']));
