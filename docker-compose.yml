@@ -8,7 +8,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - .:/var/www/html
+      - .:/var/www/html/
     depends_on:
       - db
     networks:
@@ -16,10 +16,12 @@ services:
 
   db:
     image: mysql:5.7
+    restart: always
+    container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: uZD7t0J66
       MYSQL_DATABASE: inventorioistg
-      # MYSQL_USER: root
+      MYSQL_USER: cesarcent
       MYSQL_PASSWORD: uZD7t0J66
     networks:
       - networkdev
@@ -30,11 +32,15 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db
     ports:
       - "8081:80"
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: uZD7t0J66
+      restart: always
     networks:
       - networkdev
 networks:
